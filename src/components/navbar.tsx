@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Navbar() {
     return (
-        <header className="py-2 px-4 border-b shadow-md">
+        <header className="py-2 px-8 border-b shadow-md">
             <nav className="2xl:container 2xl:mx-auto flex justify-between items-center">
                 <Link href="/" className="flex items-center">
                     <img
