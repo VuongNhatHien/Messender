@@ -75,7 +75,7 @@ body {
 
 @layer components {
     .card {
-        @apply flex flex-col rounded-xl border bg-card text-card-foreground shadow overflow-hidden;
+        @apply flex flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow;
     }
 
     .card-link {

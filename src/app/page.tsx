@@ -122,17 +122,17 @@ export default function Home() {
     const [state] = useState(false);
 
     return (
-        <div className="h-full px-8 py-5 bg-secondary overflow-auto">
-            <div className="2xl:container 2xl:mx-auto w-full h-full">
+        <div className="h-full overflow-auto bg-secondary px-8 py-5">
+            <div className="h-full w-full 2xl:container 2xl:mx-auto">
                 <div
-                    className={`gap-4 grid w-full h-full  ${
+                    className={`grid h-full w-full gap-4 ${
                         state ? "grid-cols-4" : "grid-cols-3"
                     }`}
                 >
                     <div className="card">
                         <div
                             className={
-                                "header flex justify-between items-center px-4 py-3"
+                                "header flex items-center justify-between px-4 py-3"
                             }
                         >
                             <p className={"text-2xl font-bold"}>Chats</p>
@@ -162,12 +162,11 @@ export default function Home() {
                                     </div>
 
                                     <Separator className={"mt-4"} />
-                                    <div className="h-full overflow-auto px-1 space-y-1 pt-1">
+                                    <div className="h-full space-y-1 overflow-auto px-1 pt-1">
                                         {previewMessage.map((message) => (
-                                            <Link
+                                            <button
                                                 key={message.id}
-                                                className="card-link pl-2 py-1"
-                                                href={""}
+                                                className="card-link py-1 pl-2"
                                             >
                                                 <img
                                                     src={message.avatar}
@@ -175,14 +174,14 @@ export default function Home() {
                                                     className="h-10 w-10 rounded-full"
                                                 />
                                                 <div className="ml-4">
-                                                    <p className="font-semibold">
+                                                    <p className="flex font-semibold">
                                                         {message.name}
                                                     </p>
-                                                    <p className="text-muted-foreground line-clamp-1">
+                                                    <p className="line-clamp-1 flex text-muted-foreground">
                                                         {message.email}
                                                     </p>
                                                 </div>
-                                            </Link>
+                                            </button>
                                         ))}
                                     </div>
                                 </DialogContent>
@@ -193,11 +192,11 @@ export default function Home() {
                         </div>
 
                         <Separator className={"mt-4"} />
-                        <div className="h-full overflow-auto px-1 space-y-1 pt-1">
+                        <div className="h-full space-y-1 overflow-auto px-1 pt-1">
                             {previewMessage.map((message) => (
                                 <Link
                                     key={message.id}
-                                    className="card-link pl-2 py-1"
+                                    className="card-link py-1 pl-2"
                                     href={""}
                                 >
                                     <img
@@ -209,7 +208,7 @@ export default function Home() {
                                         <p className="font-semibold">
                                             {message.name}
                                         </p>
-                                        <p className="text-muted-foreground line-clamp-1">
+                                        <p className="line-clamp-1 text-muted-foreground">
                                             {message.message}
                                         </p>
                                     </div>
