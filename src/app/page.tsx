@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import Searchbar from "@/components/search";
 import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const previewMessage = [
     {
@@ -119,7 +120,7 @@ const previewMessage = [
 ];
 
 export default function Home() {
-    const [state] = useState(false);
+    const [state] = useState(true);
 
     return (
         <div className="h-full overflow-auto bg-secondary px-8 py-5">
@@ -168,11 +169,12 @@ export default function Home() {
                                                 key={message.id}
                                                 className="card-link py-1 pl-2"
                                             >
-                                                <img
-                                                    src={message.avatar}
-                                                    alt={message.name}
-                                                    className="h-10 w-10 rounded-full"
-                                                />
+                                                <Avatar>
+                                                    <AvatarImage
+                                                        src={message.avatar}
+                                                    />
+                                                    {/* <AvatarFallback>Null</AvatarFallback> */}
+                                                </Avatar>
                                                 <div className="ml-4">
                                                     <p className="flex font-semibold">
                                                         {message.name}
@@ -199,11 +201,11 @@ export default function Home() {
                                     className="card-link py-1 pl-2"
                                     href={""}
                                 >
-                                    <img
-                                        src={message.avatar}
-                                        alt={message.name}
-                                        className="h-10 w-10 rounded-full"
-                                    />
+                                    <Avatar>
+                                        <AvatarImage src={message.avatar} />
+                                        {/* <AvatarFallback>Null</AvatarFallback> */}
+                                    </Avatar>
+
                                     <div className="ml-4">
                                         <p className="font-semibold">
                                             {message.name}
@@ -216,7 +218,9 @@ export default function Home() {
                             ))}
                         </div>
                     </div>
-                    <div className="card col-span-2"></div>
+                    <div className="card col-span-2 flex items-center justify-center">
+                        <p className={"text-2xl font-bold"}>No chats selected</p>
+                    </div>
                     {state && <div className="card"></div>}
                 </div>
             </div>
