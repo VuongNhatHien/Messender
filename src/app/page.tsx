@@ -1,18 +1,18 @@
 "use client";
 
-import {useState} from "react";
-import {Button} from "@/components/ui/button";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import {
-    Dialog, DialogClose,
+    Dialog,
     DialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger
+    DialogTrigger,
 } from "@/components/ui/dialog";
 import Searchbar from "@/components/search";
-import {Separator} from "@/components/ui/separator";
+import { Separator } from "@/components/ui/separator";
 
 const previewMessage = [
     {
@@ -47,7 +47,8 @@ const previewMessage = [
         id: 5,
         name: "Ethan Hunt",
         avatar: "/avatar.png",
-        message: "Can we reschedule the meeting? I just realized I have another appointment at the same time, and it might overlap. Let me know what works best for you!",
+        message:
+            "Can we reschedule the meeting? I just realized I have another appointment at the same time, and it might overlap. Let me know what works best for you!",
         email: "ethan.hunt@example.com",
     },
     {
@@ -68,7 +69,8 @@ const previewMessage = [
         id: 8,
         name: "Hannah Montana",
         avatar: "/avatar.png",
-        message: "Looking forward to our call! By the way, I wanted to mention that I found some really interesting articles related to our discussion topic. I think you'll find them useful, so I'll share the links during the call.",
+        message:
+            "Looking forward to our call! By the way, I wanted to mention that I found some really interesting articles related to our discussion topic. I think you'll find them useful, so I'll share the links during the call.",
         email: "hannah.montana@example.com",
     },
     {
@@ -110,11 +112,11 @@ const previewMessage = [
         id: 14,
         name: "Nina Dobrev",
         avatar: "/avatar.png",
-        message: "I'll see you at the event. By the way, do you think we should prepare some additional materials to make sure everything goes smoothly? I was thinking of adding a few backup slides just in case.",
+        message:
+            "I'll see you at the event. By the way, do you think we should prepare some additional materials to make sure everything goes smoothly? I was thinking of adding a few backup slides just in case.",
         email: "nina.dobrev@example.com",
     },
 ];
-
 
 export default function Home() {
     const [state] = useState(false);
@@ -122,43 +124,60 @@ export default function Home() {
     return (
         <div className="h-full px-8 py-5 bg-secondary overflow-auto">
             <div className="2xl:container 2xl:mx-auto w-full h-full">
-                <div className={`grid w-full h-full gap-4 ${state ? "grid-cols-4" : "grid-cols-3"}`}>
+                <div
+                    className={`gap-4 grid w-full h-full  ${
+                        state ? "grid-cols-4" : "grid-cols-3"
+                    }`}
+                >
                     <div className="card">
-                        <div className={"header flex justify-between items-center px-4 py-3"}>
+                        <div
+                            className={
+                                "header flex justify-between items-center px-4 py-3"
+                            }
+                        >
                             <p className={"text-2xl font-bold"}>Chats</p>
 
                             <Dialog>
                                 <DialogTrigger asChild>
-                                    <Button variant={"secondary"}
-                                            className={"rounded-full"}
-                                            size={"icon"}>
-                                        <p className={"text-2xl"}>
-                                            +
-                                        </p>
+                                    <Button
+                                        variant={"secondary"}
+                                        className={"rounded-full"}
+                                        size={"icon"}
+                                    >
+                                        <p className={"text-2xl"}>+</p>
                                     </Button>
                                 </DialogTrigger>
+
                                 <DialogContent className={"h-[30rem] gap-0"}>
                                     <DialogHeader>
                                         <DialogTitle>New message</DialogTitle>
                                         <DialogDescription>
-                                            Start a new conversation with someone
+                                            Start a new conversation with
+                                            someone
                                         </DialogDescription>
                                     </DialogHeader>
 
                                     <div className={"pt-3"}>
-                                        <Searchbar/>
+                                        <Searchbar />
                                     </div>
 
-                                    <Separator className={"mt-4"}/>
+                                    <Separator className={"mt-4"} />
                                     <div className="h-full overflow-auto px-1 space-y-1 pt-1">
                                         {previewMessage.map((message) => (
-                                            <Link key={message.id}
-                                                  className="card-link pl-2 py-1"
-                                                  href={""}>
-                                                <img src={message.avatar} alt={message.name}
-                                                     className="h-10 w-10 rounded-full"/>
+                                            <Link
+                                                key={message.id}
+                                                className="card-link pl-2 py-1"
+                                                href={""}
+                                            >
+                                                <img
+                                                    src={message.avatar}
+                                                    alt={message.name}
+                                                    className="h-10 w-10 rounded-full"
+                                                />
                                                 <div className="ml-4">
-                                                    <p className="font-semibold">{message.name}</p>
+                                                    <p className="font-semibold">
+                                                        {message.name}
+                                                    </p>
                                                     <p className="text-muted-foreground line-clamp-1">
                                                         {message.email}
                                                     </p>
@@ -168,23 +187,28 @@ export default function Home() {
                                     </div>
                                 </DialogContent>
                             </Dialog>
-
-
                         </div>
                         <div className={"px-3"}>
-                            <Searchbar/>
+                            <Searchbar />
                         </div>
 
-                        <Separator className={"mt-4"}/>
+                        <Separator className={"mt-4"} />
                         <div className="h-full overflow-auto px-1 space-y-1 pt-1">
                             {previewMessage.map((message) => (
-                                <Link key={message.id}
-                                      className="card-link pl-2 py-1"
-                                      href={""}>
-                                    <img src={message.avatar} alt={message.name}
-                                         className="h-10 w-10 rounded-full"/>
+                                <Link
+                                    key={message.id}
+                                    className="card-link pl-2 py-1"
+                                    href={""}
+                                >
+                                    <img
+                                        src={message.avatar}
+                                        alt={message.name}
+                                        className="h-10 w-10 rounded-full"
+                                    />
                                     <div className="ml-4">
-                                        <p className="font-semibold">{message.name}</p>
+                                        <p className="font-semibold">
+                                            {message.name}
+                                        </p>
                                         <p className="text-muted-foreground line-clamp-1">
                                             {message.message}
                                         </p>
@@ -193,13 +217,10 @@ export default function Home() {
                             ))}
                         </div>
                     </div>
-                    <div className="card col-span-2">
-
-                    </div>
+                    <div className="card col-span-2"></div>
                     {state && <div className="card"></div>}
                 </div>
             </div>
         </div>
-
     );
 }
