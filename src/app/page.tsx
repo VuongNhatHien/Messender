@@ -150,18 +150,17 @@ export default function Home() {
 
                                     <div className="pt-2 border-t h-full overflow-auto pr-2">
                                         {previewMessage.map((message) => (
-                                            <Link key={message.id}
-                                                  className="card-link"
-                                                  href={"/"}>
+                                            <button key={message.id}
+                                                    className="card-link">
                                                 <img src={message.avatar} alt={message.name}
                                                      className="h-10 w-10 rounded-full"/>
                                                 <div className="ml-4">
-                                                    <p className="font-semibold">{message.name}</p>
-                                                    <p className="text-muted-foreground">
+                                                    <p className="font-semibold flex">{message.name}</p>
+                                                    <p className="text-muted-foreground flex">
                                                         {message.email}
                                                     </p>
                                                 </div>
-                                            </Link>
+                                            </button>
                                         ))}
                                     </div>
                                 </DialogContent>
@@ -177,7 +176,7 @@ export default function Home() {
                             {previewMessage.map((message) => (
                                 <Link key={message.id}
                                       className="card-link"
-                                      href={"/"}>
+                                      href={""}>
                                     <img src={message.avatar} alt={message.name}
                                          className="h-10 w-10 rounded-full"/>
                                     <div className="ml-4">
