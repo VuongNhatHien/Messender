@@ -79,5 +79,9 @@ body {
     .card {
         @apply flex flex-col rounded-xl border bg-card text-card-foreground shadow p-4 overflow-hidden;
     }
+
+    .card-link {
+        @apply flex w-full items-center rounded-sm p-2 hover:bg-accent hover:text-accent-foreground;
+    }
 }
 
