@@ -4,6 +4,7 @@ import {useState} from "react";
 import {Button} from "@/components/ui/button";
 import {AiOutlineSearch} from "react-icons/ai";
 import {Input} from "@/components/ui/input";
+import Link from "next/link";
 
 const previewMessage = [
     {
@@ -125,20 +126,22 @@ export default function Home() {
                             </div>
                         </div>
 
-                        <div className="mt-4 border-t h-full overflow-auto">
+                        <div className="mt-4 pt-2 border-t h-full overflow-auto pr-2">
                             {previewMessage.map((message) => (
-                                <div key={message.id} className="flex items-center gap-3 mt-4">
+                                <Link key={message.id}
+                                      className="flex w-full items-center gap-3 rounded-sm p-2 hover:bg-accent hover:text-accent-foreground"
+                                      href={"/"}>
                                     <img src={message.avatar} alt={message.name}
                                          className="h-10 w-10 rounded-full"/>
                                     <div>
                                         <p className="font-semibold">{message.name}</p>
                                         <p className="text-muted-foreground">
-                                            {message.message.length > 20
-                                                ? `${message.message.slice(0, 20)}...`
+                                            {message.message.length > 32
+                                                ? `${message.message.slice(0, 32)}...`
                                                 : message.message}
                                         </p>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>
