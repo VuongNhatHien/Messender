@@ -2,9 +2,7 @@
 
 import {useState} from "react";
 import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
 import Link from "next/link";
-import {Search} from "lucide-react"
 import {
     Dialog, DialogClose,
     DialogContent,
@@ -14,6 +12,7 @@ import {
     DialogTrigger
 } from "@/components/ui/dialog";
 import Searchbar from "@/components/search";
+import {Separator} from "@/components/ui/separator";
 
 const previewMessage = [
     {
@@ -125,7 +124,7 @@ export default function Home() {
             <div className="2xl:container 2xl:mx-auto w-full h-full">
                 <div className={`grid w-full h-full gap-4 ${state ? "grid-cols-4" : "grid-cols-3"}`}>
                     <div className="card">
-                        <div className={"header flex justify-between items-center"}>
+                        <div className={"header flex justify-between items-center px-4 py-3"}>
                             <p className={"text-2xl font-bold"}>Chats</p>
 
                             <Dialog>
@@ -138,7 +137,7 @@ export default function Home() {
                                         </p>
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent className={"h-[30rem]"}>
+                                <DialogContent className={"h-[30rem] gap-0"}>
                                     <DialogHeader>
                                         <DialogTitle>New message</DialogTitle>
                                         <DialogDescription>
@@ -146,21 +145,25 @@ export default function Home() {
                                         </DialogDescription>
                                     </DialogHeader>
 
-                                    <Searchbar/>
+                                    <div className={"pt-3"}>
+                                        <Searchbar/>
+                                    </div>
 
-                                    <div className="pt-2 border-t h-full overflow-auto pr-2">
+                                    <Separator className={"mt-4"}/>
+                                    <div className="h-full overflow-auto px-1 space-y-1 pt-1">
                                         {previewMessage.map((message) => (
-                                            <button key={message.id}
-                                                    className="card-link">
+                                            <Link key={message.id}
+                                                  className="card-link pl-2 py-1"
+                                                  href={""}>
                                                 <img src={message.avatar} alt={message.name}
                                                      className="h-10 w-10 rounded-full"/>
                                                 <div className="ml-4">
-                                                    <p className="font-semibold flex">{message.name}</p>
-                                                    <p className="text-muted-foreground flex">
+                                                    <p className="font-semibold">{message.name}</p>
+                                                    <p className="text-muted-foreground line-clamp-1">
                                                         {message.email}
                                                     </p>
                                                 </div>
-                                            </button>
+                                            </Link>
                                         ))}
                                     </div>
                                 </DialogContent>
@@ -168,23 +171,22 @@ export default function Home() {
 
 
                         </div>
-                        <div className={"mt-4"}>
+                        <div className={"px-3"}>
                             <Searchbar/>
                         </div>
 
-                        <div className="mt-4 pt-2 border-t h-full overflow-auto pl-1 pr-2">
+                        <Separator className={"mt-4"}/>
+                        <div className="h-full overflow-auto px-1 space-y-1 pt-1">
                             {previewMessage.map((message) => (
                                 <Link key={message.id}
-                                      className="card-link"
+                                      className="card-link pl-2 py-1"
                                       href={""}>
                                     <img src={message.avatar} alt={message.name}
                                          className="h-10 w-10 rounded-full"/>
                                     <div className="ml-4">
                                         <p className="font-semibold">{message.name}</p>
-                                        <p className="text-muted-foreground">
-                                            {message.message.length > 32
-                                                ? `${message.message.slice(0, 32)}...`
-                                                : message.message}
+                                        <p className="text-muted-foreground line-clamp-1">
+                                            {message.message}
                                         </p>
                                     </div>
                                 </Link>
