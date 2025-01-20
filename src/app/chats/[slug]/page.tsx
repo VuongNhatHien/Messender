@@ -200,8 +200,8 @@ export default function Home() {
                             {previewMessage.map((message) => (
                                 <Link
                                     key={message.id}
-                                    className="card-link py-1 pl-2"
-                                    href={""}
+                                    className={`card-link py-1 pl-2 ${message.id.toString() === params.slug ? "bg-accent text-accent-foreground" : ""}`}
+                                    href={`/chats/${message.id}`}
                                 >
                                     <Avatar>
                                         <AvatarImage src={message.avatar} />
