@@ -53,9 +53,9 @@ export default function PreviewMessage() {
                             {previewMessage.map((message) => (
                                 <button
                                     key={message.id}
-                                    className="card-link py-1 pl-2"
+                                    className="card-link"
                                 >
-                                    <Avatar>
+                                    <Avatar className="size-12">
                                         <AvatarImage src={message.avatar} />
                                         {/* <AvatarFallback>Null</AvatarFallback> */}
                                     </Avatar>
@@ -82,10 +82,10 @@ export default function PreviewMessage() {
                 {previewMessage.map((message) => (
                     <Link
                         key={message.id}
-                        className={`card-link py-1 pl-2 ${params.slug === `${message.id}` ? "bg-accent border-2 shadow" : "text-accent-foreground"}`}
+                        className={`card-link ${params.slug === `${message.id}` ? "bg-accent border-2 shadow" : "text-accent-foreground"}`}
                         href={`/chats/${message.id}`}
                     >
-                        <Avatar>
+                        <Avatar className="size-12">
                             <AvatarImage src={message.avatar} />
                             {/* <AvatarFallback>Null</AvatarFallback> */}
                         </Avatar>

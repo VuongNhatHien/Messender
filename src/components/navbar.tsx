@@ -13,8 +13,8 @@ export default function Navbar() {
                         className="h-7 w-auto" // Adjust height and width as needed
                     />
                 </Link>
-                <div className="flex items-center gap-2">
-                    <Button variant="ghost" className={"font-semibold"}>
+                <div className="flex items-center">
+                    <Button variant="ghost" className={"font-semibold text-base"}>
                         Logout
                     </Button>
                     <ModeToggle />
