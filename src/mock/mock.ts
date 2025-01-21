@@ -131,7 +131,47 @@ export const chat = {
         },
         {
             sender: user[1],
+            message: "Thanks",
+            createAt: "2025-01-21T10:04:00Z",
+        },
+        {
+            sender: user[1],
+            message:
+                "Hi, I need help with setting up Tailwind CSS in my project.",
+            createAt: "2025-01-21T10:00:00Z",
+        },
+        {
+            sender: user[0],
+            message:
+                "Sure, I can help with that! Are you using a framework like React or just plain HTML?",
+            createAt: "2025-01-21T10:01:00Z",
+        },
+        {
+            sender: user[1],
+            message:
+                "I'm using React. I want to integrate Tailwind for styling components.",
+            createAt: "2025-01-21T10:02:00Z",
+        },
+        {
+            sender: user[0],
+            message:
+                "Great! You can install Tailwind CSS using npm. Run `npm install -D tailwindcss postcss autoprefixer`, then create a Tailwind configuration file with `npx tailwindcss init`. Would you like the steps for configuring your React project as well?",
+            createAt: "2025-01-21T10:03:00Z",
+        },
+        {
+            sender: user[0],
+            message:
+                "Great! You can install Tailwind CSS using npm. Run `npm install -D tailwindcss postcss autoprefixer`, then create a Tailwind configuration file with `npx tailwindcss init`. Would you like the steps for configuring your React project as well?",
+            createAt: "2025-01-21T10:03:00Z",
+        },
+        {
+            sender: user[1],
             message: "Yes, that would be helpful. Thanks!",
+            createAt: "2025-01-21T10:04:00Z",
+        },
+        {
+            sender: user[1],
+            message: "Thanks",
             createAt: "2025-01-21T10:04:00Z",
         },
     ],
