@@ -192,6 +192,7 @@ export const previews = [
         chatId: 2,
         user: user[1],
         lastMessage: chat.messages[chat.messages.length - 1].message,
+        lastMessageTime: chat.messages[chat.messages.length - 1].createAt,
     },
     {
         chatId: 3,

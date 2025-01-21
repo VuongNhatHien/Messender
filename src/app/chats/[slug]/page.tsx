@@ -1,16 +1,16 @@
 "use client";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { chat } from "@/mock/mock";
+import { Paperclip } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { Paperclip } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export default function Home() {
-    const [state] = useState(false);
+    // const [state] = useState(false);
     const params = useParams<{ slug: string }>();
 
     if (!chat) {
@@ -71,7 +71,7 @@ export default function Home() {
                 <div>
                     <div className="mb-4 flex items-center gap-4 px-4">
                         <label htmlFor="file">
-                            <Paperclip className="hover:text-primary cursor-pointer"/>
+                            <Paperclip className="cursor-pointer hover:text-primary" />
                         </label>
                         <input id="file" type="file" className="hidden" />
 
@@ -82,15 +82,24 @@ export default function Home() {
                         />
                         <button>
                             <img
-                                src="/logo.png" // Replace with the actual path to your logo
+                                src="/logo.png"
                                 alt="Logo"
-                                className="h-7 w-auto" // Adjust height and width as needed
+                                className="h-7 w-8"
                             />
                         </button>
                     </div>
                 </div>
             </div>
-            <div className="card col-span-1"></div>
+            <div className="card col-span-1">
+                <div className="flex flex-col items-center p-4">
+                    <Avatar className="size-20">
+                        <AvatarImage src={chat.user.avatar} />
+                    </Avatar>
+                    <div className="mt-4 text-center">
+                        <p className="text-xl font-semibold">{chat.user.name}</p>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

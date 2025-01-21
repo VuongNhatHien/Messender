@@ -15,7 +15,6 @@ import { previews } from "@/mock/mock";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-
 export default function PreviewMessage() {
     const params = useParams<{ slug: string }>();
     return (
@@ -56,7 +55,9 @@ export default function PreviewMessage() {
                                     className="card-link"
                                 >
                                     <Avatar className="size-12">
-                                        <AvatarImage src={preview.user.avatar} />
+                                        <AvatarImage
+                                            src={preview.user.avatar}
+                                        />
                                         {/* <AvatarFallback>Null</AvatarFallback> */}
                                     </Avatar>
                                     <div className="ml-4">
@@ -82,7 +83,7 @@ export default function PreviewMessage() {
                 {previews.map((preview) => (
                     <Link
                         key={preview.chatId}
-                        className={`card-link ${params.slug === `${preview.chatId}` ? "bg-accent border-2 shadow" : "text-accent-foreground"}`}
+                        className={`card-link ${params.slug === `${preview.chatId}` ? "border-2 bg-accent shadow" : "text-accent-foreground"}`}
                         href={`/chats/${preview.chatId}`}
                     >
                         <Avatar className="size-12">
@@ -90,7 +91,7 @@ export default function PreviewMessage() {
                             {/* <AvatarFallback>Null</AvatarFallback> */}
                         </Avatar>
 
-                        <div className="ml-4">
+                        <div className="ml-4 w-full">
                             <p className="line-clamp-1 font-semibold">
                                 {preview.user.name}
                             </p>
