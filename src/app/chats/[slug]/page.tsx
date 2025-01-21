@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { useParams } from "next/navigation";
-import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { previewMessage } from "@/mock/mock";
+import { Separator } from "@/components/ui/separator";
+import { previews } from "@/mock/mock";
+import { useParams } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
     const [state] = useState(false);
     const params = useParams<{ slug: string }>();
-    const chat = previewMessage.find(
-        (chat) => chat.id.toString() === params.slug,
+    const chat = previews.find(
+        (preview) => preview.chatId.toString() === params.slug,
     );
 
     if (!chat) {
@@ -31,13 +31,13 @@ export default function Home() {
                 >
                     <div className="flex items-center">
                         <Avatar>
-                            <AvatarImage src={chat?.avatar} />
+                            <AvatarImage src={chat.user.avatar} />
                             {/* <AvatarFallback>Null</AvatarFallback> */}
                         </Avatar>
 
                         <div className="ml-4 text-lg">
                             <p className="line-clamp-1 font-semibold">
-                                {chat.name}
+                                {chat.user.name}
                             </p>
                         </div>
                     </div>

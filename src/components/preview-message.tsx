@@ -11,7 +11,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import { previewMessage } from "@/mock/mock";
+import { previews } from "@/mock/mock";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -50,21 +50,21 @@ export default function PreviewMessage() {
 
                         <Separator className={"mt-4"} />
                         <div className="h-full space-y-1 overflow-auto px-1 pt-1">
-                            {previewMessage.map((message) => (
+                            {previews.map((preview) => (
                                 <button
-                                    key={message.id}
+                                    key={preview.chatId}
                                     className="card-link"
                                 >
                                     <Avatar className="size-12">
-                                        <AvatarImage src={message.avatar} />
+                                        <AvatarImage src={preview.user.avatar} />
                                         {/* <AvatarFallback>Null</AvatarFallback> */}
                                     </Avatar>
                                     <div className="ml-4">
                                         <p className="line-clamp-1 flex font-semibold">
-                                            {message.name}
+                                            {preview.user.name}
                                         </p>
                                         <p className="line-clamp-1 flex text-muted-foreground">
-                                            {message.email}
+                                            {preview.user.email}
                                         </p>
                                     </div>
                                 </button>
@@ -79,23 +79,23 @@ export default function PreviewMessage() {
 
             <Separator className={"mt-4"} />
             <div className="h-full space-y-1 overflow-auto px-1 py-1">
-                {previewMessage.map((message) => (
+                {previews.map((preview) => (
                     <Link
-                        key={message.id}
-                        className={`card-link ${params.slug === `${message.id}` ? "bg-accent border-2 shadow" : "text-accent-foreground"}`}
-                        href={`/chats/${message.id}`}
+                        key={preview.chatId}
+                        className={`card-link ${params.slug === `${preview.chatId}` ? "bg-accent border-2 shadow" : "text-accent-foreground"}`}
+                        href={`/chats/${preview.chatId}`}
                     >
                         <Avatar className="size-12">
-                            <AvatarImage src={message.avatar} />
+                            <AvatarImage src={preview.user.avatar} />
                             {/* <AvatarFallback>Null</AvatarFallback> */}
                         </Avatar>
 
                         <div className="ml-4">
                             <p className="line-clamp-1 font-semibold">
-                                {message.name}
+                                {preview.user.name}
                             </p>
                             <p className="line-clamp-1 text-muted-foreground">
-                                {message.message}
+                                {preview.lastMessage}
                             </p>
                         </div>
                     </Link>
