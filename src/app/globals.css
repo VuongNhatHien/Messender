@@ -79,6 +79,6 @@ body {
     }
 
     .card-link {
-        @apply flex w-full items-center rounded-sm hover:bg-accent hover:text-accent-foreground;
+        @apply flex w-full items-center rounded-sm hover:bg-secondary hover:text-secondary-foreground;
     }
 }
