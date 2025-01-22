@@ -1,5 +1,5 @@
-import { ModeToggle } from "@/components/mode-toggle";
-import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/shadcn/mode-toggle";
+import { Button } from "@/components/shadcn/button";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -14,7 +14,10 @@ export default function Navbar() {
                     />
                 </Link>
                 <div className="flex items-center">
-                    <Button variant="ghost" className={"font-semibold text-base"}>
+                    <Button
+                        variant="ghost"
+                        className={"text-base font-semibold"}
+                    >
                         Logout
                     </Button>
                     <ModeToggle />

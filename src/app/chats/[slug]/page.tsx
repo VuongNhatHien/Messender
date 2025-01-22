@@ -1,13 +1,11 @@
 "use client";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { chat } from "@/mock/mock";
+import { Avatar, AvatarImage } from "@/components/shadcn/avatar";
+import { Input } from "@/components/shadcn/input";
+import { Separator } from "@/components/shadcn/separator";
+import { chat } from "@/mocks/mock";
 import { Paperclip } from "lucide-react";
 import { useParams } from "next/navigation";
-import { useState } from "react";
 
 export default function Home() {
     // const [state] = useState(false);
@@ -96,7 +94,9 @@ export default function Home() {
                         <AvatarImage src={chat.user.avatar} />
                     </Avatar>
                     <div className="mt-4 text-center">
-                        <p className="text-xl font-semibold">{chat.user.name}</p>
+                        <p className="text-xl font-semibold">
+                            {chat.user.name}
+                        </p>
                     </div>
                 </div>
             </div>

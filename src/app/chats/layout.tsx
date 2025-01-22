@@ -1,4 +1,4 @@
-import PreviewMessage from "@/components/preview-message";
+import PreviewMessage from "@/app/chats/preview-message";
 
 
 

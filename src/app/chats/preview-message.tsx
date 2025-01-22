@@ -1,7 +1,7 @@
 "use client";
-import Searchbar from "@/components/search";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import Searchbar from "@/components/custom/search";
+import { Avatar, AvatarImage } from "@/components/shadcn/avatar";
+import { Button } from "@/components/shadcn/button";
 import {
     Dialog,
     DialogContent,
@@ -9,9 +9,9 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
-import { previews } from "@/mock/mock";
+} from "@/components/shadcn/dialog";
+import { Separator } from "@/components/shadcn/separator";
+import { previews } from "@/mocks/mock";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
