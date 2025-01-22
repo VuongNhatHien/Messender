@@ -6,8 +6,9 @@ import { Separator } from "@/components/shadcn/separator";
 import { chat } from "@/mocks/mock";
 import { Paperclip } from "lucide-react";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 
-export default function Home() {
+export default function Chat() {
     // const [state] = useState(false);
     const params = useParams<{ slug: string }>();
 
@@ -79,10 +80,11 @@ export default function Home() {
                             className="rounded-full bg-accent text-accent-foreground"
                         />
                         <button>
-                            <img
+                            <Image
                                 src="/logo.png"
                                 alt="Logo"
-                                className="h-7 w-8"
+                                width={30}
+                                height={30}
                             />
                         </button>
                     </div>
