@@ -81,4 +81,7 @@ body {
     .card-link {
         @apply flex w-full items-center rounded-sm hover:bg-secondary hover:text-secondary-foreground p-2;
     }
+    .container-custom {
+        @apply px-5 2xl:container 2xl:mx-auto;
+    }
 }
