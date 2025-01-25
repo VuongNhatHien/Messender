@@ -7,7 +7,7 @@ export default function Navbar() {
     return (
         <header className="border-b shadow-md">
             <nav className="container-custom flex items-center justify-between py-2">
-                <Link href="/auth/login" className="flex items-center">
+                <Link href="/auth/register" className="flex items-center">
                     <Image src="/logo.png" alt="Logo" width={30} height={30} />
                 </Link>
                 <div className="flex items-center">

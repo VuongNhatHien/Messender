@@ -4,8 +4,6 @@ export default function FormErrorMessage({
     errors: string[] | undefined;
 }) {
     return (
-        <div>
-            <ul>{errors?.map((error) => <li key={error} className="text-destructive">- {error}</li>)}</ul>
-        </div>
+        <p className="text-destructive mt-2">{errors?.[0]}</p>
     );
 }
