@@ -1,5 +1,5 @@
-import Navbar from "@/components/custom/navbar";
-import { ThemeProvider } from "@/components/shadcn/theme-provider";
+import Navbar from "@/components/ui/navbar";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";

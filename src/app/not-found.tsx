@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/shadcn/button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 export default function NotFound() {
     const router = useRouter();

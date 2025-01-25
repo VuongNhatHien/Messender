@@ -1,8 +1,8 @@
 "use client";
 
-import { Avatar, AvatarImage } from "@/components/shadcn/avatar";
-import { Input } from "@/components/shadcn/input";
-import { Separator } from "@/components/shadcn/separator";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { chat } from "@/mocks/mock";
 import { Paperclip } from "lucide-react";
 import { useParams } from "next/navigation";
@@ -55,7 +55,7 @@ export default function Chat() {
                                 }`}
                             >
                                 <div
-                                    className={`max-w-[75%] rounded-[20px] px-3 py-2 ${
+                                    className={`max-w-[75%] rounded-3xl px-3 py-2 ${
                                         message.sender.userId ===
                                         chat.user.userId
                                             ? "bg-secondary text-secondary-foreground"

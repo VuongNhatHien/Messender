@@ -1,4 +1,4 @@
-import { Input } from "@/components/shadcn/input";
+import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 
 export default function Searchbar() {

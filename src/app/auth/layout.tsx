@@ -1,9 +1,7 @@
-import PreviewMessage from "@/app/chats/preview-message";
-
 export default function AuthLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    return <div>{children}</div>;
+    return <div className="flex h-full items-center justify-center">{children}</div>;
 }
