@@ -1,17 +1,17 @@
-"use client";
-
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { chat } from "@/mocks/mock";
+import { findChatById } from "@/mocks/mock";
 import { Paperclip } from "lucide-react";
-import { useParams } from "next/navigation";
 import Image from "next/image";
 
-export default function Chat() {
-    // const [state] = useState(false);
-    const params = useParams<{ slug: string }>();
-
+export default async function Page({
+    params,
+}: {
+    params: Promise<{ chatId: string }>;
+}) {
+    const chatId = (await params).chatId;
+    const chat = findChatById(chatId);
     if (!chat) {
         return (
             <div className="card col-span-3 flex items-center justify-center">

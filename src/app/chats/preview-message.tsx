@@ -16,7 +16,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 
 export default function PreviewMessage() {
-    const params = useParams<{ slug: string }>();
+    const chatId = useParams<{ chatId: string }>().chatId;
     return (
         <div className="card col-span-1">
             <div
@@ -83,7 +83,7 @@ export default function PreviewMessage() {
                 {previews.map((preview) => (
                     <Link
                         key={preview.chatId}
-                        className={`card-link ${params.slug === `${preview.chatId}` ? "border-2 bg-accent shadow" : "text-accent-foreground"}`}
+                        className={`card-link ${chatId === `${preview.chatId}` ? "border-2 bg-accent shadow" : "text-accent-foreground"}`}
                         href={`/chats/${preview.chatId}`}
                     >
                         <Avatar className="size-12">
