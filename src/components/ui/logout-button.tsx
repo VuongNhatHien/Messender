@@ -1,15 +1,16 @@
 "use client"
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "./button";
 
 export default function LogoutButton() {
+    const router = useRouter()
     return (
         <div>
             <Button
                 variant="ghost"
                 className={"text-base font-semibold"}
                 onClick={() => {
-                    redirect("/auth/register");
+                    router.push("/auth/register");
                 }}
             >
                 Logout

@@ -1,4 +1,4 @@
 import { redirect } from "next/navigation";
 export default function Page() {
-    redirect("/chats/2");
+    redirect("/chats/1");
 }
