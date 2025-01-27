@@ -91,6 +91,45 @@ export const user = [
     // },
 ];
 
+export const not_connected = [
+    {
+        userId: 12,
+        name: "Not connected",
+        avatar: "/avatar.png",
+        email: "ziuezj.lmmgzrfm@demo.net",
+    },
+    {
+        userId: 13,
+        name: "Tupejv Cijtmuhu",
+        avatar: "/avatar.png",
+        email: "tupejv.cijtmuhu@example.com",
+    },
+    {
+        userId: 14,
+        name: "Ebmkxh Homeotvq",
+        avatar: "/avatar.png",
+        email: "ebmkxh.homeotvq@demo.net",
+    },
+    {
+        userId: 15,
+        name: "Jwqelx Awzmnzuq",
+        avatar: "/avatar.png",
+        email: "jwqelx.awzmnzuq@demo.net",
+    },
+    {
+        userId: 16,
+        name: "Jwqelx Awzmnzuq",
+        avatar: "/avatar.png",
+        email: "jwqelx.awzmnzuq@demo.net",
+    },
+    {
+        userId: 17,
+        name: "Jwqelx Awzmnzuq",
+        avatar: "/avatar.png",
+        email: "jwqelx.awzmnzuq@demo.net",
+    },
+];
+
 export const chat = [
     {
         chatId: 1,
@@ -198,9 +237,7 @@ export const chat = [
     {
         chatId: 3,
         user: user[3],
-        messages: [
-
-        ],
+        messages: [],
     },
     {
         chatId: 4,
@@ -328,10 +365,14 @@ export const chat = [
 export const previews = chat.map((chat) => ({
     chatId: chat.chatId,
     user: chat.user,
-    lastMessage: chat.messages.length > 0 ? chat.messages[chat.messages.length - 1].message : "No messages",
+    lastMessage:
+        chat.messages.length > 0
+            ? chat.messages[chat.messages.length - 1].message
+            : "No messages",
     // lastMessageTime: chat.messages.length > 0 && chat.messages[chat.messages.length - 1].createAt,
 }));
 
 export const findChatById = (chatId: string) => {
     return chat.find((c) => c.chatId.toString() === chatId);
 };
+

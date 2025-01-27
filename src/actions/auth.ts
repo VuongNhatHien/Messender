@@ -1,3 +1,5 @@
+"use server"
+
 import { RegisterSchema, FormState } from "@/lib/definitions";
 
 export async function signup(state: FormState, formData: FormData) {

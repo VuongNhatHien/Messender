@@ -1,4 +1,4 @@
-import PreviewMessage from "@/app/chats/preview-message";
+import PreviewMessage from "@/components/ui/preview-message";
 
 export default function ChatLayout({
     children,

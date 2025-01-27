@@ -10,7 +10,7 @@ export default function LogoutButton() {
                 variant="ghost"
                 className={"text-base font-semibold"}
                 onClick={() => {
-                    router.push("/auth/register");
+                    router.push("/auth/login");
                 }}
             >
                 Logout
