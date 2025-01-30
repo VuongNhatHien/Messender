@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { RegisterSchema, FormState } from "@/lib/definitions";
 
@@ -19,7 +19,7 @@ export async function signup(state: FormState, formData: FormData) {
         };
     }
 
-    alert("User created successfully!");
+    console.log("User created successfully!");
 
     // Call the provider or db to create a user...
 }
@@ -41,8 +41,21 @@ export async function login(state: FormState, formData: FormData) {
     //     };
     // }
 
-    alert("User logged in successfully!");
+    console.log("User logged in successfully!");
 
     // Call the provider or db to create a user...
+    return undefined;
+}
+
+export async function sendMessage(state: FormState, formData: FormData) {
+    const payload = {
+        message: formData.get("message"),
+    };
+
+    if (!payload.message) {
+        return undefined;
+    }
+
+    console.log(`Message sent: ${payload.message}`);
     return undefined;
 }

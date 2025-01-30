@@ -1,5 +1,6 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import SendMessageBox from "@/components/ui/send-message-box";
 import { Separator } from "@/components/ui/separator";
 import { findChatById } from "@/mocks/mock";
 import { Paperclip } from "lucide-react";
@@ -74,7 +75,7 @@ export default async function Page({
                         </label>
                         <input id="file" type="file" className="hidden" />
 
-                        <Input
+                        {/* <Input
                             type="text"
                             placeholder="Message"
                             className="rounded-full bg-accent text-accent-foreground"
@@ -86,7 +87,8 @@ export default async function Page({
                                 width={30}
                                 height={30}
                             />
-                        </button>
+                        </button> */}
+                        <SendMessageBox />
                     </div>
                 </div>
             </div>
