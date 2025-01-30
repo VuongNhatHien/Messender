@@ -47,7 +47,11 @@ export async function login(state: FormState, formData: FormData) {
     return undefined;
 }
 
-export async function sendMessage(state: FormState, formData: FormData) {
+export async function sendMessage(
+    chatId: string,
+    state: FormState,
+    formData: FormData,
+) {
     const payload = {
         message: formData.get("message"),
     };
@@ -56,6 +60,6 @@ export async function sendMessage(state: FormState, formData: FormData) {
         return undefined;
     }
 
-    console.log(`Message sent: ${payload.message}`);
+    console.log(`Message with chatId ${chatId} sent: ${payload.message}`);
     return undefined;
 }

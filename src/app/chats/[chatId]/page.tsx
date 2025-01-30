@@ -75,20 +75,7 @@ export default async function Page({
                         </label>
                         <input id="file" type="file" className="hidden" />
 
-                        {/* <Input
-                            type="text"
-                            placeholder="Message"
-                            className="rounded-full bg-accent text-accent-foreground"
-                        />
-                        <button>
-                            <Image
-                                src="/logo.png"
-                                alt="Logo"
-                                width={30}
-                                height={30}
-                            />
-                        </button> */}
-                        <SendMessageBox />
+                        <SendMessageBox chatId={chatId} />
                     </div>
                 </div>
             </div>

@@ -2,14 +2,14 @@
 
 import { sendMessage } from "@/actions/auth";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useActionState } from "react";
-import { Input } from "./input";
 import { Textarea } from "./textarea";
 
-export default function SendMessageBox() {
-    const router = useRouter();
-    const [state, action, pending] = useActionState(sendMessage, undefined);
+export default function SendMessageBox({ chatId }: { chatId: string }) {
+    const [state, action, pending] = useActionState(
+        sendMessage.bind(null, chatId),
+        undefined,
+    );
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const formData = new FormData(event.currentTarget);
@@ -36,7 +36,7 @@ export default function SendMessageBox() {
             <Textarea
                 name="message"
                 placeholder="Message"
-                className="bg-accent text-accent-foreground resize-none"
+                className="resize-none bg-accent text-accent-foreground"
                 onKeyDown={handleKeyDown}
             />
             <button type="submit" disabled={pending}>
