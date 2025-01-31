@@ -1,6 +1,7 @@
 "use server";
 
 import { RegisterSchema, FormState } from "@/lib/definitions";
+import { redirect } from "next/navigation";
 
 export async function signup(state: FormState, formData: FormData) {
     // Validate form fields
@@ -62,4 +63,12 @@ export async function sendMessage(
 
     console.log(`Message with chatId ${chatId} sent: ${payload.message}`);
     return undefined;
+}
+export async function addUser(userId: number) {
+    // alert(`Adding user with id: ${userId}`);
+    // Call the provider or db to create a user...
+}
+
+export async function logout() {
+    redirect("/auth/login");
 }

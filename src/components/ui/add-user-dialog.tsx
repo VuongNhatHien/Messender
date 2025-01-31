@@ -1,4 +1,4 @@
-import { addUser } from "@/actions/add-user";
+import { addUser } from "@/actions/actions";
 import { Avatar, AvatarImage } from "./avatar";
 import { Button } from "./button";
 import {

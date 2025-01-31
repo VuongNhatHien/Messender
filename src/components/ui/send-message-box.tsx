@@ -1,6 +1,6 @@
 "use client";
 
-import { sendMessage } from "@/actions/auth";
+import { sendMessage } from "@/actions/actions";
 import Image from "next/image";
 import { useActionState } from "react";
 import { Textarea } from "./textarea";
@@ -29,14 +29,14 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
 
     return (
         <form
-            className="flex w-full items-center gap-3"
+            className="flex w-full items-center gap-4"
             action={action} //Server-side validation
             onSubmit={handleSubmit} //Client-side validation
         >
             <Textarea
                 name="message"
                 placeholder="Message"
-                className="resize-none bg-accent text-accent-foreground"
+                className="bg-accent text-accent-foreground"
                 onKeyDown={handleKeyDown}
             />
             <button type="submit" disabled={pending}>

@@ -1,24 +1,20 @@
 "use client";
 
-import { login } from "@/actions/auth";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { login } from "@/actions/actions";
 import Image from "next/image";
+import Link from "next/link";
 import { useActionState } from "react";
 import { Button } from "./button";
-import FormErrorMessage from "./form-error-message";
+import { Checkbox } from "./checkbox";
 import { Input } from "./input";
 import { Label } from "./label";
-import { Checkbox } from "./checkbox";
-import { Separator } from "@radix-ui/react-separator";
 
 export default function LoginForm() {
-    const router = useRouter();
     const [state, action, pending] = useActionState(login, undefined);
 
     return (
         <form
-            className="card w-80 items-center justify-center p-4 space-y-4"
+            className="card w-80 items-center justify-center space-y-4 p-4"
             action={action}
         >
             <p className="text-2xl font-semibold">Sign in</p>

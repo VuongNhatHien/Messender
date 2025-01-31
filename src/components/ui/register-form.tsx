@@ -1,17 +1,14 @@
 "use client";
 
-import { signup } from "@/actions/auth";
+import { signup } from "@/actions/actions";
+import Link from "next/link";
 import { useActionState } from "react";
+import { Button } from "./button";
 import FormErrorMessage from "./form-error-message";
 import { Input } from "./input";
-import { Button } from "./button";
-import Image from "next/image";
 import { Label } from "./label";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 export default function RegisterForm() {
-    const router = useRouter();
     const [state, action, pending] = useActionState(signup, undefined);
 
     return (
