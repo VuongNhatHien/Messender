@@ -1,10 +1,9 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
 import SendMessageBox from "@/components/ui/send-message-box";
 import { Separator } from "@/components/ui/separator";
 import { findChatById } from "@/mocks/mock";
-import { Paperclip } from "lucide-react";
-import Image from "next/image";
+import { Paperclip, Image, File, Link as LinkLucide } from "lucide-react";
+import Link from "next/link";
 
 export default async function Page({
     params,
@@ -80,14 +79,30 @@ export default async function Page({
                 </div>
             </div>
             <div className="card col-span-1">
-                <div className="flex flex-col items-center p-4">
+                <div className="flex flex-col items-center pt-4 px-2">
                     <Avatar className="size-20">
                         <AvatarImage src={chat.user.avatar} />
                     </Avatar>
-                    <div className="mt-4 text-center">
+                    <div className="mt-2 text-center">
                         <p className="text-xl font-semibold">
                             {chat.user.name}
                         </p>
+                    </div>
+                    <div className="mt-4 w-full space-y-1">
+                        <Link className="card-link gap-2" href="/chats">
+                            <Image/>
+                            <p className="font-semibold">Media</p>
+                        </Link>
+
+                        <Link className="card-link gap-2" href="/chats">
+                            <File />
+                            <p className="font-semibold">Files</p>
+                        </Link>
+
+                        <Link className="card-link gap-2" href="/chats">
+                            <LinkLucide />
+                            <p className="font-semibold">Links</p>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ export const user = [
     {
         userId: 2,
         name: "John Doe",
-        avatar: "https://i.pravatar.cc/150?img=2",
+        avatar: "https://i.pravatar.cc/150?img=32",
         email: "johndoe@example.com",
     },
     {
@@ -43,7 +43,7 @@ export const user = [
     {
         userId: 7,
         name: "Sqhccw Wrqfvaop",
-        avatar: "https://i.pravatar.cc/150?img=7",
+        avatar: "https://i.pravatar.cc/150?img=33",
         email: "sqhccw.wrqfvaop@mail.com",
     },
     {
