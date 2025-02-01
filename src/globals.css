@@ -74,12 +74,15 @@ body {
 }
 
 @layer components {
+    .hover-custom {
+        @apply hover:bg-secondary hover:text-secondary-foreground
+    }
     .card {
         @apply flex flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow;
     }
 
     .card-link {
-        @apply flex w-full items-center rounded-sm hover:bg-secondary hover:text-secondary-foreground p-2;
+        @apply flex w-full items-center rounded-sm hover-custom p-2;
     }
     .container-custom {
         @apply px-5 2xl:container 2xl:mx-auto;
