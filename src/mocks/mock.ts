@@ -1,131 +1,112 @@
+//create array of 15 avatars
+export const avatars = Array.from({ length: 15 }).map(
+    (_, i) => `https://i.pravatar.cc/150?img=${i + 1}`,
+);
+
 export const user = [
     {
         userId: 1,
         name: "Root",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=1",
         email: "yjoczm.jamguzvp@demo.net",
     },
     {
         userId: 2,
         name: "John Doe",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=2",
         email: "johndoe@example.com",
     },
     {
         userId: 3,
         name: "Qnayic Kipcmaop",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=3",
         email: "qnayic.kipcmaop@demo.net",
     },
     {
         userId: 4,
         name: "Pzqnbs Qjlwsupc",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=4",
         email: "pzqnbs.qjlwsupc@example.com",
     },
     {
         userId: 5,
         name: "Zpcqjg Lwonflev",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=5",
         email: "zpcqjg.lwonflev@mail.com",
     },
     {
         userId: 6,
         name: "Lseuqp Iigyavke",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=31",
         email: "lseuqp.iigyavke@demo.net",
     },
     {
         userId: 7,
         name: "Sqhccw Wrqfvaop",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=7",
         email: "sqhccw.wrqfvaop@mail.com",
     },
     {
         userId: 8,
         name: "Qtfvff Jdnngort",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=8",
         email: "qtfvff.jdnngort@demo.net",
     },
     {
         userId: 9,
         name: "Nmihce Yuvcpqwj",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=9",
         email: "nmihce.yuvcpqwj@test.org",
     },
     {
         userId: 10,
         name: "Mdcttk Crgddeed",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=10",
         email: "mdcttk.crgddeed@test.org",
     },
     {
         userId: 11,
         name: "Qlrxix Umgkgohu",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=11",
         email: "qlrxix.umgkgohu@test.org",
     },
-    // {
-    //     userId: 12,
-    //     name: "Ziuezj Lmmgzrfm",
-    //     avatar: "/avatar.png",
-    //     email: "ziuezj.lmmgzrfm@demo.net",
-    // },
-    // {
-    //     userId: 13,
-    //     name: "Tupejv Cijtmuhu",
-    //     avatar: "/avatar.png",
-    //     email: "tupejv.cijtmuhu@example.com",
-    // },
-    // {
-    //     userId: 14,
-    //     name: "Ebmkxh Homeotvq",
-    //     avatar: "/avatar.png",
-    //     email: "ebmkxh.homeotvq@demo.net",
-    // },
-    // {
-    //     userId: 15,
-    //     name: "Jwqelx Awzmnzuq",
-    //     avatar: "/avatar.png",
-    //     email: "jwqelx.awzmnzuq@demo.net",
-    // },
 ];
 
 export const not_connected = [
     {
         userId: 12,
         name: "Not connected",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=12",
         email: "ziuezj.lmmgzrfm@demo.net",
     },
     {
         userId: 13,
         name: "Tupejv Cijtmuhu",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=13",
         email: "tupejv.cijtmuhu@example.com",
     },
     {
         userId: 14,
         name: "Ebmkxh Homeotvq",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=14",
         email: "ebmkxh.homeotvq@demo.net",
     },
     {
         userId: 15,
         name: "Jwqelx Awzmnzuq",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=15",
         email: "jwqelx.awzmnzuq@demo.net",
     },
     {
         userId: 16,
         name: "Jwqelx Awzmnzuq",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=16",
         email: "jwqelx.awzmnzuq@demo.net",
     },
     {
         userId: 17,
         name: "Jwqelx Awzmnzuq",
-        avatar: "/avatar.png",
+        avatar: "https://i.pravatar.cc/150?img=17",
         email: "jwqelx.awzmnzuq@demo.net",
     },
 ];
@@ -375,4 +356,3 @@ export const previews = chat.map((chat) => ({
 export const findChatById = (chatId: string) => {
     return chat.find((c) => c.chatId.toString() === chatId);
 };
-
