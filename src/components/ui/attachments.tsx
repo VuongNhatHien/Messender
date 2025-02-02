@@ -21,7 +21,7 @@ export default function Attachments({
                 >
                     <ArrowLeft size={24} />
                 </button>
-                <p className="text-lg font-semibold">Media, files, links</p>
+                <p className="text-lg font-bold">Media, files, links</p>
             </div>
             <div className="mt-3 w-full">
                 <AttachmentsNavBar page={page} setPage={setPage} />

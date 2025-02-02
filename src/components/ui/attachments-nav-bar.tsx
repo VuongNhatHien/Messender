@@ -12,8 +12,8 @@ const navItems = [
     {
         name: "Links",
         value: "links",
-    }
-]
+    },
+];
 
 export default function AttachmentsNavBar({
     page,
@@ -30,7 +30,7 @@ export default function AttachmentsNavBar({
                     className={`hover-custom basis-1/${navItems.length} rounded-full p-1 ${page === navItem.value ? "border bg-accent" : "text-accent-foreground"}`}
                     onClick={() => setPage(navItem.value)}
                 >
-                    {navItem.name}
+                    <p className="font-semibold">{navItem.name}</p>
                 </button>
             ))}
         </div>
