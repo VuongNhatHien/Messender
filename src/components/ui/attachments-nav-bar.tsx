@@ -27,7 +27,7 @@ export default function AttachmentsNavBar({
             {navItems.map((navItem, index) => (
                 <button
                     key={index}
-                    className={`hover-custom basis-1/${navItems.length} rounded-full p-1 ${page === navItem.value ? "border bg-accent" : "text-accent-foreground"}`}
+                    className={`hover-custom w-full p-1 basis-1/${navItems.length} rounded-full ${page === navItem.value ? "border bg-accent" : "text-accent-foreground"}`}
                     onClick={() => setPage(navItem.value)}
                 >
                     <p className="font-semibold">{navItem.name}</p>

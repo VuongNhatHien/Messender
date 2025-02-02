@@ -33,7 +33,7 @@ export default function RootLayout({
                     attribute="class"
                     defaultTheme="system"
                     enableSystem
-                    disableTransitionOnChange
+                    // disableTransitionOnChange
                 >
                     <main className="flex h-screen flex-col">
                         <Navbar />

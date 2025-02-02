@@ -1,11 +1,6 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Conversation from "@/components/ui/conversation";
-import SendMessageBox from "@/components/ui/send-message-box";
-import { Separator } from "@/components/ui/separator";
 import ThirdColumn from "@/components/ui/third-column";
 import { findChatById } from "@/mocks/mock";
-import { Paperclip, Image, File, Link as LinkLucide } from "lucide-react";
-import Link from "next/link";
 
 export default async function Page({
     params,

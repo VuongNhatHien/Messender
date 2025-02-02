@@ -30,7 +30,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
     return (
         <form
             className="flex w-full items-center gap-4"
-            action={action} //Server-side validation
+            action={action}
             onSubmit={handleSubmit} //Client-side validation
         >
             <Textarea

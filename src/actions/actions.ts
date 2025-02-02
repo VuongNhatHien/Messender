@@ -64,8 +64,18 @@ export async function sendMessage(
     console.log(`Message with chatId ${chatId} sent: ${payload.message}`);
     return undefined;
 }
+
+export async function uploadFiles(chatId: string, files: FileList) {
+    // console.log(`Files uploaded with chatId ${chatId} : `, files);
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+        formData.append("files", files[i]);
+    }
+    //print form data
+    console.log(`From chatId ${chatId}`, formData);
+}
+
 export async function addUser(userId: number) {
-    // alert(`Adding user with id: ${userId}`);
     // Call the provider or db to create a user...
 }
 
