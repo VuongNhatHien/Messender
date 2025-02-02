@@ -5,11 +5,22 @@ export type UserType = {
     email: string;
 };
 
+export type AttachmentType = {
+    attachmentId: number;
+    fileUrl: string;
+    fileType: string;
+    fileName: string;
+    fileSize: number;
+};
+
+export type messageType = {
+    sender: UserType;
+    message: string;
+    attachment: AttachmentType | null;
+};
+
 export type ChatType = {
     chatId: number;
     user: UserType;
-    messages: {
-        sender: UserType;
-        message: string;
-    }[];
+    messages: messageType[];
 };

@@ -26,7 +26,7 @@ export default function ThirdColumn({ chat }: { chat: ChatType }) {
 
     return (
         <div className="card col-span-1">
-            <div className="flex flex-col items-center px-2 pt-4">
+            <div className="flex flex-col items-center px-3 pt-4">
                 {page === "default" ? (
                     <>
                     <Avatar className="size-20">
