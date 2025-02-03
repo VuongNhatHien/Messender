@@ -14,6 +14,7 @@ export type AttachmentType = {
 };
 
 export type messageType = {
+    messageId: number;
     sender: UserType;
     message: string;
     attachment: AttachmentType | null;

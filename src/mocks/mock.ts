@@ -119,6 +119,7 @@ export const chat = [
         user: user[1],
         messages: [
             {
+                messageId: 1,
                 sender: user[1],
                 message:
                     "Hi, I need help with setting up Tailwind CSS in my project.",
@@ -126,6 +127,7 @@ export const chat = [
                 createAt: "2025-01-21T10:00:00Z",
             },
             {
+                messageId: 2,
                 sender: user[0],
                 message:
                     "Sure, I can help with that! Are you using a framework like React or just plain HTML?",
@@ -133,6 +135,7 @@ export const chat = [
                 createAt: "2025-01-21T10:01:00Z",
             },
             {
+                messageId: 3,
                 sender: user[1],
                 message:
                     "I'm using React. I want to integrate Tailwind for styling components.",
@@ -140,6 +143,7 @@ export const chat = [
                 createAt: "2025-01-21T10:02:00Z",
             },
             {
+                messageId: 4,
                 sender: user[0],
                 message:
                     "Great! You can install Tailwind CSS using npm. Run npm install -D tailwindcss postcss autoprefixer, then create a Tailwind configuration file with npx tailwindcss init. Would you like the steps for configuring your React project as well?",
@@ -147,6 +151,7 @@ export const chat = [
                 createAt: "2025-01-21T10:03:00Z",
             },
             {
+                messageId: 5,
                 sender: user[0],
                 message:
                     "Great! You can install Tailwind CSS using npm. Run npm install -D tailwindcss postcss autoprefixer, then create a Tailwind configuration file with npx tailwindcss init. Would you like the steps for configuring your React project as well?",
@@ -154,18 +159,21 @@ export const chat = [
                 createAt: "2025-01-21T10:03:00Z",
             },
             {
+                messageId: 6,
                 sender: user[1],
                 message: "Yes, that would be helpful. Thanks!",
                 attachment: null,
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
+                messageId: 7,
                 sender: user[1],
                 message: "Thanks",
                 attachment: null,
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
+                messageId: 8,
                 sender: user[1],
                 message:
                     "Hi, I need help with setting up Tailwind CSS in my project.",
@@ -173,6 +181,7 @@ export const chat = [
                 createAt: "2025-01-21T10:00:00Z",
             },
             {
+                messageId: 9,
                 sender: user[0],
                 message:
                     "Sure, I can help with that! Are you using a framework like React or just plain HTML?",
@@ -180,6 +189,7 @@ export const chat = [
                 createAt: "2025-01-21T10:01:00Z",
             },
             {
+                messageId: 10,
                 sender: user[1],
                 message: "",
                 attachment: {
@@ -193,6 +203,7 @@ export const chat = [
                 createAt: "2025-01-21T10:02:00Z",
             },
             {
+                messageId: 11,
                 sender: user[0],
                 message: "",
                 attachment: {
@@ -206,6 +217,7 @@ export const chat = [
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
+                messageId: 12,
                 sender: user[0],
                 message: "",
                 attachment: {
@@ -219,12 +231,13 @@ export const chat = [
                 createAt: "2025-01-21T10:03:00Z",
             },
             {
+                messageId: 13,
                 sender: user[1],
                 message: "",
                 attachment: {
                     attachmentId: 3,
                     fileUrl:
-                        "https://test-messender.sgp1.cdn.digitaloceanspaces.com/KICK%20BACK%20-%20Chainsaw%20Man%20OP%20%5BPiano%5D%20%E2%A7%B8%20Kenshi%20Yonezu.mp4",
+                        "https://test-messender.sgp1.cdn.digitaloceanspaces.com/ct4.mp4",
                     fileType: "video/mp4",
                     fileName: "movie.mp4",
                     fileSize: 123,
@@ -232,6 +245,7 @@ export const chat = [
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
+                messageId: 14,
                 sender: user[1],
                 message: "",
                 attachment: {
@@ -376,6 +390,7 @@ export const chat = [
         user: user[10],
         messages: [
             {
+                messageId: 15,
                 sender: user[10],
                 message:
                     "What is the difference between React and React Native?",
@@ -383,6 +398,7 @@ export const chat = [
                 createAt: "2025-01-21T19:00:00Z",
             },
             {
+                messageId: 16,
                 sender: user[0],
                 message:
                     "React is for web apps, and React Native is for mobile apps.",
