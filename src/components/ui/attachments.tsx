@@ -29,7 +29,7 @@ export default function Attachments({
                 <AttachmentsNavBar page={page} setPage={setPage} />
             </div>
             <div className="mt-4 w-full">
-                {page === "media" && <MediaPage />}
+                {page === "media" && <MediaPage chatId={chatId}/>}
                 {page === "files" && <FilePage chatId={chatId}/>}
                 {page === "links" && <LinkPage />}
             </div>

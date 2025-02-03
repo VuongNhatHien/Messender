@@ -179,17 +179,29 @@ export const chat = [
             {
                 messageId: 8,
                 sender: user[1],
-                message:
-                    "Hi, I need help with setting up Tailwind CSS in my project.",
-                attachment: null,
+                message: "",
+                attachment: {
+                    attachmentId: 123132,
+                    fileUrl:
+                        "https://test-messender.sgp1.cdn.digitaloceanspaces.com/KICK%20BACK%20-%20Chainsaw%20Man%20OP%20%5BPiano%5D%20%E2%A7%B8%20Kenshi%20Yonezu.mp4",
+                    fileType: "video/mp4",
+                    fileName: "movie.mp4",
+                    fileSize: 123,
+                },
                 createAt: "2025-01-21T10:00:00Z",
             },
             {
                 messageId: 9,
                 sender: user[0],
-                message:
-                    "Sure, I can help with that! Are you using a framework like React or just plain HTML?",
-                attachment: null,
+                message: "",
+                attachment: {
+                    attachmentId: 5123,
+                    fileUrl:
+                        "https://test-messender.sgp1.cdn.digitaloceanspaces.com/piclorem.jpg",
+                    fileType: "image/jpg",
+                    fileName: "lorem.jpg",
+                    fileSize: 123,
+                },
                 createAt: "2025-01-21T10:01:00Z",
             },
             {
@@ -197,7 +209,7 @@ export const chat = [
                 sender: user[1],
                 message: "",
                 attachment: {
-                    attachmentId: 1,
+                attachmentId: 1,
                     fileUrl:
                         "https://cdn.fbsbx.com/v/t59.2708-21/475331341_511448854817445_8895421833669516899_n.json/openapi.json?_nc_cat=106&ccb=1-7&_nc_sid=2b0e22&_nc_ohc=ovRBw20dXpsQ7kNvgFZjVFp&_nc_zt=7&_nc_ht=cdn.fbsbx.com&_nc_gid=AfIQL5HtW11ZvrO27mxKUDP&oh=03_Q7cD1gHH4p_F9vx7cooJqm0YLR6dh88Iuakp9uwaswXmtgFcHw&oe=67A18CCE&dl=1",
                     fileType: "application/json;charset=utf-8",
