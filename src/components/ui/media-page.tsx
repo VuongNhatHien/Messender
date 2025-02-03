@@ -57,7 +57,7 @@ export default function MediaPage({ chatId }: { chatId: string }) {
     }
 
     return (
-        <div className="">
+        <div className="divide-y-2">
             {rows.map((row, rowIndex) => (
                 <div key={rowIndex} className="grid grid-cols-3 divide-x-2">
                     {row.map((file) => (

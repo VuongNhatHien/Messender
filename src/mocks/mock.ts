@@ -263,7 +263,7 @@ export const chat = [
             {
                 messageId: 14,
                 sender: user[1],
-                message: "",
+                message: "hello hello hello hello",
                 attachment: {
                     attachmentId: 5,
                     fileUrl:

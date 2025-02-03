@@ -72,18 +72,24 @@ const MessageBubble = ({
     isOwnMessage: boolean;
 }) => (
     <div className={`flex ${isOwnMessage ? "justify-end" : "justify-start"}`}>
-        {content.message && (
-            <div
-                className={`max-w-[75%] rounded-3xl px-3 py-2 ${
-                    isOwnMessage
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-secondary text-secondary-foreground"
-                }`}
-            >
-                <p>{content.message}</p>
+        <div className="max-w-[75%]">
+            <div>
+                {content.message && (
+                    <div
+                        className={`rounded-3xl px-3 py-2 ${
+                            isOwnMessage
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-secondary text-secondary-foreground"
+                        }`}
+                    >
+                        <p>{content.message}</p>
+                    </div>
+                )}
             </div>
-        )}
-        {content.attachment && renderAttachment(content.attachment)}
+            <div>
+                {content.attachment && renderAttachment(content.attachment)}
+            </div>
+        </div>
     </div>
 );
 
