@@ -43,7 +43,7 @@ const FileAttachment = ({ attachment }: { attachment: AttachmentType }) => (
     <a
         href={attachment.fileUrl}
         target="_blank"
-        className="flex items-center gap-2 rounded-3xl bg-secondary px-4 py-2"
+        className="flex items-center gap-2 rounded-3xl bg-secondary px-4 py-2 hover:opacity-75"
     >
         <File size={36} />
         <div>

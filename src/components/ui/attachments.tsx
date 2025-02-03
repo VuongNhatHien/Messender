@@ -8,9 +8,11 @@ import MediaPage from "./media-page";
 export default function Attachments({
     page,
     setPage,
+    chatId,
 }: {
     page: string;
     setPage: Dispatch<SetStateAction<string>>;
+    chatId: string;
 }) {
     return (
         <>
@@ -26,9 +28,9 @@ export default function Attachments({
             <div className="mt-3 w-full">
                 <AttachmentsNavBar page={page} setPage={setPage} />
             </div>
-            <div className="mt-3">
+            <div className="mt-4 w-full">
                 {page === "media" && <MediaPage />}
-                {page === "files" && <FilePage />}
+                {page === "files" && <FilePage chatId={chatId}/>}
                 {page === "links" && <LinkPage />}
             </div>
         </>

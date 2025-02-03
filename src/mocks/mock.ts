@@ -1,5 +1,9 @@
 import { ChatType } from "@/lib/type";
 
+const isImage = (type: string) => type.includes("image");
+const isVideo = (type: string) => type.includes("video");
+const isAudio = (type: string) => type.includes("audio");
+
 //create array of 15 avatars
 export const avatars = Array.from({ length: 15 }).map(
     (_, i) => `https://i.pravatar.cc/150?img=${i + 1}`,
@@ -193,7 +197,7 @@ export const chat = [
                 sender: user[1],
                 message: "",
                 attachment: {
-                    attachmentId: 2,
+                    attachmentId: 1,
                     fileUrl:
                         "https://cdn.fbsbx.com/v/t59.2708-21/475331341_511448854817445_8895421833669516899_n.json/openapi.json?_nc_cat=106&ccb=1-7&_nc_sid=2b0e22&_nc_ohc=ovRBw20dXpsQ7kNvgFZjVFp&_nc_zt=7&_nc_ht=cdn.fbsbx.com&_nc_gid=AfIQL5HtW11ZvrO27mxKUDP&oh=03_Q7cD1gHH4p_F9vx7cooJqm0YLR6dh88Iuakp9uwaswXmtgFcHw&oe=67A18CCE&dl=1",
                     fileType: "application/json;charset=utf-8",
@@ -207,7 +211,7 @@ export const chat = [
                 sender: user[0],
                 message: "",
                 attachment: {
-                    attachmentId: 3,
+                    attachmentId: 2,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/poly-bridge.m4a",
                     fileType: "audio/mp4",
@@ -221,7 +225,7 @@ export const chat = [
                 sender: user[0],
                 message: "",
                 attachment: {
-                    attachmentId: 2,
+                    attachmentId: 3,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/openapi.json",
                     fileType: "application/json;charset=utf-8",
@@ -235,7 +239,7 @@ export const chat = [
                 sender: user[1],
                 message: "",
                 attachment: {
-                    attachmentId: 3,
+                    attachmentId: 4,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/ct4.mp4",
                     fileType: "video/mp4",
@@ -249,7 +253,7 @@ export const chat = [
                 sender: user[1],
                 message: "",
                 attachment: {
-                    attachmentId: 1,
+                    attachmentId: 5,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/piclorem.jpg",
                     fileType: "image/jpg",
@@ -421,4 +425,32 @@ export const previews = chat.map((chat) => ({
 
 export const findChatById = (chatId: string) => {
     return chat.find((c) => c.chatId.toString() === chatId);
+};
+
+//Find all photos and videos in chatId
+export const findMediaInChat = (chatId: string) => {
+    const chat = findChatById(chatId);
+    if (!chat) return [];
+    return chat.messages
+        .filter(
+            (m) =>
+                m.attachment &&
+                (isImage(m.attachment.fileType) ||
+                    isVideo(m.attachment.fileType)),
+        )
+        .map((m) => m.attachment);
+};
+
+//Find all files in chatId
+export const findFilesInChat = (chatId: string) => {
+    const chat = findChatById(chatId);
+    if (!chat) return [];
+    return chat.messages
+        .filter(
+            (m) =>
+                m.attachment &&
+                !isImage(m.attachment.fileType) &&
+                !isVideo(m.attachment.fileType),
+        )
+        .map((m) => m.attachment);
 };
