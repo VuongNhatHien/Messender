@@ -19,7 +19,7 @@ export default function AddUserDialog() {
             <DialogTrigger asChild>
                 <Button
                     variant={"outline"}
-                    className={"rounded-full"}
+                    className={"rounded-full shrink-0"}
                     size={"icon"}
                 >
                     <p className={"text-2xl"}>+</p>

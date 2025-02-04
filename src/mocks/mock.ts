@@ -500,3 +500,11 @@ export const findFilesInChat = (chatId: string) => {
         )
         .map((m) => m.attachment);
 };
+
+export const findLinksInChat = (chatId: string) => {
+    const chat = findChatById(chatId);
+    if (!chat) return [];
+    return chat.messages
+        .filter((m) => m.metadata)
+        .map((m) => m.metadata);
+}

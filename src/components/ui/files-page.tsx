@@ -7,11 +7,13 @@ const FileItem = ({ file }: { file: AttachmentType | null }) => {
         <a
             href={file?.fileUrl}
             target="_blank"
-            className="hover-custom flex items-center gap-2 rounded-sm px-2 py-1"
+            className="hover-custom flex items-center gap-2 rounded-sm pe-2 py-1"
         >
-            <File size={36} />
-            <div>
-                <p className="line-clamp-1 font-extrabold">{file?.fileName}</p>
+            <div className="flex shrink-0 size-[52px] items-center justify-center rounded-xl bg-muted">
+                <File size={36} className="" />
+            </div>
+            <div className="overflow-hidden">
+                <p className="truncate font-extrabold">{file?.fileName}</p>
                 <p className="font-medium text-muted-foreground">{`${file?.fileSize} KB`}</p>
             </div>
         </a>

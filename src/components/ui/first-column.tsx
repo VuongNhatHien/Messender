@@ -35,11 +35,11 @@ export default function FirstColumn() {
                             {/* <AvatarFallback>Null</AvatarFallback> */}
                         </Avatar>
 
-                        <div className="ml-4 w-full">
-                            <p className="line-clamp-1 font-semibold">
+                        <div className="ml-4 w-full overflow-hidden">
+                            <p className="truncate font-semibold">
                                 {preview.user.name}
                             </p>
-                            <p className="line-clamp-1 text-muted-foreground">
+                            <p className="truncate text-muted-foreground">
                                 {preview.lastMessage}
                             </p>
                         </div>

@@ -43,7 +43,7 @@ export default function SecondColumn({ chat }: { chat: ChatType }) {
                     <ConversationBody chat={chat} />
                     <ConversationFooter chat={chat} />
                     {isOver && (
-                        <div className="absolute inset-0 flex h-full flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-foreground bg-background opacity-85">
+                        <div className="absolute inset-0 flex h-full flex-col items-center justify-center gap-3 rounded-lg border-dashed border-foreground border-2 bg-background opacity-85">
                             <p className="text-2xl font-bold text-secondary-foreground">
                                 Drop files here
                             </p>
