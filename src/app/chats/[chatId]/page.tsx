@@ -1,4 +1,4 @@
-import Conversation from "@/components/ui/conversation";
+import SecondColumn from "@/components/ui/second-column";
 import ThirdColumn from "@/components/ui/third-column";
 import { findChatById } from "@/mocks/mock";
 
@@ -20,7 +20,7 @@ export default async function Page({
 
     return (
         <>
-            <Conversation chat={chat} />
+            <SecondColumn chat={chat} />
             <ThirdColumn chat={chat} />
         </>
     );

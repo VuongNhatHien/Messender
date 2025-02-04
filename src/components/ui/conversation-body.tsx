@@ -1,4 +1,9 @@
-import { AttachmentType, ChatType, messageType } from "@/lib/type";
+import {
+    AttachmentType,
+    ChatType,
+    messageType,
+    MetadataType,
+} from "@/lib/type";
 import { File } from "lucide-react";
 import Image from "next/image";
 
@@ -53,6 +58,45 @@ const FileAttachment = ({ attachment }: { attachment: AttachmentType }) => (
     </a>
 );
 
+const Message = ({
+    content,
+    isOwnMessage,
+}: {
+    content: messageType;
+    isOwnMessage: boolean;
+}) => (
+    <div
+        className={`rounded-${content.metadata ? "t-" : ""}3xl px-3 py-2 ${
+            isOwnMessage
+                ? "bg-primary text-primary-foreground"
+                : "bg-secondary text-secondary-foreground"
+        }`}
+    >
+        <p>{content.message}</p>
+    </div>
+);
+
+const MetaData = ({ metadata }: { metadata: MetadataType }) => (
+    <a href={metadata.url} target="_blank" className="hover:opacity-75">
+        {metadata.image && (
+            <div className="">
+                <Image
+                    width={512}
+                    height={512}
+                    src={metadata.image}
+                    alt=""
+                    className="h-full w-full"
+                />
+            </div>
+        )}
+        <div className="rounded-b-3xl bg-secondary px-3 py-2">
+            <p className="font-bold">
+                {metadata.title ? metadata.title : metadata.url}
+            </p>
+        </div>
+    </a>
+);
+
 const renderAttachment = (attachment: any) => {
     if (isImage(attachment.fileType))
         return <ImageAttachment attachment={attachment} />;
@@ -84,42 +128,8 @@ const MessageBubble = ({
             <div
                 className={`${isOwnMessage ? "ml-auto" : ""} ${content.metadata?.image ? "w-[75%]" : "w-fit max-w-[75%]"}`}
             >
-                <div
-                    className={`rounded-${content.metadata ? "t-" : ""}3xl px-3 py-2 ${
-                        isOwnMessage
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-secondary text-secondary-foreground"
-                    }`}
-                >
-                    <p>{content.message}</p>
-                </div>
-
-                {content.metadata && (
-                    <a
-                        href={content.metadata.url}
-                        target="_blank"
-                        className="hover:opacity-75"
-                    >
-                        {content.metadata.image && (
-                            <div className="">
-                                <Image
-                                    width={128}
-                                    height={128}
-                                    src={content.metadata.image}
-                                    alt=""
-                                    className="h-full w-full"
-                                />
-                            </div>
-                        )}
-                        <div className="rounded-b-3xl bg-secondary px-3 py-2">
-                            <p className="font-bold">
-                                {content.metadata.title
-                                    ? content.metadata.title
-                                    : content.metadata.url}
-                            </p>
-                        </div>
-                    </a>
-                )}
+                <Message content={content} isOwnMessage={isOwnMessage} />
+                {content.metadata && <MetaData metadata={content.metadata} />}
             </div>
         )}
     </>

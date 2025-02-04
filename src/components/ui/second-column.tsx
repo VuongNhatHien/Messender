@@ -7,7 +7,7 @@ import ConversationFooter from "./conversation-footer";
 import ConversationHeader from "./conversation-header";
 import { Separator } from "./separator";
 
-export default function Conversation({ chat }: { chat: ChatType }) {
+export default function SecondColumn({ chat }: { chat: ChatType }) {
     const [isOver, setIsOver] = useState(false);
 
     // Define the event handlers
