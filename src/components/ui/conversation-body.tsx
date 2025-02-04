@@ -71,26 +71,58 @@ const MessageBubble = ({
     content: messageType;
     isOwnMessage: boolean;
 }) => (
-    <div className={`flex ${isOwnMessage ? "justify-end" : "justify-start"}`}>
-        <div className="max-w-[75%]">
-            <div>
-                {content.message && (
-                    <div
-                        className={`rounded-3xl px-3 py-2 ${
-                            isOwnMessage
-                                ? "bg-primary text-primary-foreground"
-                                : "bg-secondary text-secondary-foreground"
-                        }`}
+    <>
+        {content.attachment && (
+            <div
+                className={`${isOwnMessage ? "ml-auto" : ""} w-fit max-w-[75%]`}
+            >
+                {renderAttachment(content.attachment)}
+            </div>
+        )}
+
+        {content.message && (
+            <div
+                className={`${isOwnMessage ? "ml-auto" : ""} ${content.metadata?.image ? "w-[75%]" : "w-fit max-w-[75%]"}`}
+            >
+                <div
+                    className={`rounded-${content.metadata ? "t-" : ""}3xl px-3 py-2 ${
+                        isOwnMessage
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-secondary text-secondary-foreground"
+                    }`}
+                >
+                    <p>{content.message}</p>
+                </div>
+
+                {content.metadata && (
+                    <a
+                        href={content.metadata.url}
+                        target="_blank"
+                        className="hover:opacity-75"
                     >
-                        <p>{content.message}</p>
-                    </div>
+                        {content.metadata.image && (
+                            <div className="">
+                                <Image
+                                    width={128}
+                                    height={128}
+                                    src={content.metadata.image}
+                                    alt=""
+                                    className="h-full w-full"
+                                />
+                            </div>
+                        )}
+                        <div className="rounded-b-3xl bg-secondary px-3 py-2">
+                            <p className="font-bold">
+                                {content.metadata.title
+                                    ? content.metadata.title
+                                    : content.metadata.url}
+                            </p>
+                        </div>
+                    </a>
                 )}
             </div>
-            <div>
-                {content.attachment && renderAttachment(content.attachment)}
-            </div>
-        </div>
-    </div>
+        )}
+    </>
 );
 
 export default function ConversationBody({ chat }: { chat: ChatType }) {

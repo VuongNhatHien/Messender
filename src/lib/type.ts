@@ -13,11 +13,19 @@ export type AttachmentType = {
     fileSize: number;
 };
 
+export type MetadataType = {
+    metadataId: number,
+    url: string,
+    title: string,
+    image: string,
+}
+
 export type messageType = {
     messageId: number;
     sender: UserType;
     message: string;
     attachment: AttachmentType | null;
+    metadata: MetadataType | null;
 };
 
 export type ChatType = {

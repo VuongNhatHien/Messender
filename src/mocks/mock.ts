@@ -1,3 +1,4 @@
+import { metadata } from "@/app/layout";
 import { ChatType } from "@/lib/type";
 
 const isImage = (type: string) => type.includes("image");
@@ -128,6 +129,7 @@ export const chat = [
                 message:
                     "Hi, I need help with setting up Tailwind CSS in my project.",
                 attachment: null,
+                metadata: null,
                 createAt: "2025-01-21T10:00:00Z",
             },
             {
@@ -136,6 +138,7 @@ export const chat = [
                 message:
                     "Sure, I can help with that! Are you using a framework like React or just plain HTML?",
                 attachment: null,
+                metadata: null,
                 createAt: "2025-01-21T10:01:00Z",
             },
             {
@@ -144,6 +147,7 @@ export const chat = [
                 message:
                     "I'm using React. I want to integrate Tailwind for styling components.",
                 attachment: null,
+                metadata: null,
                 createAt: "2025-01-21T10:02:00Z",
             },
             {
@@ -152,6 +156,7 @@ export const chat = [
                 message:
                     "Great! You can install Tailwind CSS using npm. Run npm install -D tailwindcss postcss autoprefixer, then create a Tailwind configuration file with npx tailwindcss init. Would you like the steps for configuring your React project as well?",
                 attachment: null,
+                metadata: null,
                 createAt: "2025-01-21T10:03:00Z",
             },
             {
@@ -160,20 +165,40 @@ export const chat = [
                 message:
                     "Great! You can install Tailwind CSS using npm. Run npm install -D tailwindcss postcss autoprefixer, then create a Tailwind configuration file with npx tailwindcss init. Would you like the steps for configuring your React project as well?",
                 attachment: null,
+                metadata: null,
                 createAt: "2025-01-21T10:03:00Z",
             },
             {
                 messageId: 6,
-                sender: user[1],
-                message: "Yes, that would be helpful. Thanks!",
-                attachment: null,
+                sender: user[0],
+                message: "https://www.digitalocean.commmm/ visit this website",
+                attachment: {
+                    attachmentId: 23231,
+                    fileUrl:
+                        "https://test-messender.sgp1.cdn.digitaloceanspaces.com/ct4.mp4",
+                    fileType: "video/mp4",
+                    fileName: "movie.mp4",
+                    fileSize: 123,
+                },
+                metadata: {
+                    metadataId: 2,
+                    url: "https://www.digitalocean.commmm",
+                    title: "",
+                    image: "",
+                },
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
                 messageId: 7,
                 sender: user[1],
-                message: "Thanks",
+                message: "https://www.digitalocean.com/ visit this website",
                 attachment: null,
+                metadata: {
+                    metadataId: 1,
+                    url: "https://www.digitalocean.com",
+                    title: "DigitalOcean | Cloud Infrastructure for Developers",
+                    image: "https://www.digitalocean.com/_next/static/media/social-share-default.e8530e9e.jpeg",
+                },
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
@@ -188,6 +213,7 @@ export const chat = [
                     fileName: "movie.mp4",
                     fileSize: 123,
                 },
+                metadata: null,
                 createAt: "2025-01-21T10:00:00Z",
             },
             {
@@ -202,6 +228,7 @@ export const chat = [
                     fileName: "lorem.jpg",
                     fileSize: 123,
                 },
+                metadata: null,
                 createAt: "2025-01-21T10:01:00Z",
             },
             {
@@ -209,13 +236,14 @@ export const chat = [
                 sender: user[1],
                 message: "",
                 attachment: {
-                attachmentId: 1,
+                    attachmentId: 1,
                     fileUrl:
                         "https://cdn.fbsbx.com/v/t59.2708-21/475331341_511448854817445_8895421833669516899_n.json/openapi.json?_nc_cat=106&ccb=1-7&_nc_sid=2b0e22&_nc_ohc=ovRBw20dXpsQ7kNvgFZjVFp&_nc_zt=7&_nc_ht=cdn.fbsbx.com&_nc_gid=AfIQL5HtW11ZvrO27mxKUDP&oh=03_Q7cD1gHH4p_F9vx7cooJqm0YLR6dh88Iuakp9uwaswXmtgFcHw&oe=67A18CCE&dl=1",
                     fileType: "application/json;charset=utf-8",
                     fileName: "file-from-messenger.json",
                     fileSize: 123,
                 },
+                metadata: null,
                 createAt: "2025-01-21T10:02:00Z",
             },
             {
@@ -230,6 +258,7 @@ export const chat = [
                     fileName: "audio.m4a",
                     fileSize: 123,
                 },
+                metadata: null,
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
@@ -244,6 +273,7 @@ export const chat = [
                     fileName: "openapi.json",
                     fileSize: 123,
                 },
+                metadata: null,
                 createAt: "2025-01-21T10:03:00Z",
             },
             {
@@ -258,6 +288,7 @@ export const chat = [
                     fileName: "movie.mp4",
                     fileSize: 123,
                 },
+                metadata: null,
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
@@ -272,6 +303,7 @@ export const chat = [
                     fileName: "lorem.jpg",
                     fileSize: 123,
                 },
+                metadata: null,
                 createAt: "2025-01-21T10:04:00Z",
             },
         ],
@@ -411,6 +443,7 @@ export const chat = [
                 message:
                     "What is the difference between React and React Native?",
                 attachment: null,
+                metadata: null,
                 createAt: "2025-01-21T19:00:00Z",
             },
             {
@@ -419,6 +452,7 @@ export const chat = [
                 message:
                     "React is for web apps, and React Native is for mobile apps.",
                 attachment: null,
+                metadata: null,
                 createAt: "2025-01-21T19:01:00Z",
             },
         ],

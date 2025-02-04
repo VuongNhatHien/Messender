@@ -6,17 +6,14 @@ const nextConfig: NextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "test-messender.sgp1.cdn.digitaloceanspaces.com",
-                port: "",
-                pathname: "/**",
-                search: "",
+                hostname: "**",
             },
         ],
     },
     experimental: {
-      serverActions: {
-        bodySizeLimit: '100mb',
-      },
+        serverActions: {
+            bodySizeLimit: "100mb",
+        },
     },
 };
 
