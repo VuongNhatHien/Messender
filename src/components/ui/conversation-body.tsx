@@ -137,7 +137,7 @@ const MessageBubble = ({
 
 export default function ConversationBody({ chat }: { chat: ChatType }) {
     return (
-        <div className="flex h-full flex-col-reverse justify-start gap-4 overflow-auto p-4">
+        <div className="relative flex h-full flex-col-reverse justify-start gap-4 overflow-auto p-4">
             {chat.messages
                 .slice()
                 .reverse()

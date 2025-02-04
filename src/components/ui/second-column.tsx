@@ -6,7 +6,7 @@ import ConversationBody from "./conversation-body";
 import ConversationFooter from "./conversation-footer";
 import ConversationHeader from "./conversation-header";
 import { Separator } from "./separator";
-
+import { FolderUp } from "lucide-react";
 export default function SecondColumn({ chat }: { chat: ChatType }) {
     const [isOver, setIsOver] = useState(false);
 
@@ -39,18 +39,18 @@ export default function SecondColumn({ chat }: { chat: ChatType }) {
             <>
                 <ConversationHeader chat={chat} />
                 <Separator />
-                {isOver ? (
-                    <div className="flex h-full items-center justify-center rounded-lg border-2 border-dashed border-secondary-foreground bg-secondary">
-                        <p className="text-2xl font-medium text-secondary-foreground">
-                            Drop files here
-                        </p>
-                    </div>
-                ) : (
-                    <>
-                        <ConversationBody chat={chat} />
-                        <ConversationFooter chat={chat} />
-                    </>
-                )}
+                <div className="relative flex h-full flex-col overflow-hidden">
+                    <ConversationBody chat={chat} />
+                    <ConversationFooter chat={chat} />
+                    {isOver && (
+                        <div className="absolute inset-0 flex h-full flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-foreground bg-background opacity-85">
+                            <p className="text-2xl font-bold text-secondary-foreground">
+                                Drop files here
+                            </p>
+                            <FolderUp size={48} />
+                        </div>
+                    )}
+                </div>
             </>
         </div>
     );
