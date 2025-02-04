@@ -37,7 +37,7 @@ export default function RootLayout({
                 >
                     <main className="flex h-screen flex-col">
                         <Navbar />
-                        <div className="h-full overflow-auto">
+                        <div className="flex-1 overflow-auto">
                             <div className="container-custom h-full w-full py-5">
                                 {children}
                             </div>

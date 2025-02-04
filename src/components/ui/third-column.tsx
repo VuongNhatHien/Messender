@@ -19,16 +19,15 @@ const attachmentCards = [
         name: "Links",
         icon: <LinkLucide />,
     },
-]
+];
 
 export default function ThirdColumn({ chat }: { chat: ChatType }) {
     const [page, setPage] = useState("default");
 
     return (
-        <div className="card col-span-1">
-            <div className="flex flex-col items-center px-3 pt-4">
-                {page === "default" ? (
-                    <>
+        <div className="card w-1/4 items-center px-3 py-4 overflow-auto">
+            {page === "default" ? (
+                <>
                     <Avatar className="size-20">
                         <AvatarImage src={chat.user.avatar} />
                     </Avatar>
@@ -42,18 +41,25 @@ export default function ThirdColumn({ chat }: { chat: ChatType }) {
                             <button
                                 key={index}
                                 className="card-link gap-2 py-3"
-                                onClick={() => setPage(attachment.name.toLowerCase())}
+                                onClick={() =>
+                                    setPage(attachment.name.toLowerCase())
+                                }
                             >
                                 {attachment.icon}
-                                <p className="font-semibold">{attachment.name}</p>
+                                <p className="font-semibold">
+                                    {attachment.name}
+                                </p>
                             </button>
                         ))}
                     </div>
                 </>
-                ) : (
-                    <Attachments page={page} setPage={setPage} chatId={chat.chatId.toString()} />
-                )}
-            </div>
+            ) : (
+                <Attachments
+                    page={page}
+                    setPage={setPage}
+                    chatId={chat.chatId.toString()}
+                />
+            )}
         </div>
     );
 }

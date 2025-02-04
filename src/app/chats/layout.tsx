@@ -1,4 +1,4 @@
-import PreviewMessage from "@/components/ui/preview-message";
+import FirstColumn from "@/components/ui/first-column";
 
 export default function ChatLayout({
     children,
@@ -6,8 +6,8 @@ export default function ChatLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <div className={`grid h-full w-full grid-cols-4 gap-4`}>
-            <PreviewMessage />
+        <div className={`flex h-full gap-4`}>
+            <FirstColumn />
             {children}
         </div>
     );

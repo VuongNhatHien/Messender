@@ -12,7 +12,7 @@ export default async function Page({
     const chat = findChatById(chatId);
     if (!chat) {
         return (
-            <div className="card col-span-3 flex items-center justify-center">
+            <div className="card flex items-center justify-center">
                 <p className={"text-2xl font-bold"}>No chats selected</p>
             </div>
         );

@@ -31,7 +31,7 @@ export default function SecondColumn({ chat }: { chat: ChatType }) {
     };
     return (
         <div
-            className="card col-span-2"
+            className="card w-1/2"
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}

@@ -7,10 +7,10 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import AddUserDialog from "./add-user-dialog";
 
-export default function PreviewMessage() {
+export default function FirstColumn() {
     const chatId = useParams<{ chatId: string }>().chatId;
     return (
-        <div className="card col-span-1">
+        <div className="card w-1/4">
             <div
                 className={"header flex items-center justify-between px-4 py-3"}
             >
