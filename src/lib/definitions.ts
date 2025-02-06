@@ -3,6 +3,7 @@ import { z } from "zod";
 export const RegisterSchema = z
     .object({
         name: z.string().min(1, { message: "Username is required" }).trim(),
+        displayName: z.string().min(1, { message: "Display name is required" }),
         password: z
             .string()
             .min(8, { message: "Password must be at least 8 characters long" })
@@ -20,12 +21,32 @@ export const RegisterSchema = z
         path: ["confirmPassword"], // path of error
     });
 
-export type FormState =
+export type RegisterState =
     | {
           errors?: {
-              name?: string[];
+              username?: string[];
+              displayName?: string[];
               password?: string[];
               confirmPassword?: string[];
+          };
+          message?: string;
+      }
+    | undefined;
+
+export type LoginState =
+    | {
+          errors?: {
+              username?: string[];
+              password?: string[];
+          };
+          message?: string;
+      }
+    | undefined;
+
+export type MessageState =
+    | {
+          errors?: {
+              message?: string[];
           };
           message?: string;
       }

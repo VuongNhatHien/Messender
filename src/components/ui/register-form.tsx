@@ -28,6 +28,18 @@ export default function RegisterForm() {
                     <FormErrorMessage errors={state?.errors?.name} />
                 </div>
 
+                <div className="space-y-1">
+                    <Input
+                        className="w-full"
+                        name="displayName"
+                        placeholder="Display name"
+                        defaultValue={
+                            (state?.payload.displayName || "") as string
+                        }
+                    />
+                    <FormErrorMessage errors={state?.errors?.displayName} />
+                </div>
+
                 <div>
                     <Input
                         type="password"

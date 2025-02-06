@@ -1,12 +1,19 @@
 "use server";
 
-import { RegisterSchema, FormState } from "@/lib/definitions";
+import {
+    LoginState,
+    MessageState,
+    RegisterSchema,
+    RegisterState,
+} from "@/lib/definitions";
 import { redirect } from "next/navigation";
 
-export async function signup(state: FormState, formData: FormData) {
+export async function signup(state: RegisterState, formData: FormData) {
+    console.log(state);
     // Validate form fields
     const payload = {
         name: formData.get("name"),
+        displayName: formData.get("displayName"),
         password: formData.get("password"),
         confirmPassword: formData.get("confirmPassword"),
     };
@@ -21,11 +28,12 @@ export async function signup(state: FormState, formData: FormData) {
     }
 
     console.log("User created successfully!");
+    console.log(formData);
 
     // Call the provider or db to create a user...
 }
 
-export async function login(state: FormState, formData: FormData) {
+export async function login(state: LoginState, formData: FormData) {
     console.log(state);
     console.log(formData);
     // Validate form fields
@@ -52,9 +60,10 @@ export async function login(state: FormState, formData: FormData) {
 
 export async function sendMessage(
     chatId: string,
-    state: FormState,
+    state: MessageState,
     formData: FormData,
 ) {
+    console.log(state);
     const payload = {
         message: formData.get("message"),
     };
