@@ -76,6 +76,7 @@ export async function uploadFiles(chatId: string, files: FileList) {
 }
 
 export async function addUser(userId: number) {
+    console.log(`User with userId ${userId} added to chat`);
     // Call the provider or db to create a user...
 }
 

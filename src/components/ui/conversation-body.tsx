@@ -38,7 +38,7 @@ const VideoAttachment = ({ attachment }: { attachment: AttachmentType }) => (
 );
 
 const AudioAttachment = ({ attachment }: { attachment: AttachmentType }) => (
-    <audio controls className="cursor-pointer rounded-lg bg-secondary">
+    <audio controls className="cursor-pointer rounded-lg">
         <source src={attachment.fileUrl} />
         Your browser does not support the audio tag.
     </audio>

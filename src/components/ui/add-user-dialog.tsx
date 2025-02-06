@@ -1,6 +1,4 @@
-"use client";
-import { addUser } from "@/actions/actions";
-import { Avatar, AvatarImage } from "./avatar";
+import { not_connected } from "@/mocks/mock";
 import { Button } from "./button";
 import {
     Dialog,
@@ -10,9 +8,9 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "./dialog";
+import NotConnectCard from "./not-connect-card";
 import Searchbar from "./search";
 import { Separator } from "./separator";
-import { not_connected, previews } from "@/mocks/mock";
 
 export default function AddUserDialog() {
     return (
@@ -40,28 +38,9 @@ export default function AddUserDialog() {
                 </div>
 
                 <Separator className={"mt-4"} />
-                <div className="h-full space-y-1 overflow-auto px-1 pt-1">
+                <div className="h-full space-y-1 overflow-auto pe-1 pt-1">
                     {not_connected.map((user) => (
-                        <button
-                            key={user.userId}
-                            className="card-link"
-                            onClick={async () => {
-                                await addUser(user.userId);
-                            }}
-                        >
-                            <Avatar className="size-12">
-                                <AvatarImage src={user.avatar} />
-                                {/* <AvatarFallback>Null</AvatarFallback> */}
-                            </Avatar>
-                            <div className="ml-4">
-                                <p className="line-clamp-1 flex font-semibold">
-                                    {user.name}
-                                </p>
-                                <p className="line-clamp-1 flex text-muted-foreground">
-                                    {user.email}
-                                </p>
-                            </div>
-                        </button>
+                        <NotConnectCard key={user.userId} user={user} />
                     ))}
                 </div>
             </DialogContent>
