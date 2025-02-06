@@ -97,7 +97,7 @@ const MetaData = ({ metadata }: { metadata: MetadataType }) => (
     </a>
 );
 
-const renderAttachment = (attachment: any) => {
+const renderAttachment = (attachment: AttachmentType) => {
     if (isImage(attachment.fileType))
         return <ImageAttachment attachment={attachment} />;
     if (isVideo(attachment.fileType))

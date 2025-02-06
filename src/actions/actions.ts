@@ -26,12 +26,14 @@ export async function signup(state: FormState, formData: FormData) {
 }
 
 export async function login(state: FormState, formData: FormData) {
+    console.log(state);
+    console.log(formData);
     // Validate form fields
-    const payload = {
-        name: formData.get("name"),
-        password: formData.get("password"),
-        remember: formData.get("remember"),
-    };
+    // const payload = {
+    //     name: formData.get("name"),
+    //     password: formData.get("password"),
+    //     remember: formData.get("remember"),
+    // };
     // const validatedFields = RegisterSchema.safeParse(payload);
 
     // // If any form fields are invalid, return early

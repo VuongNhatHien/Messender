@@ -11,6 +11,7 @@ import { Label } from "./label";
 
 export default function LoginForm() {
     const [state, action, pending] = useActionState(login, undefined);
+    console.log(state);
 
     return (
         <form

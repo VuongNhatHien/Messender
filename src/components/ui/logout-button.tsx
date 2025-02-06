@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import { Button } from "./button";
 import { logout } from "@/actions/actions";
 

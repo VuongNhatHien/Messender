@@ -1,5 +1,5 @@
 "use client";
-import { ChatType, PreviewMessageType } from "@/lib/type";
+import { PreviewMessageType } from "@/lib/type";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Avatar, AvatarImage } from "./avatar";

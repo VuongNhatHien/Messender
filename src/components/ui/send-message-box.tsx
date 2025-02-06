@@ -10,6 +10,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
         sendMessage.bind(null, chatId),
         undefined,
     );
+    console.log(state);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const formData = new FormData(event.currentTarget);

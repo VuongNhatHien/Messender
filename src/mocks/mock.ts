@@ -1,9 +1,6 @@
-import { metadata } from "@/app/layout";
-import { ChatType } from "@/lib/type";
 
 const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
-const isAudio = (type: string) => type.includes("audio");
 
 //create array of 15 avatars
 export const avatars = Array.from({ length: 15 }).map(
