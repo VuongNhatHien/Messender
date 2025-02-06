@@ -1,3 +1,4 @@
+"use client";
 import { addUser } from "@/actions/actions";
 import { Avatar, AvatarImage } from "./avatar";
 import { Button } from "./button";
@@ -19,7 +20,7 @@ export default function AddUserDialog() {
             <DialogTrigger asChild>
                 <Button
                     variant={"outline"}
-                    className={"rounded-full shrink-0"}
+                    className={"shrink-0 rounded-full"}
                     size={"icon"}
                 >
                     <p className={"text-2xl"}>+</p>

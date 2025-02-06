@@ -33,3 +33,9 @@ export type ChatType = {
     user: UserType;
     messages: messageType[];
 };
+
+export type PreviewMessageType = {
+    chatId: number;
+    user: UserType;
+    lastMessage: string;
+}

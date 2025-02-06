@@ -15,8 +15,8 @@ const isAudio = (type: string) => type.includes("audio");
 const ImageAttachment = ({ attachment }: { attachment: AttachmentType }) => (
     <a href={attachment.fileUrl} target="_blank">
         <Image
-            width={128}
-            height={128}
+            width={320}
+            height={320}
             src={attachment.fileUrl}
             alt="attachment"
             className="rounded-lg hover:opacity-75"

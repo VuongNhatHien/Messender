@@ -208,7 +208,7 @@ export const chat = [
                 attachment: {
                     attachmentId: 123132,
                     fileUrl:
-                        "https://test-messender.sgp1.cdn.digitaloceanspaces.com/KICK%20BACK%20-%20Chainsaw%20Man%20OP%20%5BPiano%5D%20%E2%A7%B8%20Kenshi%20Yonezu.mp4",
+                        "https://test-messender.sgp1.cdn.digitaloceanspaces.com/Rick%20Roll.mp4",
                     fileType: "video/mp4",
                     fileName: "movie.mp4",
                     fileSize: 123,
@@ -223,7 +223,7 @@ export const chat = [
                 attachment: {
                     attachmentId: 5123,
                     fileUrl:
-                        "https://test-messender.sgp1.cdn.digitaloceanspaces.com/piclorem.jpg",
+                        "https://test-messender.sgp1.cdn.digitaloceanspaces.com/237-4032x3024.jpg",
                     fileType: "image/jpg",
                     fileName: "lorem.jpg",
                     fileSize: 123,
@@ -504,7 +504,5 @@ export const findFilesInChat = (chatId: string) => {
 export const findLinksInChat = (chatId: string) => {
     const chat = findChatById(chatId);
     if (!chat) return [];
-    return chat.messages
-        .filter((m) => m.metadata)
-        .map((m) => m.metadata);
-}
+    return chat.messages.filter((m) => m.metadata).map((m) => m.metadata);
+};
