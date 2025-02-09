@@ -1,5 +1,5 @@
 "use client";
-import { addUser } from "@/actions/actions";
+import { addUser } from "@/actions/common";
 import { UserType } from "@/lib/type";
 import { Avatar, AvatarImage } from "./avatar";
 

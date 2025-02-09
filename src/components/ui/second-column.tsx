@@ -1,5 +1,5 @@
 "use client";
-import { uploadFiles } from "@/actions/actions";
+import { uploadFiles } from "@/actions/common";
 import { ChatType } from "@/lib/type";
 import { useState } from "react";
 import ConversationBody from "./conversation-body";

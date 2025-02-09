@@ -1,4 +1,4 @@
-import { uploadFiles } from "@/actions/actions";
+import { uploadFiles } from "@/actions/common";
 import { Paperclip } from "lucide-react";
 
 export default function ChooseFile({ chatId }: { chatId: string }) {

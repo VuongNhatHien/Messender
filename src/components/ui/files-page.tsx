@@ -1,5 +1,5 @@
 import { AttachmentType } from "@/lib/type";
-import { findFilesInChat } from "@/mocks/mock";
+import { FindFilesInChat } from "@/mocks/mock";
 import { File } from "lucide-react";
 
 const FileItem = ({ file }: { file: AttachmentType | null }) => {
@@ -21,7 +21,7 @@ const FileItem = ({ file }: { file: AttachmentType | null }) => {
 };
 
 export default function FilePage({ chatId }: { chatId: string }) {
-    const files = findFilesInChat(chatId);
+    const files = FindFilesInChat(chatId);
     return (
         <div className="space-y-1">
             {files.map((file) => (

@@ -466,13 +466,13 @@ export const previews = chat.map((chat) => ({
     // lastMessageTime: chat.messages.length > 0 && chat.messages[chat.messages.length - 1].createAt,
 }));
 
-export const findChatById = (chatId: string) => {
+export const FindChatById = (chatId: string) => {
     return chat.find((c) => c.chatId.toString() === chatId);
 };
 
 //Find all photos and videos in chatId
-export const findMediaInChat = (chatId: string) => {
-    const chat = findChatById(chatId);
+export const FindMediaInChat = (chatId: string) => {
+    const chat = FindChatById(chatId);
     if (!chat) return [];
     return chat.messages
         .filter(
@@ -485,8 +485,8 @@ export const findMediaInChat = (chatId: string) => {
 };
 
 //Find all files in chatId
-export const findFilesInChat = (chatId: string) => {
-    const chat = findChatById(chatId);
+export const FindFilesInChat = (chatId: string) => {
+    const chat = FindChatById(chatId);
     if (!chat) return [];
     return chat.messages
         .filter(
@@ -498,8 +498,8 @@ export const findFilesInChat = (chatId: string) => {
         .map((m) => m.attachment);
 };
 
-export const findLinksInChat = (chatId: string) => {
-    const chat = findChatById(chatId);
+export const FindLinksInChat = (chatId: string) => {
+    const chat = FindChatById(chatId);
     if (!chat) return [];
     return chat.messages.filter((m) => m.metadata).map((m) => m.metadata);
 };

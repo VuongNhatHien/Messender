@@ -1,5 +1,5 @@
 import { MetadataType } from "@/lib/type";
-import { findLinksInChat } from "@/mocks/mock";
+import { FindLinksInChat } from "@/mocks/mock";
 import Image from "next/image";
 import { Globe } from "lucide-react";
 
@@ -31,7 +31,7 @@ const LinkItem = ({ link }: { link: MetadataType | null }) => {
 };
 
 export default function LinkPage({ chatId }: { chatId: string }) {
-    const links = findLinksInChat(chatId);
+    const links = FindLinksInChat(chatId);
     return (
         <div className="space-y-1">
             {links.map((link) => (

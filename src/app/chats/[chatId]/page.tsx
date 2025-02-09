@@ -1,6 +1,6 @@
 import SecondColumn from "@/components/ui/second-column";
 import ThirdColumn from "@/components/ui/third-column";
-import { findChatById } from "@/mocks/mock";
+import { FindChatById } from "@/mocks/mock";
 
 export default async function Page({
     params,
@@ -9,7 +9,7 @@ export default async function Page({
 }) {
     const chatId = (await params).chatId;
     // const data = await fetch('https://api.vercel.app/blog')
-    const chat = findChatById(chatId);
+    const chat = FindChatById(chatId);
     if (!chat) {
         return (
             <div className="card flex items-center justify-center">

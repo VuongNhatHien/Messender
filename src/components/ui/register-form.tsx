@@ -1,6 +1,6 @@
 "use client";
 
-import { signup } from "@/actions/actions";
+import { signup } from "@/actions/common";
 import Link from "next/link";
 import { useActionState } from "react";
 import { Button } from "./button";

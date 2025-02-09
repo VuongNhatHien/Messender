@@ -1,5 +1,5 @@
 import { AttachmentType } from "@/lib/type";
-import { findMediaInChat } from "@/mocks/mock";
+import { FindMediaInChat } from "@/mocks/mock";
 import Image from "next/image";
 const MediaItem = ({ file }: { file: AttachmentType }) => {
     const isImage = file.fileType.includes("image");
@@ -48,7 +48,7 @@ const MediaItem = ({ file }: { file: AttachmentType }) => {
 };
 
 export default function MediaPage({ chatId }: { chatId: string }) {
-    const media = findMediaInChat(chatId);
+    const media = FindMediaInChat(chatId);
 
     return (
         <div className="flex flex-wrap gap-[2px]">

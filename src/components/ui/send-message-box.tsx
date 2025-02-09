@@ -1,6 +1,6 @@
 "use client";
 
-import { sendMessage } from "@/actions/actions";
+import { sendMessage } from "@/actions/common";
 import Image from "next/image";
 import { useActionState } from "react";
 import { Textarea } from "./textarea";
