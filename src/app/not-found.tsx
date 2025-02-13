@@ -14,6 +14,7 @@ export default function NotFound() {
                 removed
             </div>
             <Button
+            
                 variant="default"
                 className="rounded-full"
                 onClick={() => {
