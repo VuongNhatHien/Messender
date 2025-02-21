@@ -1,4 +1,5 @@
 import envConfig from "@/config";
+import { cookies } from "next/headers";
 
 type CustomOptions = Omit<RequestInit, "method"> & {
     baseUrl?: string | undefined;
@@ -9,6 +10,7 @@ const request = async <Response>(
     url: string,
     options?: CustomOptions | undefined,
 ) => {
+    const cookieStore = await cookies()
     let body: FormData | string | undefined = undefined;
     if (options?.body instanceof FormData) {
         body = options.body;

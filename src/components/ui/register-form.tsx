@@ -27,7 +27,7 @@ export default function RegisterForm() {
                         className="w-full"
                         name="username"
                         placeholder="Username"
-                        defaultValue={(state?.payload.username || "") as string}
+                        defaultValue={(state?.payload.username || "")}
                     />
                     <FormErrorMessage error={state?.errors?.username} />
                 </div>
@@ -38,7 +38,7 @@ export default function RegisterForm() {
                         name="displayName"
                         placeholder="Display name"
                         defaultValue={
-                            (state?.payload.displayName || "") as string
+                            (state?.payload.displayName || "")
                         }
                     />
                     <FormErrorMessage error={state?.errors?.displayName} />
@@ -50,7 +50,7 @@ export default function RegisterForm() {
                         className="w-full"
                         name="password"
                         placeholder="Password"
-                        defaultValue={(state?.payload.password || "") as string}
+                        defaultValue={(state?.payload.password || "")}
                     />
                     <FormErrorMessage error={state?.errors?.password} />
                 </div>
@@ -62,7 +62,7 @@ export default function RegisterForm() {
                         name="confirmPassword"
                         placeholder="Confirm Password"
                         defaultValue={
-                            (state?.payload.confirmPassword || "") as string
+                            (state?.payload.confirmPassword || "")
                         }
                     />
                     <FormErrorMessage error={state?.errors?.confirmPassword} />

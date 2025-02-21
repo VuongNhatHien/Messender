@@ -3,16 +3,27 @@
 import { login } from "@/actions/actions.common";
 import Image from "next/image";
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { Button } from "./button";
 import { Checkbox } from "./checkbox";
 import { Input } from "./input";
 import { Label } from "./label";
 import FormErrorMessage from "./form-error-message";
+import { toast } from "sonner";
 
 export default function LoginForm() {
     const [state, action, pending] = useActionState(login, undefined);
-    console.log(state);
+    useEffect(() => {
+        if (state?.message) {
+            toast.error("Login failed", {
+                description: state.message,
+                action: {
+                    label: "Close",
+                    onClick: () => console.log("Close"),
+                },
+            });
+        }
+    }, [state]);
 
     return (
         <form
@@ -26,9 +37,7 @@ export default function LoginForm() {
                         className="w-full"
                         name="username"
                         placeholder="Username"
-                        defaultValue={
-                            (state?.payload?.username || "") as string
-                        }
+                        defaultValue={state?.payload?.username || ""}
                     />
                     <FormErrorMessage error={state?.errors?.username} />
                 </div>
@@ -39,9 +48,7 @@ export default function LoginForm() {
                         className="w-full"
                         name="password"
                         placeholder="Password"
-                        defaultValue={
-                            (state?.payload?.password || "") as string
-                        }
+                        defaultValue={state?.payload?.password || ""}
                     />
                     <FormErrorMessage error={state?.errors?.password} />
                 </div>

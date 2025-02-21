@@ -2,7 +2,10 @@
 
 import envConfig from "@/config";
 import { request } from "@/request/request";
-import { LoginResponseValidationErrorType, RegisterResponseValidationErrorType } from "@/types/response.type";
+import {
+    LoginResponseValidationErrorType,
+    RegisterResponseValidationErrorType,
+} from "@/types/response.type";
 import { redirect } from "next/navigation";
 
 export async function signup(prevState: any, formData: FormData) {
@@ -77,43 +80,51 @@ export async function login(prevState: any, formData: FormData) {
         username,
         password,
     };
+    try {
+        const result = await request.login(body);
+        console.log("Login result: ", result);
 
-    const result = await request.login(body);
-    console.log("Login result: ", result);
-
-    if (result.code === "SUCCESS") {
-        redirect("/");
-    }
-    if (result.code === "VALIDATION_ERROR") {
-        const { username, password } = result.data as LoginResponseValidationErrorType;
+        if (result.code === "SUCCESS") {
+            redirect("/");
+        }
+        if (result.code === "VALIDATION_ERROR") {
+            const { username, password } =
+                result.data as LoginResponseValidationErrorType;
+            return {
+                payload,
+                errors: {
+                    username,
+                    password,
+                },
+            };
+        }
+        if (result.code === "WRONG_PASSWORD") {
+            return {
+                payload,
+                errors: {
+                    password: "Incorrect password",
+                },
+            };
+        }
+        if (result.code === "USER_NOT_FOUND") {
+            return {
+                payload,
+                errors: {
+                    username: "User not found",
+                },
+            };
+        }
         return {
             payload,
-            errors: {
-                username,
-                password,
-            },
+            message: "An unknown error has occurred",
         };
-    }
-    if (result.code === "WRONG_PASSWORD") {
+    } catch (error) {
+        console.error(error);
         return {
             payload,
-            errors: {
-                password: "Incorrect password",
-            },
+            message: "An unknown error has occurred",
         };
     }
-    if (result.code === "USER_NOT_FOUND") {
-        return {
-            payload,
-            errors: {
-                username: "User not found",
-            },
-        };
-    }
-    return {
-        payload,
-        message: "An unknown error has occurred",
-    };
 }
 
 export async function sendMessage(
