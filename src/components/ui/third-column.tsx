@@ -1,6 +1,6 @@
 "use client";
 
-import { ChatType } from "@/lib/type";
+import { ChatType } from "@/types/schema-type";
 import { File, Image, Link as LinkLucide } from "lucide-react";
 import { useState } from "react";
 import Attachments from "./attachments";
@@ -25,7 +25,7 @@ export default function ThirdColumn({ chat }: { chat: ChatType }) {
     const [page, setPage] = useState("default");
 
     return (
-        <div className="card w-1/4 items-center px-3 py-4 overflow-auto">
+        <div className="card w-1/4 items-center overflow-auto px-3 py-4">
             {page === "default" ? (
                 <>
                     <Avatar className="size-20">

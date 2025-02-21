@@ -1,8 +1,8 @@
 "use client";
 
-import { signup } from "@/actions/common";
+import { signup } from "@/actions/actions.common";
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { Button } from "./button";
 import FormErrorMessage from "./form-error-message";
 import { Input } from "./input";
@@ -11,6 +11,10 @@ import { Label } from "./label";
 export default function RegisterForm() {
     const [state, action, pending] = useActionState(signup, undefined);
 
+    useEffect(() => {
+        console.log(state);
+        //Toast error if needed
+    }, [state]);
     return (
         <form
             className="card w-80 items-center justify-center space-y-4 p-4"
@@ -21,11 +25,11 @@ export default function RegisterForm() {
                 <div className="space-y-1">
                     <Input
                         className="w-full"
-                        name="name"
+                        name="username"
                         placeholder="Username"
-                        defaultValue={(state?.payload.name || "") as string}
+                        defaultValue={(state?.payload.username || "") as string}
                     />
-                    <FormErrorMessage errors={state?.errors?.name} />
+                    <FormErrorMessage error={state?.errors?.username} />
                 </div>
 
                 <div className="space-y-1">
@@ -37,7 +41,7 @@ export default function RegisterForm() {
                             (state?.payload.displayName || "") as string
                         }
                     />
-                    <FormErrorMessage errors={state?.errors?.displayName} />
+                    <FormErrorMessage error={state?.errors?.displayName} />
                 </div>
 
                 <div>
@@ -48,7 +52,7 @@ export default function RegisterForm() {
                         placeholder="Password"
                         defaultValue={(state?.payload.password || "") as string}
                     />
-                    <FormErrorMessage errors={state?.errors?.password} />
+                    <FormErrorMessage error={state?.errors?.password} />
                 </div>
 
                 <div>
@@ -61,7 +65,7 @@ export default function RegisterForm() {
                             (state?.payload.confirmPassword || "") as string
                         }
                     />
-                    <FormErrorMessage errors={state?.errors?.confirmPassword} />
+                    <FormErrorMessage error={state?.errors?.confirmPassword} />
                 </div>
             </div>
 

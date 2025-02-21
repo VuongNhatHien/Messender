@@ -1,4 +1,4 @@
-import { AttachmentType } from "@/lib/type";
+import { AttachmentType } from "@/types/schema-type";
 import { FindFilesInChat } from "@/mocks/mock";
 import { File } from "lucide-react";
 
@@ -7,9 +7,9 @@ const FileItem = ({ file }: { file: AttachmentType | null }) => {
         <a
             href={file?.fileUrl}
             target="_blank"
-            className="hover-custom flex items-center gap-2 rounded-sm pe-2 py-1"
+            className="hover-custom flex items-center gap-2 rounded-sm py-1 pe-2"
         >
-            <div className="flex shrink-0 size-[52px] items-center justify-center rounded-xl bg-muted">
+            <div className="flex size-[52px] shrink-0 items-center justify-center rounded-xl bg-muted">
                 <File size={36} className="" />
             </div>
             <div className="overflow-hidden">

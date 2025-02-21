@@ -1,6 +1,6 @@
 "use client";
 
-import { login } from "@/actions/common";
+import { login } from "@/actions/actions.common";
 import Image from "next/image";
 import Link from "next/link";
 import { useActionState } from "react";
@@ -8,6 +8,7 @@ import { Button } from "./button";
 import { Checkbox } from "./checkbox";
 import { Input } from "./input";
 import { Label } from "./label";
+import FormErrorMessage from "./form-error-message";
 
 export default function LoginForm() {
     const [state, action, pending] = useActionState(login, undefined);
@@ -23,11 +24,13 @@ export default function LoginForm() {
                 <div className="space-y-1">
                     <Input
                         className="w-full"
-                        name="name"
+                        name="username"
                         placeholder="Username"
-                        // defaultValue={(state?.payload.name || "") as string}
+                        defaultValue={
+                            (state?.payload?.username || "") as string
+                        }
                     />
-                    {/* <FormErrorMessage errors={state?.errors?.name} /> */}
+                    <FormErrorMessage error={state?.errors?.username} />
                 </div>
 
                 <div>
@@ -36,9 +39,11 @@ export default function LoginForm() {
                         className="w-full"
                         name="password"
                         placeholder="Password"
-                        // defaultValue={(state?.payload.password || "") as string}
+                        defaultValue={
+                            (state?.payload?.password || "") as string
+                        }
                     />
-                    {/* <FormErrorMessage errors={state?.errors?.password} /> */}
+                    <FormErrorMessage error={state?.errors?.password} />
                 </div>
             </div>
 
@@ -58,7 +63,7 @@ export default function LoginForm() {
                 disabled={pending}
                 type="submit"
             >
-                Create account
+                Sign In
             </Button>
             <div className="flex items-center justify-center gap-1">
                 <Label className="text-sm text-accent-foreground">

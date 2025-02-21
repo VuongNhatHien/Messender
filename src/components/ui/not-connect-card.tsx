@@ -1,6 +1,6 @@
 "use client";
-import { addUser } from "@/actions/common";
-import { UserType } from "@/lib/type";
+import { addUser } from "@/actions/actions.common";
+import { UserType } from "@/types/schema-type";
 import { Avatar, AvatarImage } from "./avatar";
 
 export default function NotConnectCard({ user }: { user: UserType }) {

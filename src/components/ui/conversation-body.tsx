@@ -3,7 +3,7 @@ import {
     ChatType,
     messageType,
     MetadataType,
-} from "@/lib/type";
+} from "@/types/schema-type";
 import { File } from "lucide-react";
 import Image from "next/image";
 

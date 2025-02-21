@@ -1,5 +1,5 @@
 import { Button } from "./button";
-import { logout } from "@/actions/common";
+import { logout } from "@/actions/actions.common";
 
 export default function LogoutButton() {
     return (

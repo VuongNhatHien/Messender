@@ -1,6 +1,6 @@
 "use client";
-import { uploadFiles } from "@/actions/common";
-import { ChatType } from "@/lib/type";
+import { uploadFiles } from "@/actions/actions.common";
+import { ChatType } from "@/types/schema-type";
 import { useState } from "react";
 import ConversationBody from "./conversation-body";
 import ConversationFooter from "./conversation-footer";

@@ -1,9 +1,9 @@
 export default function FormErrorMessage({
-    errors,
+    error,
 }: {
-    errors: string[] | undefined;
+    error: string | undefined;
 }) {
     return (
-        <p className="text-destructive mt-2 text-xs">{errors?.[0]}</p>
+        <p className="text-destructive mt-2 text-xs">{error}</p>
     );
 }

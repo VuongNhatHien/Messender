@@ -1,10 +1,14 @@
 "use client";
-import { PreviewMessageType } from "@/lib/type";
+import { PreviewMessageType } from "@/types/schema-type";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Avatar, AvatarImage } from "./avatar";
 
-export default function PreviewCard({ preview }: { preview: PreviewMessageType }) {
+export default function PreviewCard({
+    preview,
+}: {
+    preview: PreviewMessageType;
+}) {
     const chatId = useParams<{ chatId: string }>().chatId;
 
     return (

@@ -1,4 +1,4 @@
-import { ChatType } from "@/lib/type";
+import { ChatType } from "@/types/schema-type";
 import ChooseFile from "./choose-file";
 import SendMessageBox from "./send-message-box";
 

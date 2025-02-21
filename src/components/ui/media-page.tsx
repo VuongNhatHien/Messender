@@ -1,4 +1,4 @@
-import { AttachmentType } from "@/lib/type";
+import { AttachmentType } from "@/types/schema-type";
 import { FindMediaInChat } from "@/mocks/mock";
 import Image from "next/image";
 const MediaItem = ({ file }: { file: AttachmentType }) => {
