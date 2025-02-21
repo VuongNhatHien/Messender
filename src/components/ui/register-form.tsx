@@ -7,13 +7,21 @@ import { Button } from "./button";
 import FormErrorMessage from "./form-error-message";
 import { Input } from "./input";
 import { Label } from "./label";
+import { toast } from "sonner";
 
 export default function RegisterForm() {
     const [state, action, pending] = useActionState(signup, undefined);
 
     useEffect(() => {
-        console.log(state);
-        //Toast error if needed
+        if (state?.message) {
+            toast.error("Login failed", {
+                description: state.message,
+                action: {
+                    label: "Close",
+                    onClick: () => console.log("Close"),
+                },
+            });
+        }
     }, [state]);
     return (
         <form
@@ -27,7 +35,7 @@ export default function RegisterForm() {
                         className="w-full"
                         name="username"
                         placeholder="Username"
-                        defaultValue={(state?.payload.username || "")}
+                        defaultValue={state?.payload.username || ""}
                     />
                     <FormErrorMessage error={state?.errors?.username} />
                 </div>
@@ -37,9 +45,7 @@ export default function RegisterForm() {
                         className="w-full"
                         name="displayName"
                         placeholder="Display name"
-                        defaultValue={
-                            (state?.payload.displayName || "")
-                        }
+                        defaultValue={state?.payload.displayName || ""}
                     />
                     <FormErrorMessage error={state?.errors?.displayName} />
                 </div>
@@ -50,7 +56,7 @@ export default function RegisterForm() {
                         className="w-full"
                         name="password"
                         placeholder="Password"
-                        defaultValue={(state?.payload.password || "")}
+                        defaultValue={state?.payload.password || ""}
                     />
                     <FormErrorMessage error={state?.errors?.password} />
                 </div>
@@ -61,9 +67,7 @@ export default function RegisterForm() {
                         className="w-full"
                         name="confirmPassword"
                         placeholder="Confirm Password"
-                        defaultValue={
-                            (state?.payload.confirmPassword || "")
-                        }
+                        defaultValue={state?.payload.confirmPassword || ""}
                     />
                     <FormErrorMessage error={state?.errors?.confirmPassword} />
                 </div>

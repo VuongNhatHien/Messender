@@ -24,46 +24,54 @@ export async function signup(prevState: any, formData: FormData) {
         confirmPassword,
     };
 
-    const result = await request.register(body);
+    try {
+        const result = await request.register(body);
 
-    console.log("Register result: ", result);
+        console.log("Register result: ", result);
 
-    if (password !== confirmPassword) {
+        if (password !== confirmPassword) {
+            return {
+                payload,
+                errors: {
+                    confirmPassword: "Passwords do not match",
+                },
+            };
+        }
+
+        if (result.code === "SUCCESS") {
+            redirect("/auth/login");
+        }
+        if (result.code === "VALIDATION_ERROR") {
+            const { username, displayName, password } =
+                result.data as RegisterResponseValidationErrorType;
+            return {
+                payload,
+                errors: {
+                    username,
+                    displayName,
+                    password,
+                },
+            };
+        }
+        if (result.code === "USER_EXISTED") {
+            return {
+                payload,
+                errors: {
+                    username: "Username already exists",
+                },
+            };
+        }
         return {
             payload,
-            errors: {
-                confirmPassword: "Passwords do not match",
-            },
+            message: "An unknown error has occurred",
         };
-    }
-
-    if (result.code === "SUCCESS") {
-        redirect("/auth/login");
-    }
-    if (result.code === "VALIDATION_ERROR") {
-        const { username, displayName, password } =
-            result.data as RegisterResponseValidationErrorType;
+    } catch (error) {
+        console.error(error);
         return {
             payload,
-            errors: {
-                username,
-                displayName,
-                password,
-            },
+            message: "An unknown error has occurred",
         };
     }
-    if (result.code === "USER_EXISTED") {
-        return {
-            payload,
-            errors: {
-                username: "Username already exists",
-            },
-        };
-    }
-    return {
-        payload,
-        message: "An unknown error has occurred",
-    };
 }
 
 export async function login(prevState: any, formData: FormData) {
