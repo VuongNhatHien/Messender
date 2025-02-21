@@ -2,7 +2,7 @@
 
 import envConfig from "@/config";
 import { request } from "@/request/request";
-import { RegisterResponseValidationErrorType } from "@/types/response.type";
+import { LoginResponseValidationErrorType, RegisterResponseValidationErrorType } from "@/types/response.type";
 import { redirect } from "next/navigation";
 
 export async function signup(prevState: any, formData: FormData) {
@@ -65,9 +65,9 @@ export async function signup(prevState: any, formData: FormData) {
 
 export async function login(prevState: any, formData: FormData) {
     console.log(prevState);
-    const username = formData.get("username");
-    const password = formData.get("password");
-    const remember = formData.get("remember");
+    const username = formData.get("username") as string;
+    const password = formData.get("password") as string;
+    const remember = formData.get("remember") as string;
     const payload = {
         username,
         password,
@@ -78,29 +78,19 @@ export async function login(prevState: any, formData: FormData) {
         password,
     };
 
-    const response = await fetch(
-        `${envConfig.NEXT_PUBLIC_API_ENDPOINT}/auth/login`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-        },
-    );
-
-    const result = await response.json();
+    const result = await request.login(body);
     console.log("Login result: ", result);
 
     if (result.code === "SUCCESS") {
         redirect("/");
     }
     if (result.code === "VALIDATION_ERROR") {
+        const { username, password } = result.data as LoginResponseValidationErrorType;
         return {
             payload,
             errors: {
-                username: result.data.username,
-                password: result.data.password,
+                username,
+                password,
             },
         };
     }
