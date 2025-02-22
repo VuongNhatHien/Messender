@@ -1,9 +1,9 @@
 import {
     AttachmentType,
     ChatType,
-    messageType,
+    MessageType,
     MetadataType,
-} from "@/types/schema-type";
+} from "@/types/schema.type";
 import { File } from "lucide-react";
 import Image from "next/image";
 
@@ -62,7 +62,7 @@ const Message = ({
     content,
     isOwnMessage,
 }: {
-    content: messageType;
+    content: MessageType;
     isOwnMessage: boolean;
 }) => (
     <div
@@ -112,7 +112,7 @@ const MessageBubble = ({
     content,
     isOwnMessage,
 }: {
-    content: messageType;
+    content: MessageType;
     isOwnMessage: boolean;
 }) => (
     <>
@@ -143,11 +143,9 @@ export default function ConversationBody({ chat }: { chat: ChatType }) {
                 .reverse()
                 .map((content) => (
                     <MessageBubble
-                        key={content.messageId}
+                        key={content.id}
                         content={content}
-                        isOwnMessage={
-                            content.sender.userId !== chat.user.userId
-                        }
+                        isOwnMessage={content.sender.id !== chat.user.id}
                     />
                 ))}
         </div>

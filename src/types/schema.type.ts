@@ -1,12 +1,13 @@
 export type UserType = {
-    userId: number;
+    id: number;
     avatar: string;
-    name: string;
+    username: string;
+    displayName: string;
     email: string;
 };
 
 export type AttachmentType = {
-    attachmentId: number;
+    id: number;
     fileUrl: string;
     fileType: string;
     fileName: string;
@@ -14,28 +15,28 @@ export type AttachmentType = {
 };
 
 export type MetadataType = {
-    metadataId: number,
-    url: string,
-    title: string,
-    image: string,
-}
+    id: number;
+    url: string;
+    title: string;
+    image: string;
+};
 
-export type messageType = {
-    messageId: number;
+export type MessageType = {
+    id: number;
     sender: UserType;
-    message: string;
+    message: string | null;
     attachment: AttachmentType | null;
     metadata: MetadataType | null;
 };
 
 export type ChatType = {
-    chatId: number;
+    id: number;
     user: UserType;
-    messages: messageType[];
+    messages: MessageType[];
 };
 
 export type PreviewMessageType = {
     chatId: number;
     user: UserType;
-    lastMessage: string;
-}
+    lastMessage: MessageType | null;
+};

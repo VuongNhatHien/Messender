@@ -9,6 +9,7 @@ export default function LogoutButton() {
                 className={"text-base font-semibold"}
                 onClick={() => {
                     logout();
+                    localStorage.removeItem("token");
                 }}
             >
                 Logout

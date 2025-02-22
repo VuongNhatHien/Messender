@@ -1,16 +1,16 @@
 import envConfig from "@/config";
-import { cookies } from "next/headers";
+import { getServerToken } from "./server-utils";
 
 type CustomOptions = Omit<RequestInit, "method"> & {
     baseUrl?: string | undefined;
 };
 
+export const isClient = () => typeof window !== "undefined";
 const request = async <Response>(
     method: "GET" | "POST" | "PUT" | "DELETE",
     url: string,
     options?: CustomOptions | undefined,
 ) => {
-    const cookieStore = await cookies()
     let body: FormData | string | undefined = undefined;
     if (options?.body instanceof FormData) {
         body = options.body;
@@ -25,14 +25,13 @@ const request = async <Response>(
             : {
                   "Content-Type": "application/json",
               };
-    // if (isClient()) {
-    //   const sessionToken = localStorage.getItem('sessionToken')
-    //   if (sessionToken) {
-    //     baseHeaders.Authorization = `Bearer ${sessionToken}`
-    //   }
-    // }
-    // Nếu không truyền baseUrl (hoặc baseUrl = undefined) thì lấy từ envConfig.NEXT_PUBLIC_API_ENDPOINT
-    // Nếu truyền baseUrl thì lấy giá trị truyền vào, truyền vào '' thì đồng nghĩa với việc chúng ta gọi API đến Next.js Server
+
+    if (isClient()) {
+        const sessionToken = localStorage.getItem("token");
+        if (sessionToken) {
+            baseHeaders.Authorization = `Bearer ${sessionToken}`;
+        }
+    }
 
     const baseUrl =
         options?.baseUrl === undefined
@@ -52,7 +51,8 @@ const request = async <Response>(
         body,
         method,
     });
-    return await res.json() as Response;
+    const result : Response = await res.json();
+    return result;
     // const payload: Response = await res.json()
     // const data = {
     //   payload

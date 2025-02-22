@@ -1,6 +1,6 @@
 "use client";
 
-import { signup } from "@/actions/actions.common";
+import { register } from "@/actions/actions.common";
 import Link from "next/link";
 import { useActionState, useEffect } from "react";
 import { Button } from "./button";
@@ -10,7 +10,7 @@ import { Label } from "./label";
 import { toast } from "sonner";
 
 export default function RegisterForm() {
-    const [state, action, pending] = useActionState(signup, undefined);
+    const [state, action, pending] = useActionState(register, undefined);
 
     useEffect(() => {
         if (state?.message) {

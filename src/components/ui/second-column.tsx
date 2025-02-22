@@ -1,6 +1,6 @@
 "use client";
 import { uploadFiles } from "@/actions/actions.common";
-import { ChatType } from "@/types/schema-type";
+import { ChatType } from "@/types/schema.type";
 import { useState } from "react";
 import ConversationBody from "./conversation-body";
 import ConversationFooter from "./conversation-footer";
@@ -26,7 +26,7 @@ export default function SecondColumn({ chat }: { chat: ChatType }) {
         setIsOver(false);
 
         if (event.dataTransfer.files) {
-            await uploadFiles(chat.chatId.toString(), event.dataTransfer.files);
+            await uploadFiles(chat.id.toString(), event.dataTransfer.files);
         }
     };
     return (

@@ -1,4 +1,4 @@
-import { MetadataType } from "@/types/schema-type";
+import { MetadataType } from "@/types/schema.type";
 import { FindLinksInChat } from "@/mocks/mock";
 import Image from "next/image";
 import { Globe } from "lucide-react";

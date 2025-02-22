@@ -1,5 +1,5 @@
 "use client";
-import { PreviewMessageType } from "@/types/schema-type";
+import { PreviewMessageType } from "@/types/schema.type";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Avatar, AvatarImage } from "./avatar";
@@ -23,9 +23,11 @@ export default function PreviewCard({
             </Avatar>
 
             <div className="ml-4 w-full overflow-hidden">
-                <p className="truncate font-semibold">{preview.user.name}</p>
+                <p className="truncate font-semibold">
+                    {preview.user.displayName}
+                </p>
                 <p className="truncate text-muted-foreground">
-                    {preview.lastMessage}
+                    {preview.lastMessage?.message ?? "No messages"}
                 </p>
             </div>
         </Link>

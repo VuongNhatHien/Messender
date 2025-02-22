@@ -1,14 +1,13 @@
 "use server";
 
-import envConfig from "@/config";
-import { request } from "@/request/request";
+import { requests } from "@/request/requests";
 import {
     LoginResponseValidationErrorType,
     RegisterResponseValidationErrorType,
 } from "@/types/response.type";
 import { redirect } from "next/navigation";
 
-export async function signup(prevState: any, formData: FormData) {
+export async function register(prevState: any, formData: FormData) {
     console.log(prevState);
     const username = formData.get("username") as string;
     const displayName = formData.get("displayName") as string;
@@ -24,8 +23,9 @@ export async function signup(prevState: any, formData: FormData) {
         confirmPassword,
     };
 
+    let redirectPath = null;
     try {
-        const result = await request.register(body);
+        const result = await requests.register(body);
 
         console.log("Register result: ", result);
 
@@ -39,7 +39,7 @@ export async function signup(prevState: any, formData: FormData) {
         }
 
         if (result.code === "SUCCESS") {
-            redirect("/auth/login");
+            redirectPath = "/auth/login";
         }
         if (result.code === "VALIDATION_ERROR") {
             const { username, displayName, password } =
@@ -71,6 +71,10 @@ export async function signup(prevState: any, formData: FormData) {
             payload,
             message: "An unknown error has occurred",
         };
+    } finally {
+        if (redirectPath) {
+            redirect(redirectPath);
+        }
     }
 }
 
@@ -88,12 +92,19 @@ export async function login(prevState: any, formData: FormData) {
         username,
         password,
     };
+    let redirectPath = null;
     try {
-        const result = await request.login(body);
+        const result = await requests.login(body);
         console.log("Login result: ", result);
 
         if (result.code === "SUCCESS") {
-            redirect("/");
+            return {
+                payload,
+                token: result.data.token,
+                expiresIn: result.data.expiresIn,
+                redirectPath: "/",
+                code: "SUCCESS",
+            };
         }
         if (result.code === "VALIDATION_ERROR") {
             const { username, password } =
@@ -131,6 +142,7 @@ export async function login(prevState: any, formData: FormData) {
         return {
             payload,
             message: "An unknown error has occurred",
+            code: "INTERNAL_SERVER_ERROR",
         };
     }
 }

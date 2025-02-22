@@ -1,6 +1,6 @@
 "use client";
 
-import { ChatType } from "@/types/schema-type";
+import { ChatType } from "@/types/schema.type";
 import { File, Image, Link as LinkLucide } from "lucide-react";
 import { useState } from "react";
 import Attachments from "./attachments";
@@ -33,7 +33,7 @@ export default function ThirdColumn({ chat }: { chat: ChatType }) {
                     </Avatar>
                     <div className="mt-2 text-center">
                         <p className="text-xl font-semibold">
-                            {chat.user.name}
+                            {chat.user.username}
                         </p>
                     </div>
                     <div className="mt-4 w-full">
@@ -57,7 +57,7 @@ export default function ThirdColumn({ chat }: { chat: ChatType }) {
                 <Attachments
                     page={page}
                     setPage={setPage}
-                    chatId={chat.chatId.toString()}
+                    chatId={chat.id.toString()}
                 />
             )}
         </div>

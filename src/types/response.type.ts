@@ -10,7 +10,7 @@ export type RegisterResponseValidationErrorType = {
 
 export type LoginResponseType = {
     token: string;
-    expiresIn: number;
+    expiresIn: string;
 }
 export type LoginResponseValidationErrorType = {
     username?: string;

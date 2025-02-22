@@ -8,7 +8,6 @@ export default async function Page({
     params: Promise<{ chatId: string }>;
 }) {
     const chatId = (await params).chatId;
-    // const data = await fetch('https://api.vercel.app/blog')
     const chat = FindChatById(chatId);
     if (!chat) {
         return (

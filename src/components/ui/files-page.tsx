@@ -1,4 +1,4 @@
-import { AttachmentType } from "@/types/schema-type";
+import { AttachmentType } from "@/types/schema.type";
 import { FindFilesInChat } from "@/mocks/mock";
 import { File } from "lucide-react";
 

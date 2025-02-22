@@ -1,4 +1,3 @@
-
 const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
 
@@ -9,119 +8,52 @@ export const avatars = Array.from({ length: 15 }).map(
 
 export const user = [
     {
-        userId: 1,
-        name: "Alice Johnson",
+        id: 1,
+        username: "Alice Johnson",
+        displayName: "Alice",
         avatar: "https://i.pravatar.cc/150?img=1",
         email: "alice.johnson@demo.net",
     },
     {
-        userId: 2,
-        name: "John Doe",
+        id: 2,
+        username: "John Doe",
+        displayName: "Alice",
         avatar: "https://i.pravatar.cc/150?img=32",
         email: "johndoe@example.com",
     },
     {
-        userId: 3,
-        name: "Michael Brown",
+        id: 3,
+        username: "Michael Brown",
+        displayName: "Alice",
         avatar: "https://i.pravatar.cc/150?img=3",
         email: "michael.brown@demo.net",
-    },
-    {
-        userId: 4,
-        name: "Sarah Davis",
-        avatar: "https://i.pravatar.cc/150?img=4",
-        email: "sarah.davis@example.com",
-    },
-    {
-        userId: 5,
-        name: "David Wilson",
-        avatar: "https://i.pravatar.cc/150?img=5",
-        email: "david.wilson@mail.com",
-    },
-    {
-        userId: 6,
-        name: "Emily Taylor",
-        avatar: "https://i.pravatar.cc/150?img=31",
-        email: "emily.taylor@demo.net",
-    },
-    {
-        userId: 7,
-        name: "James Anderson",
-        avatar: "https://i.pravatar.cc/150?img=33",
-        email: "james.anderson@mail.com",
-    },
-    {
-        userId: 8,
-        name: "Olivia Martinez",
-        avatar: "https://i.pravatar.cc/150?img=8",
-        email: "olivia.martinez@demo.net",
-    },
-    {
-        userId: 9,
-        name: "Daniel Thomas",
-        avatar: "https://i.pravatar.cc/150?img=9",
-        email: "daniel.thomas@test.org",
-    },
-    {
-        userId: 10,
-        name: "Sophia Clark",
-        avatar: "https://i.pravatar.cc/150?img=10",
-        email: "sophia.clark@test.org",
-    },
-    {
-        userId: 11,
-        name: "Matthew Lewis",
-        avatar: "https://i.pravatar.cc/150?img=11",
-        email: "matthew.lewis@test.org",
     },
 ];
 
 export const not_connected = [
     {
-        userId: 12,
-        name: "Not connected",
+        id: 12,
+        username: "Not connected",
+        displayName: "Alice",
         avatar: "https://i.pravatar.cc/150?img=12",
         email: "not.connected@demo.net",
     },
     {
-        userId: 13,
-        name: "Emma Walker",
+        id: 13,
+        username: "Emma Walker",
+        displayName: "Alice",
         avatar: "https://i.pravatar.cc/150?img=13",
         email: "emma.walker@example.com",
-    },
-    {
-        userId: 14,
-        name: "Christopher Hall",
-        avatar: "https://i.pravatar.cc/150?img=14",
-        email: "christopher.hall@demo.net",
-    },
-    {
-        userId: 15,
-        name: "Ava Allen",
-        avatar: "https://i.pravatar.cc/150?img=15",
-        email: "ava.allen@demo.net",
-    },
-    {
-        userId: 16,
-        name: "Joseph Young",
-        avatar: "https://i.pravatar.cc/150?img=16",
-        email: "joseph.young@demo.net",
-    },
-    {
-        userId: 17,
-        name: "Mia Hernandez",
-        avatar: "https://i.pravatar.cc/150?img=17",
-        email: "mia.hernandez@demo.net",
     },
 ];
 
 export const chat = [
     {
-        chatId: 1,
+        id: 1,
         user: user[1],
         messages: [
             {
-                messageId: 1,
+                id: 1,
                 sender: user[1],
                 message:
                     "Hi, I need help with setting up Tailwind CSS in my project.",
@@ -130,7 +62,7 @@ export const chat = [
                 createAt: "2025-01-21T10:00:00Z",
             },
             {
-                messageId: 2,
+                id: 2,
                 sender: user[0],
                 message:
                     "Sure, I can help with that! Are you using a framework like React or just plain HTML?",
@@ -139,7 +71,7 @@ export const chat = [
                 createAt: "2025-01-21T10:01:00Z",
             },
             {
-                messageId: 3,
+                id: 3,
                 sender: user[1],
                 message:
                     "I'm using React. I want to integrate Tailwind for styling components.",
@@ -148,7 +80,7 @@ export const chat = [
                 createAt: "2025-01-21T10:02:00Z",
             },
             {
-                messageId: 4,
+                id: 4,
                 sender: user[0],
                 message:
                     "Great! You can install Tailwind CSS using npm. Run npm install -D tailwindcss postcss autoprefixer, then create a Tailwind configuration file with npx tailwindcss init. Would you like the steps for configuring your React project as well?",
@@ -157,7 +89,7 @@ export const chat = [
                 createAt: "2025-01-21T10:03:00Z",
             },
             {
-                messageId: 5,
+                id: 5,
                 sender: user[0],
                 message:
                     "Great! You can install Tailwind CSS using npm. Run npm install -D tailwindcss postcss autoprefixer, then create a Tailwind configuration file with npx tailwindcss init. Would you like the steps for configuring your React project as well?",
@@ -166,11 +98,11 @@ export const chat = [
                 createAt: "2025-01-21T10:03:00Z",
             },
             {
-                messageId: 6,
+                id: 6,
                 sender: user[0],
                 message: "https://www.digitalocean.commmm/ visit this website",
                 attachment: {
-                    attachmentId: 23231,
+                    id: 23231,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/ct4.mp4",
                     fileType: "video/mp4",
@@ -178,7 +110,7 @@ export const chat = [
                     fileSize: 123,
                 },
                 metadata: {
-                    metadataId: 2,
+                    id: 2,
                     url: "https://www.digitalocean.commmm",
                     title: "",
                     image: "",
@@ -186,12 +118,12 @@ export const chat = [
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
-                messageId: 7,
+                id: 7,
                 sender: user[1],
                 message: "https://www.digitalocean.com/ visit this website",
                 attachment: null,
                 metadata: {
-                    metadataId: 1,
+                    id: 1,
                     url: "https://www.digitalocean.com",
                     title: "DigitalOcean | Cloud Infrastructure for Developers",
                     image: "https://www.digitalocean.com/_next/static/media/social-share-default.e8530e9e.jpeg",
@@ -199,11 +131,11 @@ export const chat = [
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
-                messageId: 8,
+                id: 8,
                 sender: user[1],
                 message: "",
                 attachment: {
-                    attachmentId: 123132,
+                    id: 123132,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/Rick%20Roll.mp4",
                     fileType: "video/mp4",
@@ -214,11 +146,11 @@ export const chat = [
                 createAt: "2025-01-21T10:00:00Z",
             },
             {
-                messageId: 9,
+                id: 9,
                 sender: user[0],
                 message: "",
                 attachment: {
-                    attachmentId: 5123,
+                    id: 5123,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/237-4032x3024.jpg",
                     fileType: "image/jpg",
@@ -229,11 +161,11 @@ export const chat = [
                 createAt: "2025-01-21T10:01:00Z",
             },
             {
-                messageId: 10,
+                id: 10,
                 sender: user[1],
                 message: "",
                 attachment: {
-                    attachmentId: 1,
+                    id: 1,
                     fileUrl:
                         "https://cdn.fbsbx.com/v/t59.2708-21/475331341_511448854817445_8895421833669516899_n.json/openapi.json?_nc_cat=106&ccb=1-7&_nc_sid=2b0e22&_nc_ohc=ovRBw20dXpsQ7kNvgFZjVFp&_nc_zt=7&_nc_ht=cdn.fbsbx.com&_nc_gid=AfIQL5HtW11ZvrO27mxKUDP&oh=03_Q7cD1gHH4p_F9vx7cooJqm0YLR6dh88Iuakp9uwaswXmtgFcHw&oe=67A18CCE&dl=1",
                     fileType: "application/json;charset=utf-8",
@@ -244,11 +176,11 @@ export const chat = [
                 createAt: "2025-01-21T10:02:00Z",
             },
             {
-                messageId: 11,
+                id: 11,
                 sender: user[0],
                 message: "",
                 attachment: {
-                    attachmentId: 2,
+                    id: 2,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/poly-bridge.m4a",
                     fileType: "audio/mp4",
@@ -259,11 +191,11 @@ export const chat = [
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
-                messageId: 12,
+                id: 12,
                 sender: user[0],
                 message: "",
                 attachment: {
-                    attachmentId: 3,
+                    id: 3,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/openapi.json",
                     fileType: "application/json;charset=utf-8",
@@ -274,11 +206,11 @@ export const chat = [
                 createAt: "2025-01-21T10:03:00Z",
             },
             {
-                messageId: 13,
+                id: 13,
                 sender: user[1],
                 message: "",
                 attachment: {
-                    attachmentId: 4,
+                    id: 4,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/ct4.mp4",
                     fileType: "video/mp4",
@@ -289,11 +221,11 @@ export const chat = [
                 createAt: "2025-01-21T10:04:00Z",
             },
             {
-                messageId: 14,
+                id: 14,
                 sender: user[1],
                 message: "hello hello hello hello",
                 attachment: {
-                    attachmentId: 5,
+                    id: 5,
                     fileUrl:
                         "https://test-messender.sgp1.cdn.digitaloceanspaces.com/piclorem.jpg",
                     fileType: "image/jpg",
@@ -306,7 +238,7 @@ export const chat = [
         ],
     },
     // {
-    //     chatId: 2,
+    //     id: 2,
     //     user: user[2],
     //     messages: [
     //         {
@@ -323,12 +255,12 @@ export const chat = [
     //     ],
     // },
     // {
-    //     chatId: 3,
+    //     id: 3,
     //     user: user[3],
     //     messages: [],
     // },
     // {
-    //     chatId: 4,
+    //     id: 4,
     //     user: user[4],
     //     messages: [
     //         {
@@ -345,7 +277,7 @@ export const chat = [
     //     ],
     // },
     // {
-    //     chatId: 5,
+    //     id: 5,
     //     user: user[5],
     //     messages: [
     //         {
@@ -362,7 +294,7 @@ export const chat = [
     //     ],
     // },
     // {
-    //     chatId: 6,
+    //     id: 6,
     //     user: user[6],
     //     messages: [
     //         {
@@ -379,7 +311,7 @@ export const chat = [
     //     ],
     // },
     // {
-    //     chatId: 7,
+    //     id: 7,
     //     user: user[7],
     //     messages: [
     //         {
@@ -397,7 +329,7 @@ export const chat = [
     //     ],
     // },
     // {
-    //     chatId: 8,
+    //     id: 8,
     //     user: user[8],
     //     messages: [
     //         {
@@ -414,7 +346,7 @@ export const chat = [
     //     ],
     // },
     // {
-    //     chatId: 9,
+    //     id: 9,
     //     user: user[9],
     //     messages: [
     //         {
@@ -431,11 +363,11 @@ export const chat = [
     //     ],
     // },
     {
-        chatId: 10,
+        id: 10,
         user: user[10],
         messages: [
             {
-                messageId: 15,
+                id: 15,
                 sender: user[10],
                 message:
                     "What is the difference between React and React Native?",
@@ -444,7 +376,7 @@ export const chat = [
                 createAt: "2025-01-21T19:00:00Z",
             },
             {
-                messageId: 16,
+                id: 16,
                 sender: user[0],
                 message:
                     "React is for web apps, and React Native is for mobile apps.",
@@ -457,7 +389,7 @@ export const chat = [
 ];
 
 export const previews = chat.map((chat) => ({
-    chatId: chat.chatId,
+    id: chat.id,
     user: chat.user,
     lastMessage:
         chat.messages.length > 0
@@ -466,13 +398,13 @@ export const previews = chat.map((chat) => ({
     // lastMessageTime: chat.messages.length > 0 && chat.messages[chat.messages.length - 1].createAt,
 }));
 
-export const FindChatById = (chatId: string) => {
-    return chat.find((c) => c.chatId.toString() === chatId);
+export const FindChatById = (id: string) => {
+    return chat.find((c) => c.id.toString() === id);
 };
 
-//Find all photos and videos in chatId
-export const FindMediaInChat = (chatId: string) => {
-    const chat = FindChatById(chatId);
+//Find all photos and videos in id
+export const FindMediaInChat = (id: string) => {
+    const chat = FindChatById(id);
     if (!chat) return [];
     return chat.messages
         .filter(
@@ -484,9 +416,9 @@ export const FindMediaInChat = (chatId: string) => {
         .map((m) => m.attachment);
 };
 
-//Find all files in chatId
-export const FindFilesInChat = (chatId: string) => {
-    const chat = FindChatById(chatId);
+//Find all files in id
+export const FindFilesInChat = (id: string) => {
+    const chat = FindChatById(id);
     if (!chat) return [];
     return chat.messages
         .filter(
@@ -498,8 +430,8 @@ export const FindFilesInChat = (chatId: string) => {
         .map((m) => m.attachment);
 };
 
-export const FindLinksInChat = (chatId: string) => {
-    const chat = FindChatById(chatId);
+export const FindLinksInChat = (id: string) => {
+    const chat = FindChatById(id);
     if (!chat) return [];
     return chat.messages.filter((m) => m.metadata).map((m) => m.metadata);
 };

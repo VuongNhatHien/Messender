@@ -10,11 +10,32 @@ import { Input } from "./input";
 import { Label } from "./label";
 import FormErrorMessage from "./form-error-message";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { requests } from "@/request/requests";
 
 export default function LoginForm() {
     const [state, action, pending] = useActionState(login, undefined);
+    const router = useRouter();
     useEffect(() => {
-        if (state?.message) {
+        const handleLoginSuccess = async () => {
+            if (state?.code === "SUCCESS") {
+                try {
+                    await requests.auth({
+                        token: state.token!,
+                        expiresIn: state.expiresIn!,
+                    });
+
+                    // Store the token in localStorage
+                    localStorage.setItem("token", state.token!);
+
+                    router.push(state.redirectPath!);
+                } catch (error) {
+                    console.error("Failed to authenticate or redirect:", error);
+                }
+            }
+        };
+
+        if (state?.code === "INTERNAL_SERVER_ERROR") {
             toast.error("Login failed", {
                 description: state.message,
                 action: {
@@ -23,7 +44,11 @@ export default function LoginForm() {
                 },
             });
         }
-    }, [state]);
+
+        if (state?.code === "SUCCESS") {
+            handleLoginSuccess(); // Call the async function
+        }
+    }, [state, router]);
 
     return (
         <form
