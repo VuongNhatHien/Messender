@@ -169,10 +169,14 @@ export async function sendMessage(
 export async function uploadFiles(chatId: string, files: FileList) {
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
-        formData.append("files", files[i]);
+        formData.append("attachments", files[i]);
     }
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
     //print form data
-    console.log(`From chatId ${chatId}`, formData);
+    const res = await requests.uploadFiles(chatId, formData, token!);
+    console.log("Upload files result: ", res.data);
+    revalidatePath(`/chats`);
 }
 
 export async function addUser(userId: string) {

@@ -1,7 +1,12 @@
 import http from "@/lib/http";
 import { ResponseType } from "@/types/common.type";
 import { LoginBodyType, RegisterBodyType } from "@/types/request.type";
-import { AddUserResponseType, GetMessagesResponseType, LoginResponseType, RegisterResponseType } from "@/types/response.type";
+import {
+    AddUserResponseType,
+    GetMessagesResponseType,
+    LoginResponseType,
+    RegisterResponseType,
+} from "@/types/response.type";
 import {
     AttachmentType,
     MessageType,
@@ -9,7 +14,7 @@ import {
     UserType,
 } from "@/types/schema.type";
 import { PreviewMessageType } from "@/types/response.type";
-import { sendMessage } from "@/actions/actions.common";
+import { sendMessage, uploadFiles } from "@/actions/actions.common";
 
 export const requests = {
     register: (body: RegisterBodyType) => {
@@ -79,17 +84,36 @@ export const requests = {
         });
     },
     addUser: (userId: string, token: string) => {
-        return http.post<AddUserResponseType>(`/users/${userId}/chat-requests`, {}, {
-            headers: {
-                Authorization: `Bearer ${token}`,
+        return http.post<AddUserResponseType>(
+            `/users/${userId}/chat-requests`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             },
-        });
+        );
     },
     sendMessage: (chatId: string, body: { message: string }, token: string) => {
-        return http.post<ResponseType<MessageType>>(`/chats/${chatId}/messages`, body, {
-            headers: {
-                Authorization: `Bearer ${token}`,
+        return http.post<ResponseType<MessageType>>(
+            `/chats/${chatId}/messages`,
+            body,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             },
-        });
-    }
+        );
+    },
+    uploadFiles: (chatId: string, formData: FormData, token: string) => {
+        return http.post<ResponseType<MessageType[]>>(
+            `/chats/${chatId}/attachments`,
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            },
+        );
+    },
 };
