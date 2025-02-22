@@ -1,7 +1,7 @@
 import http from "@/lib/http";
 import { ResponseType } from "@/types/common.type";
 import { LoginBodyType, RegisterBodyType } from "@/types/request.type";
-import { GetMessagesResponseType, LoginResponseType, RegisterResponseType } from "@/types/response.type";
+import { AddUserResponseType, GetMessagesResponseType, LoginResponseType, RegisterResponseType } from "@/types/response.type";
 import {
     AttachmentType,
     MessageType,
@@ -76,5 +76,12 @@ export const requests = {
                 Authorization: `Bearer ${token}`,
             },
         });
-    }
+    },
+    addUser: (userId: string, token: string) => {
+        return http.post<AddUserResponseType>(`/users/${userId}/chat-requests`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    },
 };

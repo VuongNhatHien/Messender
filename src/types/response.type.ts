@@ -6,6 +6,7 @@ import {
     AttachmentType,
     MetadataType,
 } from "./schema.type";
+import { ResponseType } from "@/types/common.type";
 
 export type RegisterResponseType = BaseType & RegisterBodyType;
 export type RegisterResponseValidationErrorType = {
@@ -38,3 +39,10 @@ export type PreviewMessageType = {
     user: UserType;
     lastMessage: MessageType | null;
 };
+
+export type AddUserResponseType = ResponseType<
+    BaseType & {
+        user1Id: string;
+        user2Id: string;
+    }
+>;

@@ -5,6 +5,8 @@ import {
     LoginResponseValidationErrorType,
     RegisterResponseValidationErrorType,
 } from "@/types/response.type";
+import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function register(prevState: any, formData: FormData) {
@@ -175,7 +177,12 @@ export async function uploadFiles(chatId: string, files: FileList) {
 }
 
 export async function addUser(userId: string) {
-    console.log(`User with userId ${userId} added to chat`);
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    const res = await requests.addUser(userId, token!);
+    console.log("Chat id", res.data.id);
+    // revalidatePath(`/chats`);
+    redirect(`/chats/${res.data.id}`);
 }
 
 export async function logout() {
