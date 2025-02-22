@@ -1,7 +1,7 @@
 import { BaseType } from "./common.type";
 
 export type UserType = BaseType & {
-    avatar: string;
+    avatar: string | null;
     username: string;
     displayName: string;
     email: string;

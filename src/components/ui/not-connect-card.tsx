@@ -13,13 +13,14 @@ export default function NotConnectCard({ user }: { user: UserType }) {
             }}
         >
             <Avatar className="size-12">
-                <AvatarImage src={user.avatar} />
-                {/* <AvatarFallback>Null</AvatarFallback> */}
+                <AvatarImage src={user.avatar ? user.avatar : "/avatar.png"} />
             </Avatar>
             <div className="ml-4">
-                <p className="flex truncate font-semibold">{user.username}</p>
+                <p className="flex truncate font-semibold">
+                    {user.displayName}
+                </p>
                 <p className="flex truncate text-muted-foreground">
-                    {user.email}
+                    {user.username}
                 </p>
             </div>
         </button>

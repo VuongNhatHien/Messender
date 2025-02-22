@@ -70,4 +70,11 @@ export const requests = {
     getLinks: (chatId: string) => {
         return http.get<ResponseType<MetadataType[]>>(`/chats/${chatId}/links`);
     },
+    getNotConnected: (token: string) => {
+        return http.get<ResponseType<UserType[]>>("/users/not-connected", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
 };

@@ -8,11 +8,17 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "./dialog";
-import NotConnectCard from "./not-connect-card";
 import Searchbar from "./search";
 import { Separator } from "./separator";
+import { cookies } from "next/headers";
+import { requests } from "@/request/requests";
+import NotConnectCard from "./not-connect-card";
 
-export default function AddUserDialog() {
+export default async function AddUserDialog() {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    const notConnectedRes = await requests.getNotConnected(token!);
+    const not_connected = notConnectedRes.data;
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -25,7 +31,9 @@ export default function AddUserDialog() {
                 </Button>
             </DialogTrigger>
 
-            <DialogContent className={"h-[30rem] gap-0"}>
+            <DialogContent
+                className={"flex h-[30rem] flex-col justify-start gap-0"}
+            >
                 <DialogHeader>
                     <DialogTitle>New message</DialogTitle>
                     <DialogDescription>
@@ -40,8 +48,7 @@ export default function AddUserDialog() {
                 <Separator className={"mt-4"} />
                 <div className="h-full space-y-1 overflow-auto pe-1 pt-1">
                     {not_connected.map((user) => (
-                        // <NotConnectCard key={user.id} user={user} />
-                        <div key={1}>ok</div>
+                        <NotConnectCard key={user.id} user={user} />
                     ))}
                 </div>
             </DialogContent>
