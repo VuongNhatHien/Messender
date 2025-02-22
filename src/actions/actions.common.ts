@@ -155,16 +155,15 @@ export async function sendMessage(
     formData: FormData,
 ) {
     console.log(prevState);
-    const payload = {
-        message: formData.get("message"),
+    const body = {
+        message: formData.get("message") as string,
     };
 
-    if (!payload.message) {
-        return undefined;
-    }
-
-    console.log(`Message with chatId ${chatId} sent: ${payload.message}`);
-    return undefined;
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    const res = await requests.sendMessage(chatId, body, token!);
+    console.log("Send message result: ", res.data);
+    revalidatePath(`/chats`);
 }
 
 export async function uploadFiles(chatId: string, files: FileList) {

@@ -12,15 +12,6 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
     );
     console.log(state);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        const formData = new FormData(event.currentTarget);
-        const message = formData.get("message");
-
-        if (!message || !message.toString().trim()) {
-            event.preventDefault(); // Prevent form submission
-        }
-    };
-
     const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault(); // Prevents a new line
@@ -29,11 +20,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
     };
 
     return (
-        <form
-            className="flex w-full items-center gap-4"
-            action={action}
-            onSubmit={handleSubmit} //Client-side validation
-        >
+        <form className="flex w-full items-center gap-4" action={action}>
             <Textarea
                 name="message"
                 placeholder="Message"

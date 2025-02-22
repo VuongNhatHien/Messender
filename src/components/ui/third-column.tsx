@@ -29,7 +29,13 @@ export default function ThirdColumn({ chat }: { chat: ChatType }) {
             {page === "default" ? (
                 <>
                     <Avatar className="size-20">
-                        <AvatarImage src={chat.user.avatar} />
+                        <AvatarImage
+                            src={
+                                chat.user.avatar
+                                    ? chat.user.avatar
+                                    : `/avatar.png`
+                            }
+                        />
                     </Avatar>
                     <div className="mt-2 text-center">
                         <p className="text-xl font-semibold">

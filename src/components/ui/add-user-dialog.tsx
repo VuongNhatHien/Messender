@@ -1,4 +1,5 @@
-import { not_connected } from "@/mocks/mock";
+import { requests } from "@/request/requests";
+import { cookies } from "next/headers";
 import { Button } from "./button";
 import {
     Dialog,
@@ -8,11 +9,9 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "./dialog";
+import NotConnectCard from "./not-connect-card";
 import Searchbar from "./search";
 import { Separator } from "./separator";
-import { cookies } from "next/headers";
-import { requests } from "@/request/requests";
-import NotConnectCard from "./not-connect-card";
 
 export default async function AddUserDialog() {
     const cookieStore = await cookies();

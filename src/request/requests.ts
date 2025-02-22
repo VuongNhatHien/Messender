@@ -9,6 +9,7 @@ import {
     UserType,
 } from "@/types/schema.type";
 import { PreviewMessageType } from "@/types/response.type";
+import { sendMessage } from "@/actions/actions.common";
 
 export const requests = {
     register: (body: RegisterBodyType) => {
@@ -84,4 +85,11 @@ export const requests = {
             },
         });
     },
+    sendMessage: (chatId: string, body: { message: string }, token: string) => {
+        return http.post<ResponseType<MessageType>>(`/chats/${chatId}/messages`, body, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
 };
