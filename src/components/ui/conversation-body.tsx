@@ -13,11 +13,11 @@ const isAudio = (type: string) => type.includes("audio");
 
 // Attachment components
 const ImageAttachment = ({ attachment }: { attachment: AttachmentType }) => (
-    <a href={attachment.fileUrl} target="_blank">
+    <a href={attachment.url} target="_blank">
         <Image
             width={320}
             height={320}
-            src={attachment.fileUrl}
+            src={attachment.url}
             alt="attachment"
             className="rounded-lg hover:opacity-75"
         />
@@ -32,28 +32,28 @@ const VideoAttachment = ({ attachment }: { attachment: AttachmentType }) => (
         preload="auto"
         className="cursor-pointer rounded-lg"
     >
-        <source src={attachment.fileUrl} />
+        <source src={attachment.url} />
         Your browser does not support the video tag.
     </video>
 );
 
 const AudioAttachment = ({ attachment }: { attachment: AttachmentType }) => (
     <audio controls className="cursor-pointer rounded-lg">
-        <source src={attachment.fileUrl} />
+        <source src={attachment.url} />
         Your browser does not support the audio tag.
     </audio>
 );
 
 const FileAttachment = ({ attachment }: { attachment: AttachmentType }) => (
     <a
-        href={attachment.fileUrl}
+        href={attachment.url}
         target="_blank"
         className="flex items-center gap-2 rounded-3xl bg-secondary px-4 py-2 hover:opacity-75"
     >
         <File size={36} />
         <div>
-            <p className="font-extrabold">{attachment.fileName}</p>
-            <p className="font-medium text-muted-foreground">{`${attachment.fileSize} KB`}</p>
+            <p className="font-extrabold">{attachment.name}</p>
+            <p className="font-medium text-muted-foreground">{`${attachment.size} KB`}</p>
         </div>
     </a>
 );
@@ -98,11 +98,11 @@ const MetaData = ({ metadata }: { metadata: MetadataType }) => (
 );
 
 const renderAttachment = (attachment: AttachmentType) => {
-    if (isImage(attachment.fileType))
+    if (isImage(attachment.type))
         return <ImageAttachment attachment={attachment} />;
-    if (isVideo(attachment.fileType))
+    if (isVideo(attachment.type))
         return <VideoAttachment attachment={attachment} />;
-    if (isAudio(attachment.fileType))
+    if (isAudio(attachment.type))
         return <AudioAttachment attachment={attachment} />;
     return <FileAttachment attachment={attachment} />;
 };
@@ -138,16 +138,13 @@ const MessageBubble = ({
 export default function ConversationBody({ chat }: { chat: ChatType }) {
     return (
         <div className="relative flex h-full flex-col-reverse justify-start gap-4 overflow-auto p-4">
-            {chat.messages
-                .slice()
-                .reverse()
-                .map((content) => (
-                    <MessageBubble
-                        key={content.id}
-                        content={content}
-                        isOwnMessage={content.senderId !== chat.user.id}
-                    />
-                ))}
+            {chat.messages.slice().map((content) => (
+                <MessageBubble
+                    key={content.id}
+                    content={content}
+                    isOwnMessage={content.senderId !== chat.user.id}
+                />
+            ))}
         </div>
     );
 }

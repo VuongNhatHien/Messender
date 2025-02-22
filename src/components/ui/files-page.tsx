@@ -5,7 +5,7 @@ import { File } from "lucide-react";
 const FileItem = ({ file }: { file: AttachmentType | null }) => {
     return (
         <a
-            href={file?.fileUrl}
+            href={file?.url}
             target="_blank"
             className="hover-custom flex items-center gap-2 rounded-sm py-1 pe-2"
         >
@@ -13,8 +13,8 @@ const FileItem = ({ file }: { file: AttachmentType | null }) => {
                 <File size={36} className="" />
             </div>
             <div className="overflow-hidden">
-                <p className="truncate font-extrabold">{file?.fileName}</p>
-                <p className="font-medium text-muted-foreground">{`${file?.fileSize} KB`}</p>
+                <p className="truncate font-extrabold">{file?.name}</p>
+                <p className="font-medium text-muted-foreground">{`${file?.size} KB`}</p>
             </div>
         </a>
     );

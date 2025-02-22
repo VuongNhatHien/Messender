@@ -8,10 +8,10 @@ export type UserType = {
 
 export type AttachmentType = {
     id: string;
-    fileUrl: string;
-    fileType: string;
-    fileName: string;
-    fileSize: string;
+    url: string;
+    type: string;
+    name: string;
+    size: string;
 };
 
 export type MetadataType = {
