@@ -7,7 +7,6 @@ const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
 const isAudio = (type: string) => type.includes("audio");
 
-// Attachment components
 const ImageAttachment = ({ attachment }: { attachment: AttachmentType }) => (
     <a href={attachment.url} target="_blank">
         <Image
@@ -62,13 +61,19 @@ const Message = ({
     isOwnMessage: boolean;
 }) => (
     <div
-        className={`rounded-${content.metadata ? "t-" : ""}3xl px-3 py-2 ${
+        className={`${content.metadata ? "rounded-t-3xl" : "rounded-3xl"} px-3 py-2 ${
             isOwnMessage
                 ? "bg-primary text-primary-foreground"
                 : "bg-secondary text-secondary-foreground"
         }`}
     >
-        <p>{content.message}</p>
+        {content.metadata ? (
+            <a href={content.metadata.url} target="_blank">
+                <p className="underline">{content.message}</p>
+            </a>
+        ) : (
+            <p>{content.message}</p>
+        )}
     </div>
 );
 
@@ -107,7 +112,7 @@ const MessageBubble = ({
     content,
     isOwnMessage,
 }: {
-    content: GetMessagesResponseType[0]
+    content: GetMessagesResponseType[0];
     isOwnMessage: boolean;
 }) => (
     <>

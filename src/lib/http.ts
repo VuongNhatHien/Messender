@@ -54,65 +54,6 @@ const request = async <Response>(
 
     const result : Response = await res.json();
     return result;
-    // const payload: Response = await res.json()
-    // const data = {
-    //   payload
-    // }
-    // // Interceptor là nời chúng ta xử lý request và response trước khi trả về cho phía component
-    // if (!res.ok) {
-    //   if (res.status === ENTITY_ERROR_STATUS) {
-    //     throw new EntityError(
-    //       data as {
-    //         status: 422
-    //         payload: EntityErrorPayload
-    //       }
-    //     )
-    //   } else if (res.status === AUTHENTICATION_ERROR_STATUS) {
-    //     if (isClient()) {
-    //       if (!clientLogoutRequest) {
-    //         clientLogoutRequest = fetch('/api/auth/logout', {
-    //           method: 'POST',
-    //           body: JSON.stringify({ force: true }),
-    //           headers: {
-    //             ...baseHeaders
-    //           } as any
-    //         })
-    //         try {
-    //           await clientLogoutRequest
-    //         } catch (error) {
-    //         } finally {
-    //           localStorage.removeItem('sessionToken')
-    //           localStorage.removeItem('sessionTokenExpiresAt')
-    //           clientLogoutRequest = null
-    //           location.href = '/login'
-    //         }
-    //       }
-    //     } else {
-    //       const sessionToken = (options?.headers as any)?.Authorization.split(
-    //         'Bearer '
-    //       )[1]
-    //       redirect(`/logout?sessionToken=${sessionToken}`)
-    //     }
-    //   } else {
-    //     throw new HttpError(data)
-    //   }
-    // }
-    // // Đảm bảo logic dưới đây chỉ chạy ở phía client (browser)
-    // if (isClient()) {
-    //   if (
-    //     ['auth/login', 'auth/register'].some(
-    //       (item) => item === normalizePath(url)
-    //     )
-    //   ) {
-    //     const { token, expiresAt } = (payload as LoginResType).data
-    //     localStorage.setItem('sessionToken', token)
-    //     localStorage.setItem('sessionTokenExpiresAt', expiresAt)
-    //   } else if ('auth/logout' === normalizePath(url)) {
-    //     localStorage.removeItem('sessionToken')
-    //     localStorage.removeItem('sessionTokenExpiresAt')
-    //   }
-    // }
-    // return data
 };
 
 const http = {
