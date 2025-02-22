@@ -2,6 +2,8 @@ import { MetadataType } from "@/types/schema.type";
 import { FindLinksInChat } from "@/mocks/mock";
 import Image from "next/image";
 import { Globe } from "lucide-react";
+import { useEffect, useState } from "react";
+import { requests } from "@/request/requests";
 
 const LinkItem = ({ link }: { link: MetadataType | null }) => {
     return (
@@ -31,11 +33,22 @@ const LinkItem = ({ link }: { link: MetadataType | null }) => {
 };
 
 export default function LinkPage({ chatId }: { chatId: string }) {
-    const links = FindLinksInChat(chatId);
+    const [links, setLinks] = useState<MetadataType[]>([]);
+    useEffect(() => {
+        const fetchRequest = async () => {
+            try {
+                const result = await requests.getLinks(chatId);
+                setLinks(result.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchRequest();
+    }, []);
     return (
         <div className="space-y-1">
             {links.map((link) => (
-                <LinkItem key={link?.metadataId} link={link} />
+                <LinkItem key={link?.id} link={link} />
             ))}
         </div>
     );

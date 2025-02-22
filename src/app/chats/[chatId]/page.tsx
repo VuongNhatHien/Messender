@@ -13,14 +13,11 @@ export default async function Page({
     const token = cookieStore.get("token")?.value;
     const resMessages = await requests.getChat(chatId, token!);
     const resUser = await requests.getUserFromChat(chatId, token!);
-    console.log("resMessages: ", resMessages);
-    console.log("resUser: ", resUser);
     const chat = {
         id: chatId,
         messages: resMessages.data,
         user: resUser.data,
     };
-    // const chat = FindChatById(chatId);
     if (!chat) {
         return (
             <div className="card flex items-center justify-center">

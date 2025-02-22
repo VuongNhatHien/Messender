@@ -2,8 +2,10 @@ import { AttachmentType } from "@/types/schema.type";
 import { FindMediaInChat } from "@/mocks/mock";
 import Image from "next/image";
 import useSWR from "swr";
-import { fetcher } from "@/lib/utils";
 import envConfig from "@/config";
+import { fetcher } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import { requests } from "@/request/requests";
 const MediaItem = ({ file }: { file: AttachmentType }) => {
     const isImage = file.type.includes("image");
 
@@ -51,16 +53,18 @@ const MediaItem = ({ file }: { file: AttachmentType }) => {
 };
 
 export default function MediaPage({ chatId }: { chatId: string }) {
-    // const media = FindMediaInChat(chatId);
-    const { data, error, isLoading } = useSWR(
-        `${envConfig.NEXT_PUBLIC_API_ENDPOINT}/chats/${chatId}/attachments/media`,
-        fetcher,
-    );
-    console.log("OKHEHE", data);
-    if (error) return <div>failed to load</div>;
-    if (isLoading) return <div>loading...</div>;
-
-    const media: AttachmentType[] = data.data;
+    const [media, setMedia] = useState<AttachmentType[]>([]);
+    useEffect(() => {
+        const fetchRequest = async () => {
+            try {
+                const result = await requests.getMedia(chatId);
+                setMedia(result.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchRequest();
+    }, []);
 
     return (
         <div className="flex flex-wrap gap-[2px]">

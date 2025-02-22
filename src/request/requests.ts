@@ -3,8 +3,10 @@ import { ResponseType } from "@/types/common.type";
 import { LoginBodyType, RegisterBodyType } from "@/types/request.type";
 import { LoginResponseType, RegisterResponseType } from "@/types/response.type";
 import {
+    AttachmentType,
     ChatType,
     MessageType,
+    MetadataType,
     PreviewMessageType,
     UserType,
 } from "@/types/schema.type";
@@ -56,4 +58,13 @@ export const requests = {
             },
         });
     },
+    getMedia: (chatId: string) => {
+        return http.get<ResponseType<AttachmentType[]>>(`/chats/${chatId}/attachments/media`);
+    },
+    getFiles: (chatId: string) => {
+        return http.get<ResponseType<AttachmentType[]>>(`/chats/${chatId}/attachments/files`);
+    },
+    getLinks: (chatId: string) => {
+        return http.get<ResponseType<MetadataType[]>>(`/chats/${chatId}/links`);
+    }
 };

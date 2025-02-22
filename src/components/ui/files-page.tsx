@@ -1,6 +1,8 @@
 import { AttachmentType } from "@/types/schema.type";
 import { FindFilesInChat } from "@/mocks/mock";
 import { File } from "lucide-react";
+import { useEffect, useState } from "react";
+import { requests } from "@/request/requests";
 
 const FileItem = ({ file }: { file: AttachmentType | null }) => {
     return (
@@ -21,11 +23,22 @@ const FileItem = ({ file }: { file: AttachmentType | null }) => {
 };
 
 export default function FilePage({ chatId }: { chatId: string }) {
-    const files = FindFilesInChat(chatId);
+    const [files, setFiles] = useState<AttachmentType[]>([]);
+        useEffect(() => {
+            const fetchRequest = async () => {
+                try {
+                    const result = await requests.getFiles(chatId);
+                    setFiles(result.data);
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+            fetchRequest();
+        }, []);
     return (
         <div className="space-y-1">
             {files.map((file) => (
-                <FileItem key={file?.attachmentId} file={file} />
+                <FileItem key={file?.id} file={file} />
             ))}
         </div>
     );
