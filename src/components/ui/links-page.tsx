@@ -10,7 +10,7 @@ const LinkItem = ({ link }: { link: MetadataType | null }) => {
         <a
             href={link?.url}
             target="_blank"
-            className="hover-custom flex items-center gap-3 rounded-sm py-1 pe-2"
+            className="hover-custom flex items-center gap-3 rounded-sm py-1 px-1"
         >
             <div className="flex size-[52px] shrink-0 items-center justify-center rounded-xl bg-muted">
                 {link?.image ? (
