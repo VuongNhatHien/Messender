@@ -2,6 +2,7 @@ import SecondColumn from "@/components/ui/second-column";
 import ThirdColumn from "@/components/ui/third-column";
 import { requests } from "@/request/requests";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function Page({
     params,
@@ -18,12 +19,8 @@ export default async function Page({
         messages: resMessages.data,
         user: resUser.data,
     };
-    if (!chat) {
-        return (
-            <div className="card flex items-center justify-center">
-                <p className={"text-2xl font-bold"}>No chats selected</p>
-            </div>
-        );
+    if (!chat.messages) {
+        redirect("/chats");
     }
 
     return (
