@@ -25,7 +25,8 @@ export default function LoginForm() {
                         expiresIn: state.expiresIn!,
                     });
 
-                    // Store the token in localStorage
+                    console.log("Token hehe", state.token);
+
                     localStorage.setItem("token", state.token!);
 
                     router.push(state.redirectPath!);

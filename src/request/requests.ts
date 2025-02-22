@@ -25,4 +25,13 @@ export const requests = {
             },
         });
     },
+    logout: () => {
+        return http.post(
+            "/api/auth/logout",
+            {},
+            {
+                baseUrl: "",
+            },
+        );
+    },
 };
