@@ -32,14 +32,14 @@ export const user = [
 
 export const not_connected = [
     {
-        id: 12,
+        id: "12",
         username: "Not connected",
         displayName: "Alice",
         avatar: "https://i.pravatar.cc/150?img=12",
         email: "not.connected@demo.net",
     },
     {
-        id: 13,
+        id: "13",
         username: "Emma Walker",
         displayName: "Alice",
         avatar: "https://i.pravatar.cc/150?img=13",

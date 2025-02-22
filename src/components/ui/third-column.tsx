@@ -33,7 +33,7 @@ export default function ThirdColumn({ chat }: { chat: ChatType }) {
                     </Avatar>
                     <div className="mt-2 text-center">
                         <p className="text-xl font-semibold">
-                            {chat.user.username}
+                            {chat.user.displayName}
                         </p>
                     </div>
                     <div className="mt-4 w-full">

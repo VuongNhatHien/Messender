@@ -11,7 +11,7 @@ export default function ConversationHeader({ chat }: { chat: ChatType }) {
 
                 <div className="ml-4 text-lg">
                     <p className="line-clamp-1 font-semibold">
-                        {chat.user.username}
+                        {chat.user.displayName}
                     </p>
                 </div>
             </div>

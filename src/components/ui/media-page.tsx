@@ -53,7 +53,7 @@ export default function MediaPage({ chatId }: { chatId: string }) {
     return (
         <div className="flex flex-wrap gap-[2px]">
             {media.map((media) => (
-                <MediaItem key={media?.attachmentId} file={media!} />
+                <MediaItem key={media?.id} file={media!} />
             ))}
         </div>
     );

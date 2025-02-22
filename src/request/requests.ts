@@ -2,7 +2,12 @@ import http from "@/lib/http";
 import { ResponseType } from "@/types/common.type";
 import { LoginBodyType, RegisterBodyType } from "@/types/request.type";
 import { LoginResponseType, RegisterResponseType } from "@/types/response.type";
-import { PreviewMessageType } from "@/types/schema.type";
+import {
+    ChatType,
+    MessageType,
+    PreviewMessageType,
+    UserType,
+} from "@/types/schema.type";
 
 export const requests = {
     register: (body: RegisterBodyType) => {
@@ -33,5 +38,22 @@ export const requests = {
                 baseUrl: "",
             },
         );
+    },
+    getChat: (chatId: string, token: string) => {
+        return http.get<ResponseType<MessageType[]>>(
+            `/chats/${chatId}/messages`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            },
+        );
+    },
+    getUserFromChat: (chatId: string, token: string) => {
+        return http.get<ResponseType<UserType>>(`/chats/${chatId}/users`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
     },
 };

@@ -145,7 +145,7 @@ export default function ConversationBody({ chat }: { chat: ChatType }) {
                     <MessageBubble
                         key={content.id}
                         content={content}
-                        isOwnMessage={content.sender.id !== chat.user.id}
+                        isOwnMessage={content.senderId !== chat.user.id}
                     />
                 ))}
         </div>

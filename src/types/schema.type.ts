@@ -1,5 +1,5 @@
 export type UserType = {
-    id: number;
+    id: string;
     avatar: string;
     username: string;
     displayName: string;
@@ -7,36 +7,36 @@ export type UserType = {
 };
 
 export type AttachmentType = {
-    id: number;
+    id: string;
     fileUrl: string;
     fileType: string;
     fileName: string;
-    fileSize: number;
+    fileSize: string;
 };
 
 export type MetadataType = {
-    id: number;
+    id: string;
     url: string;
     title: string;
     image: string;
 };
 
 export type MessageType = {
-    id: number;
-    sender: UserType;
+    id: string;
+    senderId: string;
     message: string | null;
     attachment: AttachmentType | null;
     metadata: MetadataType | null;
 };
 
 export type ChatType = {
-    id: number;
+    id: string;
     user: UserType;
     messages: MessageType[];
 };
 
 export type PreviewMessageType = {
-    chatId: number;
+    chatId: string;
     user: UserType;
     lastMessage: MessageType | null;
 };

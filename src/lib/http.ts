@@ -51,6 +51,9 @@ const request = async <Response>(
         body,
         method,
     });
+
+    console.log("HEHEHE", res);
+
     const result : Response = await res.json();
     return result;
     // const payload: Response = await res.json()

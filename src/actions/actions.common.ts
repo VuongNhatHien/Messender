@@ -174,7 +174,7 @@ export async function uploadFiles(chatId: string, files: FileList) {
     console.log(`From chatId ${chatId}`, formData);
 }
 
-export async function addUser(userId: number) {
+export async function addUser(userId: string) {
     console.log(`User with userId ${userId} added to chat`);
 }
 
