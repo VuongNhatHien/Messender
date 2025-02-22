@@ -1,42 +1,29 @@
-export type UserType = {
-    id: string;
+import { BaseType } from "./common.type";
+
+export type UserType = BaseType & {
     avatar: string;
     username: string;
     displayName: string;
     email: string;
 };
 
-export type AttachmentType = {
-    id: string;
+export type AttachmentType = BaseType & {
     url: string;
     type: string;
     name: string;
     size: string;
 };
 
-export type MetadataType = {
-    id: string;
+export type MetadataType = BaseType & {
     url: string;
     title: string;
     image: string;
 };
 
-export type MessageType = {
-    id: string;
+export type MessageType = BaseType & {
+    chatId: string;
     senderId: string;
     message: string | null;
-    attachment: AttachmentType | null;
-    metadata: MetadataType | null;
-};
-
-export type ChatType = {
-    id: string;
-    user: UserType;
-    messages: MessageType[];
-};
-
-export type PreviewMessageType = {
-    chatId: string;
-    user: UserType;
-    lastMessage: MessageType | null;
+    attachmentId: string | null;
+    metadataId: string | null;
 };

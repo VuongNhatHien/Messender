@@ -1,9 +1,5 @@
-import {
-    AttachmentType,
-    ChatType,
-    MessageType,
-    MetadataType,
-} from "@/types/schema.type";
+import { AttachmentType, MessageType, MetadataType } from "@/types/schema.type";
+import { ChatType, GetMessagesResponseType } from "@/types/response.type";
 import { File } from "lucide-react";
 import Image from "next/image";
 
@@ -62,7 +58,7 @@ const Message = ({
     content,
     isOwnMessage,
 }: {
-    content: MessageType;
+    content: GetMessagesResponseType[0];
     isOwnMessage: boolean;
 }) => (
     <div
@@ -107,12 +103,11 @@ const renderAttachment = (attachment: AttachmentType) => {
     return <FileAttachment attachment={attachment} />;
 };
 
-// Message bubble component
 const MessageBubble = ({
     content,
     isOwnMessage,
 }: {
-    content: MessageType;
+    content: GetMessagesResponseType[0]
     isOwnMessage: boolean;
 }) => (
     <>

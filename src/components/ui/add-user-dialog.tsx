@@ -40,7 +40,8 @@ export default function AddUserDialog() {
                 <Separator className={"mt-4"} />
                 <div className="h-full space-y-1 overflow-auto pe-1 pt-1">
                     {not_connected.map((user) => (
-                        <NotConnectCard key={user.id} user={user} />
+                        // <NotConnectCard key={user.id} user={user} />
+                        <div key={1}>ok</div>
                     ))}
                 </div>
             </DialogContent>

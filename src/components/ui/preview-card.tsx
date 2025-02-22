@@ -1,5 +1,5 @@
 "use client";
-import { PreviewMessageType } from "@/types/schema.type";
+import { PreviewMessageType } from "@/types/response.type";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Avatar, AvatarImage } from "./avatar";
@@ -10,6 +10,29 @@ export default function PreviewCard({
     preview: PreviewMessageType;
 }) {
     const chatId = useParams<{ chatId: string }>().chatId;
+
+    const renderLastMessage = () => {
+        const { lastMessage, user } = preview;
+
+        if (!lastMessage) {
+            return "No messages yet";
+        }
+
+        const isSenderUser = lastMessage.senderId === user.id;
+        const senderPrefix = isSenderUser ? "" : "You: ";
+
+        if (lastMessage.message) {
+            return `${senderPrefix}${lastMessage.message}`;
+        }
+
+        if (lastMessage.attachmentId) {
+            return isSenderUser
+                ? `${user.displayName} sent an attachment`
+                : "You sent an attachment";
+        }
+
+        return "No messages yet";
+    };
 
     return (
         <Link
@@ -27,7 +50,7 @@ export default function PreviewCard({
                     {preview.user.displayName}
                 </p>
                 <p className="truncate text-muted-foreground">
-                    {preview.lastMessage?.message ?? "No messages"}
+                    {renderLastMessage()}
                 </p>
             </div>
         </Link>

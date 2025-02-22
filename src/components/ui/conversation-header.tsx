@@ -1,4 +1,4 @@
-import { ChatType } from "@/types/schema.type";
+import { ChatType } from "@/types/response.type";
 import { Avatar, AvatarImage } from "./avatar";
 
 export default function ConversationHeader({ chat }: { chat: ChatType }) {

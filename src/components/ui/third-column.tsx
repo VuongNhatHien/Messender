@@ -1,6 +1,6 @@
 "use client";
 
-import { ChatType } from "@/types/schema.type";
+import { ChatType } from "@/types/response.type";
 import { File, Image, Link as LinkLucide } from "lucide-react";
 import { useState } from "react";
 import Attachments from "./attachments";
