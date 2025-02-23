@@ -2,6 +2,7 @@ import { AttachmentType, MessageType, MetadataType } from "@/types/schema.type";
 import { ChatType, GetMessagesResponseType } from "@/types/response.type";
 import { File } from "lucide-react";
 import Image from "next/image";
+import { formatFileSize } from "@/lib/utils";
 
 const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
@@ -48,7 +49,9 @@ const FileAttachment = ({ attachment }: { attachment: AttachmentType }) => (
         <File size={36} />
         <div>
             <p className="font-extrabold">{attachment.name}</p>
-            <p className="font-medium text-muted-foreground">{`${attachment.size} KB`}</p>
+            <p className="font-medium text-muted-foreground">
+                {formatFileSize(parseInt(attachment?.size!))}
+            </p>
         </div>
     </a>
 );

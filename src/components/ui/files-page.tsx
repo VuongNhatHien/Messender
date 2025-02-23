@@ -3,6 +3,7 @@ import { FindFilesInChat } from "@/mocks/mock";
 import { File } from "lucide-react";
 import { useEffect, useState } from "react";
 import { requests } from "@/request/requests";
+import { formatFileSize } from "@/lib/utils";
 
 const FileItem = ({ file }: { file: AttachmentType | null }) => {
     return (
@@ -16,7 +17,9 @@ const FileItem = ({ file }: { file: AttachmentType | null }) => {
             </div>
             <div className="overflow-hidden">
                 <p className="truncate font-extrabold">{file?.name}</p>
-                <p className="font-medium text-muted-foreground">{`${file?.size} KB`}</p>
+                <p className="font-medium text-muted-foreground">
+                    {formatFileSize(parseInt(file?.size!))}
+                </p>
             </div>
         </a>
     );
@@ -24,17 +27,17 @@ const FileItem = ({ file }: { file: AttachmentType | null }) => {
 
 export default function FilePage({ chatId }: { chatId: string }) {
     const [files, setFiles] = useState<AttachmentType[]>([]);
-        useEffect(() => {
-            const fetchRequest = async () => {
-                try {
-                    const result = await requests.getFiles(chatId);
-                    setFiles(result.data);
-                } catch (error) {
-                    console.log(error);
-                }
-            };
-            fetchRequest();
-        }, []);
+    useEffect(() => {
+        const fetchRequest = async () => {
+            try {
+                const result = await requests.getFiles(chatId);
+                setFiles(result.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchRequest();
+    }, []);
     return (
         <div className="space-y-1">
             {files.map((file) => (
