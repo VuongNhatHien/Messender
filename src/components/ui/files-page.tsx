@@ -18,7 +18,7 @@ const FileItem = ({ file }: { file: AttachmentType | null }) => {
             <div className="overflow-hidden">
                 <p className="truncate font-extrabold">{file?.name}</p>
                 <p className="font-medium text-muted-foreground">
-                    {formatFileSize(parseInt(file?.size!))}
+                    {formatFileSize(file?.size!)}
                 </p>
             </div>
         </a>

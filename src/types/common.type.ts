@@ -1,5 +1,5 @@
 export type BaseType = {
-    id: string;
+    id: number;
     createdAt: string;
     updatedAt: string;
 };

@@ -50,7 +50,7 @@ const FileAttachment = ({ attachment }: { attachment: AttachmentType }) => (
         <div>
             <p className="font-extrabold">{attachment.name}</p>
             <p className="font-medium text-muted-foreground">
-                {formatFileSize(parseInt(attachment?.size!))}
+                {formatFileSize(attachment?.size!)}
             </p>
         </div>
     </a>

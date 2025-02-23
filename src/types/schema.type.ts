@@ -11,7 +11,7 @@ export type AttachmentType = BaseType & {
     url: string;
     type: string;
     name: string;
-    size: string;
+    size: number;
 };
 
 export type MetadataType = BaseType & {
@@ -21,9 +21,9 @@ export type MetadataType = BaseType & {
 };
 
 export type MessageType = BaseType & {
-    chatId: string;
-    senderId: string;
+    chatId: number;
+    senderId: number;
     message: string | null;
-    attachmentId: string | null;
-    metadataId: string | null;
+    attachmentId: number | null;
+    metadataId: number | null;
 };
