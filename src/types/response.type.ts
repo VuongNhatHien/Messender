@@ -24,15 +24,17 @@ export type LoginResponseValidationErrorType = {
     password?: string;
 };
 
-export type GetMessagesResponseType = (MessageType & {
+export type MessageResponseType = MessageType & {
     attachment: AttachmentType | null;
     metadata: MetadataType | null;
-})[];
+};
+
+export type GetMessageResponseType = MessageResponseType[];
 
 export type ChatType = {
     id: number;
     user: UserType;
-    messages: GetMessagesResponseType;
+    messages: GetMessageResponseType;
 };
 export type PreviewMessageType = {
     chatId: number;

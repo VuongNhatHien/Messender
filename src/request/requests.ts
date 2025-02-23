@@ -3,8 +3,9 @@ import { ResponseType } from "@/types/common.type";
 import { LoginBodyType, RegisterBodyType } from "@/types/request.type";
 import {
     AddUserResponseType,
-    GetMessagesResponseType,
+    GetMessageResponseType,
     LoginResponseType,
+    MessageResponseType,
     RegisterResponseType,
 } from "@/types/response.type";
 import {
@@ -14,7 +15,6 @@ import {
     UserType,
 } from "@/types/schema.type";
 import { PreviewMessageType } from "@/types/response.type";
-import { sendMessage, uploadFiles } from "@/actions/actions.common";
 
 export const requests = {
     register: (body: RegisterBodyType) => {
@@ -46,22 +46,13 @@ export const requests = {
             },
         );
     },
-    getChat: (chatId: string, token: string) => {
-        return http.get<ResponseType<GetMessagesResponseType>>(
+    getChat: (chatId: string) => {
+        return http.get<ResponseType<GetMessageResponseType>>(
             `/chats/${chatId}/messages`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            },
         );
     },
-    getUserFromChat: (chatId: string, token: string) => {
-        return http.get<ResponseType<UserType>>(`/chats/${chatId}/users`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    getUserFromChat: (chatId: string) => {
+        return http.get<ResponseType<UserType>>(`/chats/${chatId}/users`, {});
     },
     getMedia: (chatId: string) => {
         return http.get<ResponseType<AttachmentType[]>>(
@@ -94,26 +85,16 @@ export const requests = {
             },
         );
     },
-    sendMessage: (chatId: string, body: { message: string }, token: string) => {
-        return http.post<ResponseType<MessageType>>(
+    sendMessage: (chatId: string, message: string) => {
+        return http.post<ResponseType<MessageResponseType>>(
             `/chats/${chatId}/messages`,
-            body,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            },
+            { message: message },
         );
     },
-    uploadFiles: (chatId: string, formData: FormData, token: string) => {
-        return http.post<ResponseType<MessageType[]>>(
+    uploadFile: (chatId: string, formData: FormData) => {
+        return http.post<ResponseType<MessageResponseType>>(
             `/chats/${chatId}/attachments`,
             formData,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            },
         );
     },
 };

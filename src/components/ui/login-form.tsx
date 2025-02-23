@@ -25,7 +25,6 @@ export default function LoginForm() {
                         expiresIn: state.expiresIn!,
                     });
 
-                    console.log("Token hehe", state.token);
 
                     localStorage.setItem("token", state.token!);
 

@@ -1,12 +1,12 @@
 "use client";
-import { uploadFiles } from "@/actions/actions.common";
 import { ChatType } from "@/types/response.type";
 import { useState } from "react";
-import ConversationBody from "./conversation-body";
+import SecondColumnBody from "./second-column-body";
 import ConversationFooter from "./conversation-footer";
 import ConversationHeader from "./conversation-header";
 import { Separator } from "./separator";
 import { FolderUp } from "lucide-react";
+import { uploadFiles } from "./choose-file";
 export default function SecondColumn({ chat }: { chat: ChatType }) {
     const [isOver, setIsOver] = useState(false);
 
@@ -40,7 +40,7 @@ export default function SecondColumn({ chat }: { chat: ChatType }) {
                 <ConversationHeader chat={chat} />
                 <Separator />
                 <div className="relative flex h-full flex-col overflow-hidden">
-                    <ConversationBody chat={chat} />
+                    <SecondColumnBody chat={chat} />
                     <ConversationFooter chat={chat} />
                     {isOver && (
                         <div className="absolute inset-0 flex h-full flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-foreground bg-background opacity-85">
