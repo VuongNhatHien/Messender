@@ -148,36 +148,6 @@ export async function login(prevState: unknown, formData: FormData) {
     }
 }
 
-// export async function sendMessage(
-//     chatId: string,
-//     prevState: any,
-//     formData: FormData,
-// ) {
-//     console.log(prevState);
-//     const body = {
-//         message: formData.get("message") as string,
-//     };
-
-//     const cookieStore = await cookies();
-//     const token = cookieStore.get("token")?.value;
-//     const res = await requests.sendMessage(chatId, body, token);
-//     console.log("Send message result: ", res.data);
-//     revalidatePath(`/chats`);
-// }
-
-// export async function uploadFiles(chatId: string, files: FileList) {
-//     const formData = new FormData();
-//     for (let i = 0; i < files.length; i++) {
-//         formData.append("attachments", files[i]);
-//     }
-//     const cookieStore = await cookies();
-//     const token = cookieStore.get("token")?.value;
-//     //print form data
-//     const res = await requests.uploadFiles(chatId, formData, token!);
-//     console.log("Upload files result: ", res.data);
-//     revalidatePath(`/chats`);
-// }
-
 export async function addUser(userId: number) {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
