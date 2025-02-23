@@ -2,8 +2,8 @@
 import { ChatType } from "@/types/response.type";
 import { useState } from "react";
 import SecondColumnBody from "./second-column-body";
-import ConversationFooter from "./conversation-footer";
-import ConversationHeader from "./conversation-header";
+import SecondColumnFooter from "./second-column-footer";
+import SecondColumnHeader from "./second-column-header";
 import { Separator } from "./separator";
 import { FolderUp } from "lucide-react";
 import { uploadFiles } from "./choose-file";
@@ -37,11 +37,11 @@ export default function SecondColumn({ chat }: { chat: ChatType }) {
             className="card w-1/2"
         >
             <>
-                <ConversationHeader chat={chat} />
+                <SecondColumnHeader chat={chat} />
                 <Separator />
                 <div className="relative flex h-full flex-col overflow-hidden">
                     <SecondColumnBody chat={chat} />
-                    <ConversationFooter chat={chat} />
+                    <SecondColumnFooter chat={chat} />
                     {isOver && (
                         <div className="absolute inset-0 flex h-full flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-foreground bg-background opacity-85">
                             <p className="text-2xl font-bold text-secondary-foreground">
