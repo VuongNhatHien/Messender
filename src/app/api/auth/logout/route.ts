@@ -57,7 +57,7 @@
 // }
 
 export async function POST(request: Request) {
-    const res = await request.json();
+    await request.json();
     return Response.json(
         {
             message: "Cookie deleted successfully",

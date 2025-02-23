@@ -1,6 +1,6 @@
 "use client";
 import { formatFileSize } from "@/lib/utils";
-import { ChatType, GetMessageResponseType, MessageResponseType } from "@/types/response.type";
+import { ChatType, MessageResponseType } from "@/types/response.type";
 import { AttachmentType, MetadataType } from "@/types/schema.type";
 import { File } from "lucide-react";
 import Image from "next/image";
@@ -51,7 +51,7 @@ const FileAttachment = ({ attachment }: { attachment: AttachmentType }) => (
         <div>
             <p className="font-extrabold">{attachment.name}</p>
             <p className="font-medium text-muted-foreground">
-                {formatFileSize(attachment?.size!)}
+                {formatFileSize(attachment.size)}
             </p>
         </div>
     </a>

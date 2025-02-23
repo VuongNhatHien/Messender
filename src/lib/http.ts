@@ -1,5 +1,4 @@
 import envConfig from "@/config";
-import { getServerToken } from "./server-utils";
 
 type CustomOptions = Omit<RequestInit, "method"> & {
     baseUrl?: string | undefined;
@@ -9,14 +8,9 @@ export const isClient = () => typeof window !== "undefined";
 const request = async <Response>(
     method: "GET" | "POST" | "PUT" | "DELETE",
     url: string,
-    options?: CustomOptions | undefined,
+    options?: CustomOptions,
+    body?: FormData | object,
 ) => {
-    let body: FormData | string | undefined = undefined;
-    if (options?.body instanceof FormData) {
-        body = options.body;
-    } else if (options?.body) {
-        body = JSON.stringify(options.body);
-    }
     const baseHeaders: {
         [key: string]: string;
     } =
@@ -47,12 +41,12 @@ const request = async <Response>(
         headers: {
             ...baseHeaders,
             ...options?.headers,
-        } as any,
-        body,
+        },
+        body: body instanceof FormData ? body : JSON.stringify(body),
         method,
     });
 
-    const result : Response = await res.json();
+    const result: Response = await res.json();
     return result;
 };
 
@@ -65,23 +59,23 @@ const http = {
     },
     post<Response>(
         url: string,
-        body: any,
+        body: FormData | object,
         options?: Omit<CustomOptions, "body"> | undefined,
     ) {
-        return request<Response>("POST", url, { ...options, body });
+        return request<Response>("POST", url, options, body);
     },
     put<Response>(
         url: string,
-        body: any,
+        body: FormData | object,
         options?: Omit<CustomOptions, "body"> | undefined,
     ) {
-        return request<Response>("PUT", url, { ...options, body });
+        return request<Response>("PUT", url, options, body);
     },
     delete<Response>(
         url: string,
         options?: Omit<CustomOptions, "body"> | undefined,
     ) {
-        return request<Response>("DELETE", url, { ...options });
+        return request<Response>("DELETE", url, options);
     },
 };
 

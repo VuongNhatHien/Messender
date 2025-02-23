@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function register(prevState: any, formData: FormData) {
+export async function register(prevState: unknown, formData: FormData) {
     console.log(prevState);
     const username = formData.get("username") as string;
     const displayName = formData.get("displayName") as string;
@@ -80,7 +80,7 @@ export async function register(prevState: any, formData: FormData) {
     }
 }
 
-export async function login(prevState: any, formData: FormData) {
+export async function login(prevState: unknown, formData: FormData) {
     console.log(prevState);
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
@@ -94,7 +94,6 @@ export async function login(prevState: any, formData: FormData) {
         username,
         password,
     };
-    let redirectPath = null;
     try {
         const result = await requests.login(body);
         console.log("Login result: ", result);
@@ -179,7 +178,7 @@ export async function login(prevState: any, formData: FormData) {
 //     revalidatePath(`/chats`);
 // }
 
-export async function addUser(userId: string) {
+export async function addUser(userId: number) {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
     const res = await requests.addUser(userId, token!);

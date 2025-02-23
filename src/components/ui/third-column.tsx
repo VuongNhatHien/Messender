@@ -1,7 +1,7 @@
 "use client";
 
 import { ChatType } from "@/types/response.type";
-import { File, Image, Link as LinkLucide } from "lucide-react";
+import { File, Image as ImageLucide, Link as LinkLucide } from "lucide-react";
 import { useState } from "react";
 import Attachments from "./attachments";
 import { Avatar, AvatarImage } from "./avatar";
@@ -9,7 +9,7 @@ import { Avatar, AvatarImage } from "./avatar";
 const attachmentCards = [
     {
         name: "Media",
-        icon: <Image />,
+        icon: <ImageLucide/>,
     },
     {
         name: "Files",

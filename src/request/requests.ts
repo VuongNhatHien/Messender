@@ -10,7 +10,6 @@ import {
 } from "@/types/response.type";
 import {
     AttachmentType,
-    MessageType,
     MetadataType,
     UserType,
 } from "@/types/schema.type";
@@ -74,7 +73,7 @@ export const requests = {
             },
         });
     },
-    addUser: (userId: string, token: string) => {
+    addUser: (userId: number, token: string) => {
         return http.post<AddUserResponseType>(
             `/users/${userId}/chat-requests`,
             {},

@@ -4,15 +4,12 @@ import SecondColumn from "@/components/ui/second-column";
 import ThirdColumn from "@/components/ui/third-column";
 import socket from "@/lib/socket";
 import { requests } from "@/request/requests";
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 import {
     ChatType,
-    GetMessageResponseType,
     MessageResponseType,
 } from "@/types/response.type";
-import { UserType } from "@/types/schema.type";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Page() {
     const { chatId } = useParams<{ chatId: string }>();
