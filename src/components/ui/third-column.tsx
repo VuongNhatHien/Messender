@@ -60,11 +60,7 @@ export default function ThirdColumn({ chat }: { chat: ChatType }) {
                     </div>
                 </>
             ) : (
-                <Attachments
-                    page={page}
-                    setPage={setPage}
-                    chatId={chat.id.toString()}
-                />
+                <Attachments page={page} setPage={setPage} chat={chat} />
             )}
         </div>
     );

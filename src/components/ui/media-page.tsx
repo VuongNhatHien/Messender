@@ -1,21 +1,17 @@
+"use client";
+import { ChatType } from "@/types/response.type";
 import { AttachmentType } from "@/types/schema.type";
-import { FindMediaInChat } from "@/mocks/mock";
 import Image from "next/image";
-import useSWR from "swr";
-import envConfig from "@/config";
-import { fetcher } from "@/lib/utils";
-import { useEffect, useState } from "react";
-import { requests } from "@/request/requests";
-const MediaItem = ({ file }: { file: AttachmentType }) => {
-    const isImage = file.type.includes("image");
+const MediaItem = ({ media }: { media: AttachmentType }) => {
+    const isImage = media.type.includes("image");
 
     return (
         <div className="aspect-square w-[32%] overflow-hidden hover:opacity-75">
             {isImage ? (
-                <a href={file.url} target="_blank">
+                <a href={media?.url} target="_blank">
                     <Image
-                        src={file.url}
-                        alt={file.name}
+                        src={media.url}
+                        alt={media.name}
                         width={200}
                         height={200}
                         className="h-full w-full object-cover"
@@ -23,14 +19,14 @@ const MediaItem = ({ file }: { file: AttachmentType }) => {
                 </a>
             ) : (
                 <a
-                    href={file.url}
+                    href={media.url}
                     target="_blank"
                     //comment "block"
                     className="h-full w-full"
                 >
                     <div className="relative h-full w-full">
                         <video
-                            src={file.url}
+                            src={media.url}
                             preload="metadata"
                             className="h-full w-full object-cover"
                         />
@@ -52,25 +48,23 @@ const MediaItem = ({ file }: { file: AttachmentType }) => {
     );
 };
 
-export default function MediaPage({ chatId }: { chatId: string }) {
-    const [media, setMedia] = useState<AttachmentType[]>([]);
-    useEffect(() => {
-        const fetchRequest = async () => {
-            try {
-                const result = await requests.getMedia(chatId);
-                setMedia(result.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchRequest();
-    }, []);
+const isMedia = (file: AttachmentType) => {
+    return file.type.includes("image") || file.type.includes("video");
+};
 
+export default function MediaPage({ chat }: { chat: ChatType }) {
     return (
         <div className="flex flex-wrap gap-[2px]">
-            {media.map((media) => (
-                <MediaItem key={media?.id} file={media!} />
-            ))}
+            {chat.messages.map(
+                (chat) =>
+                    chat.attachment &&
+                    isMedia(chat.attachment) && (
+                        <MediaItem
+                            key={chat.attachmentId}
+                            media={chat.attachment}
+                        />
+                    ),
+            )}
         </div>
     );
 }

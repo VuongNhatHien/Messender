@@ -46,13 +46,13 @@ export const requests = {
             },
         );
     },
-    getChat: (chatId: string) => {
-        return http.get<ResponseType<GetMessageResponseType>>(
+    getMessages: (chatId: string) => {
+        return http.get<ResponseType<GetMessageResponseType | null>>(
             `/chats/${chatId}/messages`,
         );
     },
     getUserFromChat: (chatId: string) => {
-        return http.get<ResponseType<UserType>>(`/chats/${chatId}/users`, {});
+        return http.get<ResponseType<UserType | null>>(`/chats/${chatId}/users`, {});
     },
     getMedia: (chatId: string) => {
         return http.get<ResponseType<AttachmentType[]>>(

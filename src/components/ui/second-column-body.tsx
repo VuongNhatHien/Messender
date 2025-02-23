@@ -1,11 +1,9 @@
 "use client";
-import { AttachmentType, MessageType, MetadataType } from "@/types/schema.type";
+import { formatFileSize } from "@/lib/utils";
 import { ChatType, GetMessageResponseType, MessageResponseType } from "@/types/response.type";
+import { AttachmentType, MetadataType } from "@/types/schema.type";
 import { File } from "lucide-react";
 import Image from "next/image";
-import { formatFileSize } from "@/lib/utils";
-import { useEffect, useState } from "react";
-import socket from "@/lib/socket";
 
 const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
@@ -63,7 +61,7 @@ const Message = ({
     content,
     isOwnMessage,
 }: {
-    content: GetMessageResponseType[0];
+    content: MessageResponseType;
     isOwnMessage: boolean;
 }) => (
     <div
@@ -118,7 +116,7 @@ const MessageBubble = ({
     content,
     isOwnMessage,
 }: {
-    content: GetMessageResponseType[0];
+    content: MessageResponseType;
     isOwnMessage: boolean;
 }) => (
     <>
@@ -142,27 +140,10 @@ const MessageBubble = ({
 );
 
 export default function SecondColumnBody({ chat }: { chat: ChatType }) {
-    const [messages, setMessages] = useState(chat.messages);
 
-    useEffect(() => {
-        const handleReceiveMessage = (
-            newMessage: MessageResponseType,
-        ) => {
-            // setMessages((prevMessages) => [...prevMessages, newMessage]);
-            // append message at the start
-            setMessages((prevMessages) => [newMessage, ...prevMessages]);
-            console.log("Message received", newMessage);
-        };
-
-        socket.on("receiveMessage", handleReceiveMessage);
-
-        return () => {
-            socket.off("receiveMessage", handleReceiveMessage);
-        };
-    }, []);
     return (
         <div className="relative flex h-full flex-col-reverse justify-start gap-4 overflow-auto p-4">
-            {messages.slice().map((content) => (
+            {chat.messages.slice().map((content) => (
                 <MessageBubble
                     key={content.id}
                     content={content}

@@ -6,7 +6,11 @@ import socket from "@/lib/socket";
 import { requests } from "@/request/requests";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { GetMessageResponseType } from "@/types/response.type";
+import {
+    ChatType,
+    GetMessageResponseType,
+    MessageResponseType,
+} from "@/types/response.type";
 import { UserType } from "@/types/schema.type";
 import { useRouter } from "next/navigation";
 
@@ -15,13 +19,29 @@ export default function Page() {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
 
-    const [messages, setMessages] = useState<GetMessageResponseType>([]);
-    const [user, setUser] = useState<UserType | null>(null);
+    const [chat, setChat] = useState<ChatType | null>(null);
 
     useEffect(() => {
         socket.emit("joinChat", chatId);
 
+        const handleReceiveMessage = (newMessage: MessageResponseType) => {
+            //append chat at the start
+            setChat((prevChat) => {
+                if (!prevChat) {
+                    return null;
+                }
+                return {
+                    ...prevChat,
+                    messages: [newMessage, ...prevChat.messages],
+                };
+            });
+            console.log("Message received", newMessage);
+        };
+
+        socket.on("receiveMessage", handleReceiveMessage);
+
         return () => {
+            socket.off("receiveMessage", handleReceiveMessage);
             socket.emit("leaveChat", chatId);
         };
     }, [chatId]);
@@ -29,12 +49,15 @@ export default function Page() {
     useEffect(() => {
         const fetchRequest = async () => {
             try {
-                const result1 = await requests.getChat(chatId);
-                setMessages(result1.data);
+                const messages = (await requests.getMessages(chatId)).data;
 
-                const result2 = await requests.getUserFromChat(chatId);
-                if (result2.data) {
-                    setUser(result2.data);
+                const user = (await requests.getUserFromChat(chatId)).data;
+                if (user && messages) {
+                    setChat({
+                        id: parseInt(chatId),
+                        messages: messages,
+                        user: user,
+                    });
                 }
             } catch (error) {
                 console.log(error);
@@ -46,10 +69,10 @@ export default function Page() {
     }, [chatId]);
 
     useEffect(() => {
-        if (!loading && (!user || !messages)) {
+        if (!loading && !chat) {
             router.push("/chats");
         }
-    }, [user, messages, router, loading]);
+    }, [router, loading, chat]);
 
     if (loading) {
         return (
@@ -59,20 +82,14 @@ export default function Page() {
         );
     }
 
-    if (!user || !messages) {
-        return null;
-    }
-
-    const chat = {
-        id: parseInt(chatId),
-        messages: messages,
-        user: user,
-    };
-
     return (
         <>
-            <SecondColumn chat={chat} />
-            <ThirdColumn chat={chat} />
+            {chat && (
+                <>
+                    <SecondColumn chat={chat} />
+                    <ThirdColumn chat={chat} />
+                </>
+            )}
         </>
     );
 }
