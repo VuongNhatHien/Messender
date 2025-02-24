@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import socket from "@/lib/socket";
 import { requests } from "@/request/requests";
 import { Paperclip } from "lucide-react";
@@ -9,7 +9,10 @@ export const uploadFiles = async (chatId: string, files: FileList) => {
             const formData = new FormData();
             formData.append("attachment", files[i]);
             const res = (await requests.uploadFile(chatId, formData)).data;
-            socket.emit("sendMessage", { chatId, message: res });
+            socket.emit("sendMessage", {
+                chatId: `chatId-${chatId}`,
+                message: res,
+            });
         }
     }
 };

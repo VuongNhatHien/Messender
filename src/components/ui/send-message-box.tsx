@@ -15,7 +15,10 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
         setPending(true);
         if (message) {
             const res = (await requests.sendMessage(chatId, message)).data;
-            socket.emit("sendMessage", { chatId, message: res });
+            socket.emit("sendMessage", {
+                chatId: `chatId-${chatId}`,
+                message: res,
+            });
         }
         setPending(false);
         setMessage("");

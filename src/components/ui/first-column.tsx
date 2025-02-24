@@ -24,7 +24,8 @@ export default function FirstColumn() {
     }, []);
     useEffect(() => {
         previews.forEach((preview) => {
-            socket.emit("joinChat", preview.chatId.toString());
+            // socket.emit("joinChat", preview.chatId.toString());
+            socket.emit("joinChat", `chatId-${preview.chatId}`);
         });
     }, [previews]);
     useEffect(() => {
