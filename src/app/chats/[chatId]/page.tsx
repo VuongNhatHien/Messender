@@ -8,7 +8,7 @@ import {
     ChatType,
     MessageResponseType,
 } from "@/types/response.type";
-import { useParams, useRouter } from "next/navigation";
+import { notFound, useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
@@ -22,7 +22,6 @@ export default function Page() {
         socket.emit("joinChat", chatId);
 
         const handleReceiveMessage = (newMessage: MessageResponseType) => {
-            //append chat at the start
             setChat((prevChat) => {
                 if (!prevChat) {
                     return null;
@@ -65,18 +64,15 @@ export default function Page() {
         fetchRequest();
     }, [chatId]);
 
-    useEffect(() => {
-        if (!loading && !chat) {
-            router.push("/chats");
-        }
-    }, [router, loading, chat]);
-
     if (loading) {
         return (
             <div className="w-fulls flex h-full w-full items-center justify-center">
                 <p className="text-muted-foreground">Loading...</p>
             </div>
         );
+    }
+    if (!chat) {
+        notFound()
     }
 
     return (
