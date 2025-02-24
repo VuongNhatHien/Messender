@@ -1,5 +1,4 @@
 import { requests } from "@/request/requests";
-import { cookies } from "next/headers";
 import { Button } from "./button";
 import {
     Dialog,
@@ -12,12 +11,22 @@ import {
 import NotConnectCard from "./not-connect-card";
 import Searchbar from "./search";
 import { Separator } from "./separator";
+import { useEffect, useState } from "react";
+import { UserType } from "@/types/schema.type";
 
-export default async function AddUserDialog() {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
-    const notConnectedRes = await requests.getNotConnected(token!);
-    const not_connected = notConnectedRes.data;
+export default function AddUserDialog() {
+    const [notConnected, setNotConnected] = useState<UserType[]>([]);
+    useEffect(() => {
+        const fetchRequest = async () => {
+            const res = (await requests.getNotConnected()).data;
+            setNotConnected(res);
+        };
+        fetchRequest();
+    }, []);
+    // const cookieStore = await cookies();
+    // const token = cookieStore.get("token")?.value;
+    // const notConnectedRes = await requests.getNotConnected(token!);
+    // const not_connected = notConnectedRes.data;
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -46,7 +55,7 @@ export default async function AddUserDialog() {
 
                 <Separator className={"mt-4"} />
                 <div className="h-full space-y-1 overflow-auto pe-1 pt-1">
-                    {not_connected.map((user) => (
+                    {notConnected.map((user) => (
                         <NotConnectCard key={user.id} user={user} />
                     ))}
                 </div>

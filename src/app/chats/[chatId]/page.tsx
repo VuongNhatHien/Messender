@@ -15,9 +15,9 @@ export default function Page() {
     const [chat, setChat] = useState<ChatType | null>(null);
 
     useEffect(() => {
-        socket.emit("joinChat", chatId);
-
+        // socket.emit("joinChat", chatId);
         const handleReceiveMessage = (newMessage: MessageResponseType) => {
+            console.log("Mess rec", newMessage);
             setChat((prevChat) => {
                 if (!prevChat) {
                     return null;
@@ -27,42 +27,36 @@ export default function Page() {
                     messages: [newMessage, ...prevChat.messages],
                 };
             });
-            console.log("Message received", newMessage);
         };
 
         socket.on("receiveMessage", handleReceiveMessage);
 
         return () => {
             socket.off("receiveMessage", handleReceiveMessage);
-            socket.emit("leaveChat", chatId);
+            // socket.emit("leaveChat", chatId);
         };
-    }, [chatId]);
+    }, []);
 
     useEffect(() => {
         const fetchRequest = async () => {
-            try {
-                const messages = (await requests.getMessages(chatId)).data;
+            const messages = (await requests.getMessages(chatId)).data;
 
-                const user = (await requests.getUserFromChat(chatId)).data;
-                if (user && messages) {
-                    setChat({
-                        id: parseInt(chatId),
-                        messages: messages,
-                        user: user,
-                    });
-                }
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setLoading(false);
+            const user = (await requests.getUserFromChat(chatId)).data;
+            if (user && messages) {
+                setChat({
+                    id: parseInt(chatId),
+                    messages: messages,
+                    user: user,
+                });
             }
+            setLoading(false);
         };
         fetchRequest();
     }, [chatId]);
 
     if (loading) {
         return (
-            <div className="w-fulls flex h-full w-full items-center justify-center">
+            <div className="flex h-full w-3/4 items-center justify-center">
                 <p className="text-muted-foreground">Loading...</p>
             </div>
         );
