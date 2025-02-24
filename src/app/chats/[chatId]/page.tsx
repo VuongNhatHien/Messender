@@ -33,7 +33,6 @@ export default function Page() {
 
         return () => {
             socket.off("receiveMessage", handleReceiveMessage);
-            // socket.emit("leaveChat", chatId);
         };
     }, []);
 
