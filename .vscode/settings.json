@@ -1,8 +1,22 @@
 {
-    "terminal.integrated.fontFamily": "MesloLGS NF",
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnPaste": false,
-    "editor.formatOnSave": true,
     "tailwindCSS.validate": true,
-    "css.validate": false
+    "css.validate": false,
+    "restoreTerminals.terminals": [
+        {
+            "splitTerminals": [
+                {
+                    "name": "git",
+                    "commands": []
+                }
+            ]
+        },
+        {
+            "splitTerminals": [
+                {
+                    "name": "run",
+                    "commands": ["bun dev"]
+                }
+            ]
+        }
+    ]
 }
