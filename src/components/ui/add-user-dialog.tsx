@@ -13,6 +13,9 @@ import Searchbar from "./search";
 import { Separator } from "./separator";
 import { useEffect, useState } from "react";
 import { UserType } from "@/types/schema.type";
+import { AddChatResponseType } from "@/types/response.type";
+import { getMe } from "@/actions/actions.common";
+import socket from "@/lib/socket";
 
 export default function AddUserDialog() {
     const [notConnected, setNotConnected] = useState<UserType[]>([]);
@@ -23,10 +26,28 @@ export default function AddUserDialog() {
         };
         fetchRequest();
     }, []);
-    // const cookieStore = await cookies();
-    // const token = cookieStore.get("token")?.value;
-    // const notConnectedRes = await requests.getNotConnected(token!);
-    // const not_connected = notConnectedRes.data;
+
+    useEffect(() => {
+        const handleReceiveChatRequest = async (
+            addChatResponse: AddChatResponseType,
+        ) => {
+            console.log("Add chat ok", addChatResponse);
+            const meId = (await getMe()).id;
+            const userId =
+                meId === addChatResponse.user1.id
+                    ? addChatResponse.user2.id
+                    : addChatResponse.user1.id;
+            setNotConnected((prevNotConnected) =>
+                prevNotConnected.filter((user) => user.id !== userId),
+            );
+        };
+
+        socket.on("receiveChatRequest", handleReceiveChatRequest);
+        return () => {
+            socket.off("receiveChatRequest", handleReceiveChatRequest);
+        };
+    }, []);
+
     return (
         <Dialog>
             <DialogTrigger asChild>

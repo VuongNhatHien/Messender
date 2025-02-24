@@ -15,7 +15,6 @@ export default function Page() {
     const [chat, setChat] = useState<ChatType | null>(null);
 
     useEffect(() => {
-        // socket.emit("joinChat", chatId);
         const handleReceiveMessage = (newMessage: MessageResponseType) => {
             console.log("Mess rec", newMessage);
             setChat((prevChat) => {

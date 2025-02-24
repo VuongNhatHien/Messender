@@ -9,7 +9,6 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-
 export async function register(prevState: unknown, formData: FormData) {
     console.log(prevState);
     const username = formData.get("username") as string;
@@ -129,11 +128,19 @@ export async function addUser(userId: number) {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
     const res = await requests.addUser(userId, token!);
-    console.log("Chat id", res.data.id);
+    console.log("Chat id", res.data?.id);
     revalidatePath(`/chats`);
-    redirect(`/chats/${res.data.id}`);
+    return res?.data;
+    // redirect(`/chats/${res.data.id}`);
 }
 
 export async function logout() {
     redirect("/auth/login");
+}
+
+export async function getMe() {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    const res = await requests.getMe(token!);
+    return res.data;
 }

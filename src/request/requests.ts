@@ -2,7 +2,7 @@ import http from "@/lib/http";
 import { ResponseType } from "@/types/common.type";
 import { LoginBodyType, RegisterBodyType } from "@/types/request.type";
 import {
-    AddUserResponseType,
+    AddChatResponseType,
     GetMessageResponseType,
     LoginResponseType,
     MessageResponseType,
@@ -66,7 +66,7 @@ export const requests = {
         return http.get<ResponseType<UserType[]>>("/users/not-connected");
     },
     addUser: (userId: number, token: string) => {
-        return http.post<AddUserResponseType>(
+        return http.post<ResponseType<AddChatResponseType | null>>(
             `/users/${userId}/chat-requests`,
             {},
             {
@@ -87,5 +87,12 @@ export const requests = {
             `/chats/${chatId}/attachments`,
             formData,
         );
+    },
+    getMe: (token: string) => {
+        return http.get<ResponseType<UserType>>("/users/me", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
     },
 };

@@ -42,9 +42,7 @@ export type PreviewMessageType = {
     lastMessage: MessageType | null;
 };
 
-export type AddUserResponseType = ResponseType<
-    BaseType & {
-        user1Id: number;
-        user2Id: number;
-    }
->;
+export type AddChatResponseType = BaseType & {
+    user1: UserType;
+    user2: UserType;
+};

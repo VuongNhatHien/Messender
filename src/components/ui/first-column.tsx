@@ -5,8 +5,13 @@ import AddUserDialog from "./add-user-dialog";
 import PreviewCard from "./preview-card";
 import { requests } from "@/request/requests";
 import { useEffect, useState } from "react";
-import { MessageResponseType, PreviewMessageType } from "@/types/response.type";
+import {
+    AddChatResponseType,
+    MessageResponseType,
+    PreviewMessageType,
+} from "@/types/response.type";
 import socket from "@/lib/socket";
+import { getMe } from "@/actions/actions.common";
 
 export default function FirstColumn() {
     const [previews, setPreview] = useState<PreviewMessageType[]>([]);
@@ -25,6 +30,7 @@ export default function FirstColumn() {
     }, [previews]);
     useEffect(() => {
         const handleReceiveMessage = (newMessage: MessageResponseType) => {
+            console.log("receive ???", newMessage);
             setPreview((prevPreviews) => {
                 const newPreviews = [...prevPreviews];
                 const index = newPreviews.findIndex(
@@ -40,10 +46,33 @@ export default function FirstColumn() {
             });
         };
 
+        const handleReceiveChatRequest = async (
+            addChatResponse: AddChatResponseType,
+        ) => {
+            console.log("Add chat ok", addChatResponse);
+            const meId = (await getMe()).id;
+            const user =
+                meId === addChatResponse.user1.id
+                    ? addChatResponse.user2
+                    : addChatResponse.user1;
+            // Add the chat to the previews
+            setPreview((prevPreviews) => {
+                const newPreviews = [...prevPreviews];
+                newPreviews.unshift({
+                    chatId: addChatResponse.id,
+                    user: user,
+                    lastMessage: null,
+                });
+                return newPreviews;
+            });
+        };
+
         socket.on("receiveMessage", handleReceiveMessage);
+        socket.on("receiveChatRequest", handleReceiveChatRequest);
 
         return () => {
             socket.off("receiveMessage", handleReceiveMessage);
+            socket.off("receiveChatRequest", handleReceiveChatRequest);
         };
     }, []);
     return (
