@@ -1,4 +1,4 @@
-"use client"; // Error boundaries must be Client Components
+"use client";
 
 import { useEffect } from "react";
 import Image from "next/image";
@@ -25,7 +25,10 @@ export default function Error({
             <Button
                 variant="default"
                 className="rounded-full"
-                onClick={() => reset}
+                onClick={() => {
+                    console.log("Reset");
+                    reset();
+                }}
             >
                 Try again
             </Button>

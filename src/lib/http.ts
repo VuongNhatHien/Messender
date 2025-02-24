@@ -21,9 +21,9 @@ const request = async <Response>(
               };
 
     if (isClient()) {
-        const sessionToken = localStorage.getItem("token");
-        if (sessionToken) {
-            baseHeaders.Authorization = `Bearer ${sessionToken}`;
+        const token = localStorage.getItem("token");
+        if (token) {
+            baseHeaders.Authorization = `Bearer ${token}`;
         }
     }
 

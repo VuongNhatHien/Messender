@@ -8,11 +8,7 @@ import {
     MessageResponseType,
     RegisterResponseType,
 } from "@/types/response.type";
-import {
-    AttachmentType,
-    MetadataType,
-    UserType,
-} from "@/types/schema.type";
+import { AttachmentType, MetadataType, UserType } from "@/types/schema.type";
 import { PreviewMessageType } from "@/types/response.type";
 
 export const requests = {
@@ -25,10 +21,11 @@ export const requests = {
     login: (body: LoginBodyType) => {
         return http.post<ResponseType<LoginResponseType>>("/auth/login", body);
     },
-    auth: (body: { token: string; expiresIn: string }) =>
-        http.post("/api/auth", body, {
+    auth: (body: { token: string; expiresIn: string }) => {
+        return http.post("/api/auth", body, {
             baseUrl: "http://localhost:3000",
-        }),
+        });
+    },
     getPreviews: (token: string) => {
         return http.get<ResponseType<PreviewMessageType[]>>("/users/chats", {
             headers: {
@@ -51,7 +48,10 @@ export const requests = {
         );
     },
     getUserFromChat: (chatId: string) => {
-        return http.get<ResponseType<UserType | null>>(`/chats/${chatId}/users`, {});
+        return http.get<ResponseType<UserType | null>>(
+            `/chats/${chatId}/users`,
+            {},
+        );
     },
     getMedia: (chatId: string) => {
         return http.get<ResponseType<AttachmentType[]>>(

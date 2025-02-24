@@ -1,12 +1,11 @@
 import { requests } from "@/request/requests";
 import { Button } from "./button";
-import { logout } from "@/actions/actions.common";
 
 export default function LogoutButton() {
     const handleLogout = async () => {
-        logout();
         localStorage.removeItem("token");
         await requests.logout();
+        window.location.reload();
     };
     return (
         <div>

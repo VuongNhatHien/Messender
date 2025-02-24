@@ -26,58 +26,46 @@ export async function register(prevState: unknown, formData: FormData) {
     };
 
     let redirectPath = null;
-    try {
-        const result = await requests.register(body);
+    const result = await requests.register(body);
 
-        console.log("Register result: ", result);
+    console.log("Register result: ", result);
 
-        if (password !== confirmPassword) {
-            return {
-                payload,
-                errors: {
-                    confirmPassword: "Passwords do not match",
-                },
-            };
-        }
-
-        if (result.code === "SUCCESS") {
-            redirectPath = "/auth/login";
-        }
-        if (result.code === "VALIDATION_ERROR") {
-            const { username, displayName, password } =
-                result.data as RegisterResponseValidationErrorType;
-            return {
-                payload,
-                errors: {
-                    username,
-                    displayName,
-                    password,
-                },
-            };
-        }
-        if (result.code === "USER_EXISTED") {
-            return {
-                payload,
-                errors: {
-                    username: "Username already exists",
-                },
-            };
-        }
+    if (password !== confirmPassword) {
         return {
             payload,
-            message: "An unknown error has occurred",
+            errors: {
+                confirmPassword: "Passwords do not match",
+            },
         };
-    } catch (error) {
-        console.error(error);
-        return {
-            payload,
-            message: "An unknown error has occurred",
-        };
-    } finally {
-        if (redirectPath) {
-            redirect(redirectPath);
-        }
     }
+
+    if (result.code === "SUCCESS") {
+        redirectPath = "/auth/login";
+        redirect(redirectPath);
+    }
+    if (result.code === "VALIDATION_ERROR") {
+        const { username, displayName, password } =
+            result.data as RegisterResponseValidationErrorType;
+        return {
+            payload,
+            errors: {
+                username,
+                displayName,
+                password,
+            },
+        };
+    }
+    if (result.code === "USER_EXISTED") {
+        return {
+            payload,
+            errors: {
+                username: "Username already exists",
+            },
+        };
+    }
+    return {
+        payload,
+    };
 }
 
 export async function login(prevState: unknown, formData: FormData) {
@@ -94,58 +82,46 @@ export async function login(prevState: unknown, formData: FormData) {
         username,
         password,
     };
-    try {
-        const result = await requests.login(body);
-        console.log("Login result: ", result);
+    const result = await requests.login(body);
 
-        if (result.code === "SUCCESS") {
-            return {
-                payload,
-                token: result.data.token,
-                expiresIn: result.data.expiresIn,
-                redirectPath: "/",
-                code: "SUCCESS",
-            };
-        }
-        if (result.code === "VALIDATION_ERROR") {
-            const { username, password } =
-                result.data as LoginResponseValidationErrorType;
-            return {
-                payload,
-                errors: {
-                    username,
-                    password,
-                },
-            };
-        }
-        if (result.code === "WRONG_PASSWORD") {
-            return {
-                payload,
-                errors: {
-                    password: "Incorrect password",
-                },
-            };
-        }
-        if (result.code === "USER_NOT_FOUND") {
-            return {
-                payload,
-                errors: {
-                    username: "User not found",
-                },
-            };
-        }
+    if (result.code === "SUCCESS") {
         return {
             payload,
-            message: "An unknown error has occurred",
-        };
-    } catch (error) {
-        console.error(error);
-        return {
-            payload,
-            message: "An unknown error has occurred",
-            code: "INTERNAL_SERVER_ERROR",
+            token: result.data.token,
+            expiresIn: result.data.expiresIn,
+            code: "SUCCESS",
         };
     }
+    if (result.code === "VALIDATION_ERROR") {
+        const { username, password } =
+            result.data as LoginResponseValidationErrorType;
+        return {
+            payload,
+            errors: {
+                username,
+                password,
+            },
+        };
+    }
+    if (result.code === "WRONG_PASSWORD") {
+        return {
+            payload,
+            errors: {
+                password: "Incorrect password",
+            },
+        };
+    }
+    if (result.code === "USER_NOT_FOUND") {
+        return {
+            payload,
+            errors: {
+                username: "User not found",
+            },
+        };
+    }
+    return {
+        payload,
+    };
 }
 
 export async function addUser(userId: number) {

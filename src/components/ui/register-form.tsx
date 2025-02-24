@@ -7,22 +7,10 @@ import { Button } from "./button";
 import FormErrorMessage from "./form-error-message";
 import { Input } from "./input";
 import { Label } from "./label";
-import { toast } from "sonner";
 
 export default function RegisterForm() {
     const [state, action, pending] = useActionState(register, undefined);
 
-    useEffect(() => {
-        if (state?.message) {
-            toast.error("Login failed", {
-                description: state.message,
-                action: {
-                    label: "Close",
-                    onClick: () => console.log("Close"),
-                },
-            });
-        }
-    }, [state]);
     return (
         <form
             className="card w-80 items-center justify-center space-y-4 p-4"

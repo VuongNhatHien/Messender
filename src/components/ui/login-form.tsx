@@ -3,14 +3,13 @@
 import { login } from "@/actions/actions.common";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { Button } from "./button";
 import { Checkbox } from "./checkbox";
+import FormErrorMessage from "./form-error-message";
 import { Input } from "./input";
 import { Label } from "./label";
-import FormErrorMessage from "./form-error-message";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { requests } from "@/request/requests";
 
 export default function LoginForm() {
@@ -18,35 +17,17 @@ export default function LoginForm() {
     const router = useRouter();
     useEffect(() => {
         const handleLoginSuccess = async () => {
-            if (state?.code === "SUCCESS") {
-                try {
-                    await requests.auth({
-                        token: state.token!,
-                        expiresIn: state.expiresIn!,
-                    });
-
-
-                    localStorage.setItem("token", state.token!);
-
-                    router.push(state.redirectPath!);
-                } catch (error) {
-                    console.error("Failed to authenticate or redirect:", error);
-                }
-            }
+            //set cookie (later server side will automatically get token from client, so this must be implmented in client side)
+            await requests.auth({
+                token: state?.token!,
+                expiresIn: state?.expiresIn!,
+            });
+            localStorage.setItem("token", state?.token!);
+            window.location.reload();
         };
 
-        if (state?.code === "INTERNAL_SERVER_ERROR") {
-            toast.error("Login failed", {
-                description: state.message,
-                action: {
-                    label: "Close",
-                    onClick: () => console.log("Close"),
-                },
-            });
-        }
-
         if (state?.code === "SUCCESS") {
-            handleLoginSuccess(); // Call the async function
+            handleLoginSuccess();
         }
     }, [state, router]);
 
