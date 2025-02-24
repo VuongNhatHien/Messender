@@ -1,12 +1,11 @@
 import { BaseType } from "./common.type";
 import { RegisterBodyType } from "./request.type";
 import {
-    UserType,
-    MessageType,
     AttachmentType,
+    MessageType,
     MetadataType,
+    UserType,
 } from "./schema.type";
-import { ResponseType } from "@/types/common.type";
 
 export type RegisterResponseType = BaseType & RegisterBodyType;
 export type RegisterResponseValidationErrorType = {

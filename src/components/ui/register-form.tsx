@@ -2,7 +2,7 @@
 
 import { register } from "@/actions/actions.common";
 import Link from "next/link";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { Button } from "./button";
 import FormErrorMessage from "./form-error-message";
 import { Input } from "./input";

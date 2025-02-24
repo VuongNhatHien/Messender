@@ -5,8 +5,6 @@ import {
     LoginResponseValidationErrorType,
     RegisterResponseValidationErrorType,
 } from "@/types/response.type";
-import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function register(prevState: unknown, formData: FormData) {
