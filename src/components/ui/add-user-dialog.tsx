@@ -14,7 +14,6 @@ import { Separator } from "./separator";
 import { useEffect, useState } from "react";
 import { UserType } from "@/types/schema.type";
 import { AddChatResponseType } from "@/types/response.type";
-import { getMe } from "@/actions/actions.common";
 import socket from "@/lib/socket";
 
 export default function AddUserDialog() {
@@ -31,8 +30,7 @@ export default function AddUserDialog() {
         const handleReceiveChatRequest = async (
             addChatResponse: AddChatResponseType,
         ) => {
-            console.log("Add chat ok", addChatResponse);
-            const meId = (await getMe()).id;
+            const meId = (await requests.getMe()).data?.id;
             const userId =
                 meId === addChatResponse.user1.id
                     ? addChatResponse.user2.id

@@ -88,11 +88,7 @@ export const requests = {
             formData,
         );
     },
-    getMe: (token: string) => {
-        return http.get<ResponseType<UserType>>("/users/me", {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    getMe: () => {
+        return http.get<ResponseType<UserType | null>>("/users/me");
     },
 };

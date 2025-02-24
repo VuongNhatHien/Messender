@@ -131,16 +131,4 @@ export async function addUser(userId: number) {
     console.log("Chat id", res.data?.id);
     revalidatePath(`/chats`);
     return res?.data;
-    // redirect(`/chats/${res.data.id}`);
-}
-
-export async function logout() {
-    redirect("/auth/login");
-}
-
-export async function getMe() {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
-    const res = await requests.getMe(token!);
-    return res.data;
 }

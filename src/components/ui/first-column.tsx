@@ -11,7 +11,6 @@ import {
     PreviewMessageType,
 } from "@/types/response.type";
 import socket from "@/lib/socket";
-import { getMe } from "@/actions/actions.common";
 
 export default function FirstColumn() {
     const [previews, setPreview] = useState<PreviewMessageType[]>([]);
@@ -50,7 +49,7 @@ export default function FirstColumn() {
             addChatResponse: AddChatResponseType,
         ) => {
             console.log("Add chat ok", addChatResponse);
-            const meId = (await getMe()).id;
+            const meId = (await requests.getMe()).data?.id;
             const user =
                 meId === addChatResponse.user1.id
                     ? addChatResponse.user2

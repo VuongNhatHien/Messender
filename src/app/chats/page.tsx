@@ -1,13 +1,13 @@
 "use client";
 
-import { getMe } from "@/actions/actions.common";
 import socket from "@/lib/socket";
+import { requests } from "@/request/requests";
 import { useEffect } from "react";
 
 export default function Page() {
     useEffect(() => {
         const handleSocket = async () => {
-            const meId = (await getMe()).id;
+            const meId = (await requests.getMe()).data?.id;
             socket.emit("connectUser", `userId-${meId}`);
         };
         handleSocket();
