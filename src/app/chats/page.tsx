@@ -8,7 +8,7 @@ export default function Page() {
     useEffect(() => {
         const handleSocket = async () => {
             const meId = (await requests.getMe()).data?.id;
-            socket.emit("connectUser", `userId-${meId}`);
+            socket.emit("listenChatRequest", `userId-${meId}`);
         };
         handleSocket();
     }, []);
