@@ -1,5 +1,4 @@
 "use client";
-import { addUser } from "@/actions/actions.common";
 import socket from "@/lib/socket";
 import { UserType } from "@/types/schema.type";
 import { Avatar, AvatarImage } from "./avatar";
@@ -7,8 +6,7 @@ import { requests } from "@/request/requests";
 
 export default function NotConnectCard({ user }: { user: UserType }) {
     const handleAddUser = async () => {
-        const chat = await addUser(user.id);
-        console.log("Chat", chat);
+        const chat = (await requests.addUser(user.id)).data;
         if (chat) {
             const meId = (await requests.getMe()).data?.id;
             const userId =

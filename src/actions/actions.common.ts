@@ -123,12 +123,3 @@ export async function login(prevState: unknown, formData: FormData) {
         payload,
     };
 }
-
-export async function addUser(userId: number) {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
-    const res = await requests.addUser(userId, token!);
-    console.log("Chat id", res.data?.id);
-    revalidatePath(`/chats`);
-    return res?.data;
-}
