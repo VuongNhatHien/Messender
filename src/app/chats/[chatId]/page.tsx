@@ -4,16 +4,12 @@ import SecondColumn from "@/components/ui/second-column";
 import ThirdColumn from "@/components/ui/third-column";
 import socket from "@/lib/socket";
 import { requests } from "@/request/requests";
-import {
-    ChatType,
-    MessageResponseType,
-} from "@/types/response.type";
-import { notFound, useParams, useRouter } from "next/navigation";
+import { ChatType, MessageResponseType } from "@/types/response.type";
+import { notFound, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
     const { chatId } = useParams<{ chatId: string }>();
-    const router = useRouter();
     const [loading, setLoading] = useState(true);
 
     const [chat, setChat] = useState<ChatType | null>(null);
@@ -72,7 +68,7 @@ export default function Page() {
         );
     }
     if (!chat) {
-        notFound()
+        notFound();
     }
 
     return (
