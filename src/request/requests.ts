@@ -65,10 +65,15 @@ export const requests = {
     getNotConnected: () => {
         return http.get<ResponseType<UserType[]>>("/users/not-connected");
     },
-    addUser: (userId: number) => {
+    addUser: (userId: number, token: string) => {
         return http.post<ResponseType<AddChatResponseType | null>>(
             `/users/${userId}/chat-requests`,
             {},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            },
         );
     },
     sendMessage: (chatId: string, message: string, token: string) => {

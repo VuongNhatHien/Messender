@@ -145,3 +145,12 @@ export async function uploadFile(chatId: string, file: File) {
     const res = (await requests.uploadFile(chatId, formData, token!)).data;
     return res;
 }
+
+export async function addUser(userId: number) {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    const res = await requests.addUser(userId, token!);
+    console.log("Chat id", res.data?.id);
+    return res?.data;
+    // redirect(`/chats/${res.data.id}`);
+}

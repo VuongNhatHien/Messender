@@ -3,14 +3,17 @@ import socket from "@/lib/socket";
 import { UserType } from "@/types/schema.type";
 import { Avatar, AvatarImage } from "./avatar";
 import { requests } from "@/request/requests";
+import { addUser } from "@/actions/actions.common";
 
 export default function NotConnectCard({ user }: { user: UserType }) {
     const handleAddUser = async () => {
-        const chat = (await requests.addUser(user.id)).data;
+        const chat = await addUser(user.id);
+
         if (chat) {
             const meId = (await requests.getMe()).data?.id;
             const userId =
                 meId === chat.user1.id ? chat.user2.id : chat.user1.id;
+            socket.emit("connectUser", `userId-${userId}`);
             socket.emit("addChat", { userId: `userId-${userId}`, chat });
             window.location.href = `/chats/${chat.id}`;
         }
