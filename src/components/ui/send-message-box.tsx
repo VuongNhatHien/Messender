@@ -1,30 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useActionState, useEffect } from "react";
 import { Textarea } from "./textarea";
 import socket from "@/lib/socket";
-import { requests } from "@/request/requests";
 import { mutate } from "swr";
+import { sendMessage } from "@/actions/actions.common";
 
 export default function SendMessageBox({ chatId }: { chatId: string }) {
-    const [message, setMessage] = useState("");
-    const [pending, setPending] = useState(false);
+    const [state, action, pending] = useActionState(
+        sendMessage.bind(null, chatId),
+        undefined,
+    );
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        setPending(true);
-        if (message) {
-            const res = (await requests.sendMessage(chatId, message)).data;
+    useEffect(() => {
+        if (state) {
             socket.emit("sendMessage", {
                 chatId: `chatId-${chatId}`,
-                message: res,
+                message: state,
             });
+            mutate(`http://localhost:8080/chats/${chatId}/messages`);
         }
-        mutate(`http://localhost:8080/chats/${chatId}/messages`);
-        setPending(false);
-        setMessage("");
-    };
+    }, [state, chatId]);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === "Enter" && !event.shiftKey) {
@@ -34,17 +31,12 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
     };
 
     return (
-        <form
-            className="flex w-full items-center gap-4"
-            onSubmit={handleSubmit}
-        >
+        <form className="flex w-full items-center gap-4" action={action}>
             <Textarea
                 name="message"
                 placeholder="Message"
                 className="bg-accent text-accent-foreground"
-                onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
-                value={message}
             />
             <button type="submit" disabled={pending}>
                 <Image src="/logo.png" alt="Logo" width={30} height={30} />

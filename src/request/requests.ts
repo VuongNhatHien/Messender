@@ -71,10 +71,15 @@ export const requests = {
             {},
         );
     },
-    sendMessage: (chatId: string, message: string) => {
+    sendMessage: (chatId: string, message: string, token: string) => {
         return http.post<ResponseType<MessageResponseType>>(
             `/chats/${chatId}/messages`,
             { message: message },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            },
         );
     },
     uploadFile: (chatId: string, formData: FormData) => {

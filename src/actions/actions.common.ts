@@ -5,7 +5,9 @@ import {
     LoginResponseValidationErrorType,
     RegisterResponseValidationErrorType,
 } from "@/types/response.type";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { mutate } from "swr";
 
 export async function register(prevState: unknown, formData: FormData) {
     console.log(prevState);
@@ -120,4 +122,17 @@ export async function login(prevState: unknown, formData: FormData) {
     return {
         payload,
     };
+}
+
+export async function sendMessage(
+    chatId: string,
+    prevState: any,
+    formData: FormData,
+) {
+    console.log(prevState);
+    const message = formData.get("message") as string;
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    const res = await requests.sendMessage(chatId, message, token!);
+    return res.data;
 }
