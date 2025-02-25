@@ -1,7 +1,10 @@
 "use client";
-import { ChatType } from "@/types/response.type";
+import Loading from "@/app/loading";
+import fetcher from "@/lib/fetcher";
 import { AttachmentType } from "@/types/schema.type";
 import Image from "next/image";
+import { useParams } from "next/navigation";
+import useSWR from "swr";
 const MediaItem = ({ media }: { media: AttachmentType }) => {
     const isImage = media.type.includes("image");
 
@@ -48,23 +51,21 @@ const MediaItem = ({ media }: { media: AttachmentType }) => {
     );
 };
 
-const isMedia = (file: AttachmentType) => {
-    return file.type.includes("image") || file.type.includes("video");
-};
+export default function MediaPage() {
+    const { chatId } = useParams<{ chatId: string }>();
 
-export default function MediaPage({ chat }: { chat: ChatType }) {
+    const { data: media } = useSWR<AttachmentType[]>(
+        `http://localhost:8080/chats/${chatId}/attachments/media`,
+        fetcher,
+    );
+    if (!media) {
+        return <Loading />;
+    }
     return (
         <div className="flex flex-wrap gap-[2px]">
-            {chat.messages.map(
-                (chat) =>
-                    chat.attachment &&
-                    isMedia(chat.attachment) && (
-                        <MediaItem
-                            key={chat.attachmentId}
-                            media={chat.attachment}
-                        />
-                    ),
-            )}
+            {media.map((media) => (
+                <MediaItem key={media.id} media={media} />
+            ))}
         </div>
     );
 }

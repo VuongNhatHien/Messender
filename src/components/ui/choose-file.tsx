@@ -13,6 +13,7 @@ export const uploadFiles = async (chatId: string, files: FileList) => {
     }
     mutate(`http://localhost:8080/chats/${chatId}/messages`);
     mutate(`http://localhost:8080/users/chats`);
+    mutate(`http://localhost:8080/chats/${chatId}/attachments/media`);
 };
 
 export default function ChooseFile({ chatId }: { chatId: string }) {
