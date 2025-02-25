@@ -13,6 +13,7 @@ import {
 import socket from "@/lib/socket";
 import useSWR, { mutate } from "swr";
 import fetcher from "@/lib/fetcher";
+import Loading from "@/app/loading";
 
 export default function FirstColumn() {
     // const [previews, setPreview] = useState<PreviewMessageType[]>([]);
@@ -83,7 +84,7 @@ export default function FirstColumn() {
         };
     }, []);
     if (!previews) {
-        return "loading";
+        return <Loading />;
     }
     return (
         <div className="card w-1/4">
