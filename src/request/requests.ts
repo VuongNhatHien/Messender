@@ -82,10 +82,15 @@ export const requests = {
             },
         );
     },
-    uploadFile: (chatId: string, formData: FormData) => {
+    uploadFile: (chatId: string, formData: FormData, token: string) => {
         return http.post<ResponseType<MessageResponseType>>(
             `/chats/${chatId}/attachments`,
             formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            },
         );
     },
     getMe: () => {

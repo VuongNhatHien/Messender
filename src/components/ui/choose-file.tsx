@@ -1,14 +1,11 @@
-"use client";
+import { uploadFile } from "@/actions/actions.common";
 import socket from "@/lib/socket";
-import { requests } from "@/request/requests";
 import { Paperclip } from "lucide-react";
 
 export const uploadFiles = async (chatId: string, files: FileList) => {
     if (files) {
         for (let i = 0; i < files.length; i++) {
-            const formData = new FormData();
-            formData.append("attachment", files[i]);
-            const res = (await requests.uploadFile(chatId, formData)).data;
+            const res = await uploadFile(chatId, files[i]);
             socket.emit("sendMessage", {
                 chatId: `chatId-${chatId}`,
                 message: res,
@@ -18,7 +15,7 @@ export const uploadFiles = async (chatId: string, files: FileList) => {
 };
 
 export default function ChooseFile({ chatId }: { chatId: string }) {
-    const hanldeOnChange = async (
+    const handleUploadFiles = async (
         event: React.ChangeEvent<HTMLInputElement>,
     ) => {
         if (event.target.files) {
@@ -35,7 +32,7 @@ export default function ChooseFile({ chatId }: { chatId: string }) {
                 type="file"
                 className="hidden"
                 multiple
-                onChange={hanldeOnChange}
+                onChange={handleUploadFiles}
             />
         </>
     );

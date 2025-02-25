@@ -136,3 +136,12 @@ export async function sendMessage(
     const res = await requests.sendMessage(chatId, message, token!);
     return res.data;
 }
+
+export async function uploadFile(chatId: string, file: File) {
+    const formData = new FormData();
+    formData.append("attachment", file);
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    const res = (await requests.uploadFile(chatId, formData, token!)).data;
+    return res;
+}
