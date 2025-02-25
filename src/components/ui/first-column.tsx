@@ -30,7 +30,6 @@ export default function FirstColumn() {
     }, [previews]);
     useEffect(() => {
         const handleReceiveMessage = (newMessage: MessageResponseType) => {
-            console.log("receive ???", newMessage);
             setPreview((prevPreviews) => {
                 const newPreviews = [...prevPreviews];
                 const index = newPreviews.findIndex(

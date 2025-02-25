@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Textarea } from "./textarea";
 import socket from "@/lib/socket";
 import { requests } from "@/request/requests";
+import { mutate } from "swr";
 
 export default function SendMessageBox({ chatId }: { chatId: string }) {
     const [message, setMessage] = useState("");
@@ -20,6 +21,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
                 message: res,
             });
         }
+        mutate(`http://localhost:8080/chats/${chatId}/messages`);
         setPending(false);
         setMessage("");
     };

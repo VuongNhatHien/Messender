@@ -7,6 +7,7 @@ import { requests } from "@/request/requests";
 import { ChatType, MessageResponseType } from "@/types/response.type";
 import { notFound, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { mutate } from "swr";
 
 export default function Page() {
     const { chatId } = useParams<{ chatId: string }>();
@@ -16,16 +17,17 @@ export default function Page() {
 
     useEffect(() => {
         const handleReceiveMessage = (newMessage: MessageResponseType) => {
-            console.log("Mess rec", newMessage);
-            setChat((prevChat) => {
-                if (!prevChat) {
-                    return null;
-                }
-                return {
-                    ...prevChat,
-                    messages: [newMessage, ...prevChat.messages],
-                };
-            });
+            // console.log("Mess rec", newMessage);
+            // setChat((prevChat) => {
+            //     if (!prevChat) {
+            //         return null;
+            //     }
+            //     return {
+            //         ...prevChat,
+            //         messages: [newMessage, ...prevChat.messages],
+            //     };
+            // });
+            mutate(`http://localhost:8080/chats/${chatId}/messages`);
         };
 
         socket.on("receiveMessage", handleReceiveMessage);
