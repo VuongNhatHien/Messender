@@ -3,6 +3,10 @@ import { AttachmentType } from "@/types/schema.type";
 import { File } from "lucide-react";
 import { formatFileSize } from "@/lib/utils";
 import { ChatType } from "@/types/response.type";
+import { useParams } from "next/navigation";
+import useSWR from "swr";
+import fetcher from "@/lib/fetcher";
+import Loading from "@/app/loading";
 
 const FileItem = ({ file }: { file: AttachmentType }) => {
     return (
@@ -24,23 +28,21 @@ const FileItem = ({ file }: { file: AttachmentType }) => {
     );
 };
 
-const isFile = (file: AttachmentType) => {
-    return !file.type.includes("image") && !file.type.includes("video");
-};
+export default function FilePage() {
+    const { chatId } = useParams<{ chatId: string }>();
 
-export default function FilePage({ chat }: { chat: ChatType }) {
+    const { data: files } = useSWR<AttachmentType[]>(
+        `http://localhost:8080/chats/${chatId}/attachments/files`,
+        fetcher,
+    );
+    if (!files) {
+        return <Loading />;
+    }
     return (
         <div className="space-y-1">
-            {chat.messages.map(
-                (chat) =>
-                    chat.attachment &&
-                    isFile(chat.attachment) && (
-                        <FileItem
-                            key={chat.attachmentId}
-                            file={chat.attachment}
-                        />
-                    ),
-            )}
+            {files.map((file) => (
+                <FileItem key={file.id} file={file} />
+            ))}
         </div>
     );
 }

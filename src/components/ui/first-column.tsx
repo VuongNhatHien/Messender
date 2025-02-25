@@ -36,22 +36,22 @@ export default function FirstColumn() {
         });
     }, [previews]);
     useEffect(() => {
-        const handleReceiveMessage = (newMessage: MessageResponseType) => {
-            // setPreview((prevPreviews) => {
-            //     const newPreviews = [...prevPreviews];
-            //     const index = newPreviews.findIndex(
-            //         (preview) => preview.chatId === newMessage.chatId,
-            //     );
+        // const handleReceiveMessage = (newMessage: MessageResponseType) => {
+        //     // setPreview((prevPreviews) => {
+        //     //     const newPreviews = [...prevPreviews];
+        //     //     const index = newPreviews.findIndex(
+        //     //         (preview) => preview.chatId === newMessage.chatId,
+        //     //     );
 
-            //     if (index !== -1) {
-            //         newPreviews[index].lastMessage = newMessage;
-            //         const updatedChat = newPreviews.splice(index, 1)[0]; // Remove the chat from its current position
-            //         newPreviews.unshift(updatedChat); // Add it to the beginning of the array
-            //     }
-            //     return newPreviews;
-            // });
-            mutate(`http://localhost:8080/users/chats`);
-        };
+        //     //     if (index !== -1) {
+        //     //         newPreviews[index].lastMessage = newMessage;
+        //     //         const updatedChat = newPreviews.splice(index, 1)[0]; // Remove the chat from its current position
+        //     //         newPreviews.unshift(updatedChat); // Add it to the beginning of the array
+        //     //     }
+        //     //     return newPreviews;
+        //     // });
+        //     mutate(`http://localhost:8080/users/chats`);
+        // };
 
         const handleReceiveChatRequest = async (
             addChatResponse: AddChatResponseType,
@@ -75,11 +75,9 @@ export default function FirstColumn() {
             mutate(`http://localhost:8080/users/chats`);
         };
 
-        socket.on("receiveMessage", handleReceiveMessage);
         socket.on("receiveChatRequest", handleReceiveChatRequest);
 
         return () => {
-            socket.off("receiveMessage", handleReceiveMessage);
             socket.off("receiveChatRequest", handleReceiveChatRequest);
         };
     }, []);

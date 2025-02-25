@@ -28,6 +28,9 @@ export default function Page() {
             //     };
             // });
             mutate(`http://localhost:8080/chats/${chatId}/messages`);
+            mutate(`http://localhost:8080/users/chats`);
+            mutate(`http://localhost:8080/chats/${chatId}/attachments/media`);
+            mutate(`http://localhost:8080/chats/${chatId}/attachments/files`);
         };
 
         socket.on("receiveMessage", handleReceiveMessage);
