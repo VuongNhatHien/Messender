@@ -1,4 +1,5 @@
 "use client";
+import fetcher from "@/lib/fetcher";
 import { formatFileSize } from "@/lib/utils";
 import { ChatType, MessageResponseType } from "@/types/response.type";
 import { AttachmentType, MetadataType } from "@/types/schema.type";
@@ -140,20 +141,12 @@ const MessageBubble = ({
     </>
 );
 
-const fetcher = (url: string) =>
-    fetch(url, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-    })
-        .then((res) => res.json())
-        .then((result) => result.data);
+
 
 export default function SecondColumnBody({ chat }: { chat: ChatType }) {
     const { data: messages } = useSWR<MessageResponseType[]>(
         `http://localhost:8080/chats/${chat.id}/messages`,
-        fetcher
+        fetcher,
     );
     return (
         messages && (

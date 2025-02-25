@@ -20,6 +20,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
                 message: state,
             });
             mutate(`http://localhost:8080/chats/${chatId}/messages`);
+            mutate(`http://localhost:8080/users/chats`);
         }
     }, [state, chatId]);
 
