@@ -4,13 +4,17 @@ import Searchbar from "@/components/ui/search";
 import { Separator } from "@/components/ui/separator";
 import fetcher from "@/lib/fetcher";
 import socket from "@/lib/socket";
-import { PreviewMessageType } from "@/types/response.type";
+import { AddChatResponseType, PreviewMessageType } from "@/types/response.type";
 import { useEffect } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import AddUserDialog from "./add-user-dialog";
 import PreviewCard from "./preview-card";
+import { requests } from "@/request/requests";
+import { useParams } from "next/navigation";
 
 export default function FirstColumn() {
+    const { chatId } = useParams<{ chatId: string }>();
+
     const { data: previews } = useSWR<PreviewMessageType[]>(
         `http://localhost:8080/users/chats`,
         fetcher,
@@ -21,6 +25,37 @@ export default function FirstColumn() {
             socket.emit("joinChat", `chatId-${preview.chatId}`);
         });
     }, [previews]);
+
+    useEffect(() => {
+        const handleListenChatRequest = async () => {
+            const meId = (await requests.getMe()).data?.id;
+            socket.emit("listenChatRequest", `userId-${meId}`);
+        };
+        handleListenChatRequest();
+
+        const handleReceiveMessage = () => {
+            mutate(`http://localhost:8080/chats/${chatId}/messages`);
+            mutate(`http://localhost:8080/users/chats`);
+            mutate(`http://localhost:8080/chats/${chatId}/attachments/media`);
+            mutate(`http://localhost:8080/chats/${chatId}/attachments/files`);
+            mutate(`http://localhost:8080/chats/${chatId}/links`);
+        };
+
+        socket.on("receiveMessage", handleReceiveMessage);
+
+        const handleReceiveChatRequest = (chatRequest: AddChatResponseType) => {
+            socket.emit("joinChat", `chatId-${chatRequest.id}`);
+            mutate(`http://localhost:8080/users/chats`);
+            mutate(`http://localhost:8080/users/not-connected`);
+        };
+
+        socket.on("receiveChatRequest", handleReceiveChatRequest);
+
+        return () => {
+            socket.off("receiveMessage", handleReceiveMessage);
+            socket.off("receiveChatRequest", handleReceiveChatRequest);
+        };
+    }, [chatId]);
 
     if (!previews) {
         return <Loading />;
