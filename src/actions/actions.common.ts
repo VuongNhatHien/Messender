@@ -7,7 +7,6 @@ import {
 } from "@/types/response.type";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { mutate } from "swr";
 
 export async function register(prevState: unknown, formData: FormData) {
     console.log(prevState);
@@ -126,7 +125,7 @@ export async function login(prevState: unknown, formData: FormData) {
 
 export async function sendMessage(
     chatId: string,
-    prevState: any,
+    prevState: unknown,
     formData: FormData,
 ) {
     console.log(prevState);

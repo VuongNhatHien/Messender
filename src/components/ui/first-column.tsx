@@ -3,13 +3,13 @@ import Loading from "@/app/loading";
 import Searchbar from "@/components/ui/search";
 import { Separator } from "@/components/ui/separator";
 import socket from "@/lib/socket";
-import { AddChatResponseType, PreviewMessageType } from "@/types/response.type";
+import { requests } from "@/request/requests";
+import { PreviewMessageType } from "@/types/response.type";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import useSWR, { mutate } from "swr";
 import AddUserDialog from "./add-user-dialog";
 import PreviewCard from "./preview-card";
-import { requests } from "@/request/requests";
-import { useParams } from "next/navigation";
 
 export default function FirstColumn() {
     const { chatId } = useParams<{ chatId: string }>();

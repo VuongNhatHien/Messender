@@ -1,4 +1,6 @@
-import { requests } from "@/request/requests";
+import Loading from "@/app/loading";
+import { UserType } from "@/types/schema.type";
+import useSWR from "swr";
 import { Button } from "./button";
 import {
     Dialog,
@@ -11,9 +13,6 @@ import {
 import NotConnectCard from "./not-connect-card";
 import Searchbar from "./search";
 import { Separator } from "./separator";
-import { UserType } from "@/types/schema.type";
-import useSWR from "swr";
-import Loading from "@/app/loading";
 
 export default function AddUserDialog() {
     const { data: notConnected } = useSWR<UserType[]>(`/users/not-connected`);

@@ -18,17 +18,17 @@ export default function LoginForm() {
     useEffect(() => {
         const handleLoginSuccess = async () => {
             //set cookie (later server side will automatically get token from client, so this must be implmented in client side)
-            await requests.auth({
-                token: state?.token!,
-                expiresIn: state?.expiresIn!,
-            });
-            localStorage.setItem("token", state?.token!);
-            window.location.reload();
+            if (state?.code === "SUCCESS") {
+                await requests.auth({
+                    token: state.token,
+                    expiresIn: state.expiresIn,
+                });
+                localStorage.setItem("token", state.token);
+                window.location.reload();
+            }
         };
 
-        if (state?.code === "SUCCESS") {
-            handleLoginSuccess();
-        }
+        handleLoginSuccess();
     }, [state, router]);
 
     return (
