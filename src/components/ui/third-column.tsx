@@ -1,15 +1,14 @@
 "use client";
 
-import { ChatType } from "@/types/response.type";
+import Loading from "@/app/loading";
+import fetcher from "@/lib/fetcher";
+import { UserType } from "@/types/schema.type";
 import { File, Image as ImageLucide, Link as LinkLucide } from "lucide-react";
+import { useParams } from "next/navigation";
 import { useState } from "react";
+import useSWR from "swr";
 import Attachments from "./attachments";
 import { Avatar, AvatarImage } from "./avatar";
-import { useParams } from "next/navigation";
-import useSWR from "swr";
-import { UserType } from "@/types/schema.type";
-import fetcher from "@/lib/fetcher";
-import Loading from "@/app/loading";
 
 const attachmentCards = [
     {

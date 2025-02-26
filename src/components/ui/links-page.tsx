@@ -1,8 +1,7 @@
 "use client";
 import Loading from "@/app/loading";
 import fetcher from "@/lib/fetcher";
-import { ChatType } from "@/types/response.type";
-import { AttachmentType, MetadataType } from "@/types/schema.type";
+import { MetadataType } from "@/types/schema.type";
 import { Globe } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";

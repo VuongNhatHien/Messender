@@ -2,7 +2,6 @@
 import { AttachmentType } from "@/types/schema.type";
 import { File } from "lucide-react";
 import { formatFileSize } from "@/lib/utils";
-import { ChatType } from "@/types/response.type";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";

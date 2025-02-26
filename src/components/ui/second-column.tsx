@@ -1,13 +1,12 @@
 "use client";
-import { ChatType } from "@/types/response.type";
+import { FolderUp } from "lucide-react";
+import { useParams } from "next/navigation";
 import { useState } from "react";
+import { uploadFiles } from "./choose-file";
 import SecondColumnBody from "./second-column-body";
 import SecondColumnFooter from "./second-column-footer";
 import SecondColumnHeader from "./second-column-header";
 import { Separator } from "./separator";
-import { FolderUp } from "lucide-react";
-import { uploadFiles } from "./choose-file";
-import { useParams } from "next/navigation";
 export default function SecondColumn() {
     const { chatId } = useParams<{ chatId: string }>();
 

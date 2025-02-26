@@ -2,7 +2,7 @@
 import Loading from "@/app/loading";
 import fetcher from "@/lib/fetcher";
 import { formatFileSize } from "@/lib/utils";
-import { ChatType, MessageResponseType } from "@/types/response.type";
+import { MessageResponseType } from "@/types/response.type";
 import { AttachmentType, MetadataType, UserType } from "@/types/schema.type";
 import { File } from "lucide-react";
 import Image from "next/image";

@@ -30,11 +30,6 @@ export type MessageResponseType = MessageType & {
 
 export type GetMessageResponseType = MessageResponseType[];
 
-export type ChatType = {
-    id: number;
-    user: UserType;
-    messages: GetMessageResponseType;
-};
 export type PreviewMessageType = {
     chatId: number;
     user: UserType;

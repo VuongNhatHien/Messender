@@ -5,7 +5,6 @@ import AttachmentsNavBar from "./attachments-nav-bar";
 import FilePage from "./files-page";
 import LinkPage from "./links-page";
 import MediaPage from "./media-page";
-import { ChatType } from "@/types/response.type";
 
 export default function Attachments({
     page,

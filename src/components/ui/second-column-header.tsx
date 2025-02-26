@@ -1,10 +1,9 @@
-import { ChatType } from "@/types/response.type";
-import { Avatar, AvatarImage } from "./avatar";
+import Loading from "@/app/loading";
 import fetcher from "@/lib/fetcher";
-import useSWR from "swr";
 import { UserType } from "@/types/schema.type";
 import { useParams } from "next/navigation";
-import Loading from "@/app/loading";
+import useSWR from "swr";
+import { Avatar, AvatarImage } from "./avatar";
 
 export default function SecondColumnHeader() {
     const { chatId } = useParams<{ chatId: string }>();
