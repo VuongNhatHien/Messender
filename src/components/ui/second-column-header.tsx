@@ -1,5 +1,4 @@
 import Loading from "@/app/loading";
-import fetcher from "@/lib/fetcher";
 import { UserType } from "@/types/schema.type";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
@@ -8,10 +7,7 @@ import { Avatar, AvatarImage } from "./avatar";
 export default function SecondColumnHeader() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { data: user } = useSWR<UserType>(
-        `http://localhost:8080/chats/${chatId}/users`,
-        fetcher,
-    );
+    const { data: user } = useSWR<UserType>(`/chats/${chatId}/users`);
     if (!user) {
         return <Loading />;
     }

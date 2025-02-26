@@ -4,7 +4,6 @@ import { File } from "lucide-react";
 import { formatFileSize } from "@/lib/utils";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
-import fetcher from "@/lib/fetcher";
 import Loading from "@/app/loading";
 
 const FileItem = ({ file }: { file: AttachmentType }) => {
@@ -31,8 +30,7 @@ export default function FilePage() {
     const { chatId } = useParams<{ chatId: string }>();
 
     const { data: files } = useSWR<AttachmentType[]>(
-        `http://localhost:8080/chats/${chatId}/attachments/files`,
-        fetcher,
+        `/chats/${chatId}/attachments/files`,
     );
     if (!files) {
         return <Loading />;

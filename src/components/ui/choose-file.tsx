@@ -8,10 +8,10 @@ export const uploadFiles = async (chatId: string, files: FileList) => {
         const res = await uploadFile(chatId, files[i]);
         socket.emit("sendMessage", `chatId-${chatId}`);
     }
-    mutate(`http://localhost:8080/chats/${chatId}/messages`);
-    mutate(`http://localhost:8080/users/chats`);
-    mutate(`http://localhost:8080/chats/${chatId}/attachments/media`);
-    mutate(`http://localhost:8080/chats/${chatId}/attachments/files`);
+    mutate(`/chats/${chatId}/messages`);
+    mutate(`/users/chats`);
+    mutate(`/chats/${chatId}/attachments/media`);
+    mutate(`/chats/${chatId}/attachments/files`);
 };
 
 export default function ChooseFile({ chatId }: { chatId: string }) {

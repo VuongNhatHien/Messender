@@ -2,7 +2,6 @@
 import Loading from "@/app/loading";
 import Searchbar from "@/components/ui/search";
 import { Separator } from "@/components/ui/separator";
-import fetcher from "@/lib/fetcher";
 import socket from "@/lib/socket";
 import { AddChatResponseType, PreviewMessageType } from "@/types/response.type";
 import { useEffect } from "react";
@@ -15,10 +14,7 @@ import { useParams } from "next/navigation";
 export default function FirstColumn() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { data: previews } = useSWR<PreviewMessageType[]>(
-        `http://localhost:8080/users/chats`,
-        fetcher,
-    );
+    const { data: previews } = useSWR<PreviewMessageType[]>(`/users/chats`);
 
     useEffect(() => {
         const handleListenChatRequest = async () => {
@@ -36,18 +32,18 @@ export default function FirstColumn() {
 
     useEffect(() => {
         const handleReceiveMessage = () => {
-            mutate(`http://localhost:8080/chats/${chatId}/messages`);
-            mutate(`http://localhost:8080/users/chats`);
-            mutate(`http://localhost:8080/chats/${chatId}/attachments/media`);
-            mutate(`http://localhost:8080/chats/${chatId}/attachments/files`);
-            mutate(`http://localhost:8080/chats/${chatId}/links`);
+            mutate(`/chats/${chatId}/messages`);
+            mutate(`/users/chats`);
+            mutate(`/chats/${chatId}/attachments/media`);
+            mutate(`/chats/${chatId}/attachments/files`);
+            mutate(`/chats/${chatId}/links`);
         };
 
         socket.on("receiveMessage", handleReceiveMessage);
 
         const handleReceiveChatRequest = () => {
-            mutate(`http://localhost:8080/users/chats`);
-            mutate(`http://localhost:8080/users/not-connected`);
+            mutate(`/users/chats`);
+            mutate(`/users/not-connected`);
         };
 
         socket.on("receiveChatRequest", handleReceiveChatRequest);

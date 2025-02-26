@@ -1,6 +1,5 @@
 "use client";
 import Loading from "@/app/loading";
-import fetcher from "@/lib/fetcher";
 import { formatFileSize } from "@/lib/utils";
 import { MessageResponseType } from "@/types/response.type";
 import { AttachmentType, MetadataType, UserType } from "@/types/schema.type";
@@ -149,14 +148,10 @@ export default function SecondColumnBody() {
     const { chatId } = useParams<{ chatId: string }>();
 
     const { data: messages } = useSWR<MessageResponseType[]>(
-        `http://localhost:8080/chats/${chatId}/messages`,
-        fetcher,
+        `/chats/${chatId}/messages`,
     );
 
-    const { data: user } = useSWR<UserType>(
-        `http://localhost:8080/chats/${chatId}/users`,
-        fetcher,
-    );
+    const { data: user } = useSWR<UserType>(`/chats/${chatId}/users`);
     if (!user) {
         return <Loading />;
     }

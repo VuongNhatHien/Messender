@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ToasterWrapper from "@/components/ui/toaster-wrapper";
+import { SWRConfig } from "swr";
+import { fetcher } from "@/lib/fetcher";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -35,14 +37,23 @@ export default function RootLayout({
                     defaultTheme="system"
                     enableSystem
                 >
-                    <main className="flex h-screen flex-col">
-                        <Navbar />
-                        <div className="flex-1 overflow-auto">
-                            <div className="container-custom h-full w-full py-5">
-                                {children}
+                    <SWRConfig
+                        value={{
+                            fetcher,
+                            revalidateIfStale: false,
+                            revalidateOnFocus: false,
+                            revalidateOnReconnect: false,
+                        }}
+                    >
+                        <main className="flex h-screen flex-col">
+                            <Navbar />
+                            <div className="flex-1 overflow-auto">
+                                <div className="container-custom h-full w-full py-5">
+                                    {children}
+                                </div>
                             </div>
-                        </div>
-                    </main>
+                        </main>
+                    </SWRConfig>
                     <ToasterWrapper />
                 </ThemeProvider>
             </body>

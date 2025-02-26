@@ -1,6 +1,5 @@
 "use client";
 import Loading from "@/app/loading";
-import fetcher from "@/lib/fetcher";
 import { MetadataType } from "@/types/schema.type";
 import { Globe } from "lucide-react";
 import Image from "next/image";
@@ -37,10 +36,7 @@ const LinkItem = ({ link }: { link: MetadataType | null }) => {
 export default function LinkPage() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { data: links } = useSWR<MetadataType[]>(
-        `http://localhost:8080/chats/${chatId}/links`,
-        fetcher,
-    );
+    const { data: links } = useSWR<MetadataType[]>(`/chats/${chatId}/links`);
     if (!links) {
         return <Loading />;
     }

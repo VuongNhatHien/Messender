@@ -13,14 +13,10 @@ import Searchbar from "./search";
 import { Separator } from "./separator";
 import { UserType } from "@/types/schema.type";
 import useSWR from "swr";
-import fetcher from "@/lib/fetcher";
 import Loading from "@/app/loading";
 
 export default function AddUserDialog() {
-    const { data: notConnected } = useSWR<UserType[]>(
-        `http://localhost:8080/users/not-connected`,
-        fetcher,
-    );
+    const { data: notConnected } = useSWR<UserType[]>(`/users/not-connected`);
 
     if (!notConnected) {
         return <Loading />;

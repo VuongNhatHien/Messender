@@ -17,10 +17,10 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
         if (state) {
             socket.emit("sendMessage", `chatId-${chatId}`);
             if (state.metadataId) {
-                mutate(`http://localhost:8080/chats/${chatId}/links`);
+                mutate(`/chats/${chatId}/links`);
             }
-            mutate(`http://localhost:8080/chats/${chatId}/messages`);
-            mutate(`http://localhost:8080/users/chats`);
+            mutate(`/chats/${chatId}/messages`);
+            mutate(`/users/chats`);
         }
     }, [state, chatId]);
 

@@ -1,6 +1,5 @@
 "use client";
 import Loading from "@/app/loading";
-import fetcher from "@/lib/fetcher";
 import { AttachmentType } from "@/types/schema.type";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -55,8 +54,7 @@ export default function MediaPage() {
     const { chatId } = useParams<{ chatId: string }>();
 
     const { data: media } = useSWR<AttachmentType[]>(
-        `http://localhost:8080/chats/${chatId}/attachments/media`,
-        fetcher,
+        `/chats/${chatId}/attachments/media`,
     );
     if (!media) {
         return <Loading />;
