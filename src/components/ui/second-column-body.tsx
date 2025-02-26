@@ -76,9 +76,11 @@ const Message = ({
         }`}
     >
         {content.metadata ? (
-            <a href={content.metadata.url} target="_blank">
-                <p className="underline">{content.message}</p>
-            </a>
+            <p className="underline">
+                <a href={content.metadata.url} target="_blank">
+                    {content.message}
+                </a>
+            </p>
         ) : (
             <p>{content.message}</p>
         )}
