@@ -1,8 +1,12 @@
 "use client";
+import Loading from "@/app/loading";
+import fetcher from "@/lib/fetcher";
 import { ChatType } from "@/types/response.type";
-import { MetadataType } from "@/types/schema.type";
+import { AttachmentType, MetadataType } from "@/types/schema.type";
 import { Globe } from "lucide-react";
 import Image from "next/image";
+import { useParams } from "next/navigation";
+import useSWR from "swr";
 
 const LinkItem = ({ link }: { link: MetadataType | null }) => {
     return (
@@ -31,15 +35,21 @@ const LinkItem = ({ link }: { link: MetadataType | null }) => {
     );
 };
 
-export default function LinkPage({ chat }: { chat: ChatType }) {
+export default function LinkPage() {
+    const { chatId } = useParams<{ chatId: string }>();
+
+    const { data: links } = useSWR<MetadataType[]>(
+        `http://localhost:8080/chats/${chatId}/links`,
+        fetcher,
+    );
+    if (!links) {
+        return <Loading />;
+    }
     return (
         <div className="space-y-1">
-            {chat.messages.map(
-                (chat) =>
-                    chat.metadata && (
-                        <LinkItem key={chat.metadataId} link={chat.metadata} />
-                    ),
-            )}
+            {links.map((link) => (
+                <LinkItem key={link.id} link={link} />
+            ))}
         </div>
     );
 }

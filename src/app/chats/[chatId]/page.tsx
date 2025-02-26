@@ -31,6 +31,7 @@ export default function Page() {
             mutate(`http://localhost:8080/users/chats`);
             mutate(`http://localhost:8080/chats/${chatId}/attachments/media`);
             mutate(`http://localhost:8080/chats/${chatId}/attachments/files`);
+            mutate(`http://localhost:8080/chats/${chatId}/links`);
         };
 
         socket.on("receiveMessage", handleReceiveMessage);

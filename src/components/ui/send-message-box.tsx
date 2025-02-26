@@ -19,6 +19,9 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
                 chatId: `chatId-${chatId}`,
                 message: state,
             });
+            if (state.metadataId) {
+                mutate(`http://localhost:8080/chats/${chatId}/links`);
+            }
             mutate(`http://localhost:8080/chats/${chatId}/messages`);
             mutate(`http://localhost:8080/users/chats`);
         }
