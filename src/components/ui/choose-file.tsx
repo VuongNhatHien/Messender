@@ -6,10 +6,7 @@ import { mutate } from "swr";
 export const uploadFiles = async (chatId: string, files: FileList) => {
     for (let i = 0; i < files.length; i++) {
         const res = await uploadFile(chatId, files[i]);
-        socket.emit("sendMessage", {
-            chatId: `chatId-${chatId}`,
-            message: res,
-        });
+        socket.emit("sendMessage", `chatId-${chatId}`);
     }
     mutate(`http://localhost:8080/chats/${chatId}/messages`);
     mutate(`http://localhost:8080/users/chats`);

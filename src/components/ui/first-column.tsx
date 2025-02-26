@@ -43,8 +43,7 @@ export default function FirstColumn() {
 
         socket.on("receiveMessage", handleReceiveMessage);
 
-        const handleReceiveChatRequest = (chatRequest: AddChatResponseType) => {
-            socket.emit("joinChat", `chatId-${chatRequest.id}`);
+        const handleReceiveChatRequest = () => {
             mutate(`http://localhost:8080/users/chats`);
             mutate(`http://localhost:8080/users/not-connected`);
         };

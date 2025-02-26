@@ -15,10 +15,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
 
     useEffect(() => {
         if (state) {
-            socket.emit("sendMessage", {
-                chatId: `chatId-${chatId}`,
-                message: state,
-            });
+            socket.emit("sendMessage", `chatId-${chatId}`);
             if (state.metadataId) {
                 mutate(`http://localhost:8080/chats/${chatId}/links`);
             }
