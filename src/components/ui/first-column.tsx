@@ -1,30 +1,16 @@
 "use client";
+import Loading from "@/app/loading";
 import Searchbar from "@/components/ui/search";
 import { Separator } from "@/components/ui/separator";
+import fetcher from "@/lib/fetcher";
+import socket from "@/lib/socket";
+import { PreviewMessageType } from "@/types/response.type";
+import { useEffect } from "react";
+import useSWR from "swr";
 import AddUserDialog from "./add-user-dialog";
 import PreviewCard from "./preview-card";
-import { requests } from "@/request/requests";
-import { useEffect, useState } from "react";
-import {
-    AddChatResponseType,
-    MessageResponseType,
-    PreviewMessageType,
-} from "@/types/response.type";
-import socket from "@/lib/socket";
-import useSWR, { mutate } from "swr";
-import fetcher from "@/lib/fetcher";
-import Loading from "@/app/loading";
 
 export default function FirstColumn() {
-    // const [previews, setPreview] = useState<PreviewMessageType[]>([]);
-
-    // useEffect(() => {
-    //     const fetchRequest = async () => {
-    //         const res = (await requests.getPreviews()).data;
-    //         setPreview(res);
-    //     };
-    //     fetchRequest();
-    // }, []);
     const { data: previews } = useSWR<PreviewMessageType[]>(
         `http://localhost:8080/users/chats`,
         fetcher,
@@ -35,52 +21,7 @@ export default function FirstColumn() {
             socket.emit("joinChat", `chatId-${preview.chatId}`);
         });
     }, [previews]);
-    useEffect(() => {
-        // const handleReceiveMessage = (newMessage: MessageResponseType) => {
-        //     // setPreview((prevPreviews) => {
-        //     //     const newPreviews = [...prevPreviews];
-        //     //     const index = newPreviews.findIndex(
-        //     //         (preview) => preview.chatId === newMessage.chatId,
-        //     //     );
 
-        //     //     if (index !== -1) {
-        //     //         newPreviews[index].lastMessage = newMessage;
-        //     //         const updatedChat = newPreviews.splice(index, 1)[0]; // Remove the chat from its current position
-        //     //         newPreviews.unshift(updatedChat); // Add it to the beginning of the array
-        //     //     }
-        //     //     return newPreviews;
-        //     // });
-        //     mutate(`http://localhost:8080/users/chats`);
-        // };
-
-        const handleReceiveChatRequest = async (
-            addChatResponse: AddChatResponseType,
-        ) => {
-            // console.log("Add chat ok", addChatResponse);
-            // const meId = (await requests.getMe()).data?.id;
-            // const user =
-            //     meId === addChatResponse.user1.id
-            //         ? addChatResponse.user2
-            //         : addChatResponse.user1;
-            // // Add the chat to the previews
-            // setPreview((prevPreviews) => {
-            //     const newPreviews = [...prevPreviews];
-            //     newPreviews.unshift({
-            //         chatId: addChatResponse.id,
-            //         user: user,
-            //         lastMessage: null,
-            //     });
-            //     return newPreviews;
-            // });
-            mutate(`http://localhost:8080/users/chats`);
-        };
-
-        socket.on("receiveChatRequest", handleReceiveChatRequest);
-
-        return () => {
-            socket.off("receiveChatRequest", handleReceiveChatRequest);
-        };
-    }, []);
     if (!previews) {
         return <Loading />;
     }

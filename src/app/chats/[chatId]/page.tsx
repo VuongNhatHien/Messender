@@ -2,44 +2,16 @@
 
 import SecondColumn from "@/components/ui/second-column";
 import ThirdColumn from "@/components/ui/third-column";
-import socket from "@/lib/socket";
 import { requests } from "@/request/requests";
-import { ChatType, MessageResponseType } from "@/types/response.type";
+import { ChatType } from "@/types/response.type";
 import { notFound, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { mutate } from "swr";
 
 export default function Page() {
     const { chatId } = useParams<{ chatId: string }>();
     const [loading, setLoading] = useState(true);
 
     const [chat, setChat] = useState<ChatType | null>(null);
-
-    useEffect(() => {
-        const handleReceiveMessage = (newMessage: MessageResponseType) => {
-            // console.log("Mess rec", newMessage);
-            // setChat((prevChat) => {
-            //     if (!prevChat) {
-            //         return null;
-            //     }
-            //     return {
-            //         ...prevChat,
-            //         messages: [newMessage, ...prevChat.messages],
-            //     };
-            // });
-            mutate(`http://localhost:8080/chats/${chatId}/messages`);
-            mutate(`http://localhost:8080/users/chats`);
-            mutate(`http://localhost:8080/chats/${chatId}/attachments/media`);
-            mutate(`http://localhost:8080/chats/${chatId}/attachments/files`);
-            mutate(`http://localhost:8080/chats/${chatId}/links`);
-        };
-
-        socket.on("receiveMessage", handleReceiveMessage);
-
-        return () => {
-            socket.off("receiveMessage", handleReceiveMessage);
-        };
-    }, []);
 
     useEffect(() => {
         const fetchRequest = async () => {
