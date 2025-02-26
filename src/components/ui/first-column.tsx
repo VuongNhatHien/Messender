@@ -21,18 +21,20 @@ export default function FirstColumn() {
     );
 
     useEffect(() => {
+        const handleListenChatRequest = async () => {
+            const meId = (await requests.getMe()).data?.id;
+            socket.emit("listenChatRequest", `userId-${meId}`);
+        };
+        handleListenChatRequest();
+    }, []);
+
+    useEffect(() => {
         previews?.forEach((preview) => {
             socket.emit("joinChat", `chatId-${preview.chatId}`);
         });
     }, [previews]);
 
     useEffect(() => {
-        const handleListenChatRequest = async () => {
-            const meId = (await requests.getMe()).data?.id;
-            socket.emit("listenChatRequest", `userId-${meId}`);
-        };
-        handleListenChatRequest();
-
         const handleReceiveMessage = () => {
             mutate(`http://localhost:8080/chats/${chatId}/messages`);
             mutate(`http://localhost:8080/users/chats`);
