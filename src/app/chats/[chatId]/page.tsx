@@ -74,7 +74,7 @@ export default function Page() {
             {chat && (
                 <>
                     <SecondColumn chat={chat} />
-                    <ThirdColumn chat={chat} />
+                    <ThirdColumn />
                 </>
             )}
         </>

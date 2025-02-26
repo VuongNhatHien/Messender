@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { ArrowLeft } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import AttachmentsNavBar from "./attachments-nav-bar";
@@ -10,11 +10,9 @@ import { ChatType } from "@/types/response.type";
 export default function Attachments({
     page,
     setPage,
-    chat
 }: {
     page: string;
     setPage: Dispatch<SetStateAction<string>>;
-    chat: ChatType;
 }) {
     return (
         <>
@@ -30,10 +28,10 @@ export default function Attachments({
             <div className="mt-3 w-full">
                 <AttachmentsNavBar page={page} setPage={setPage} />
             </div>
-            <div className="mt-4 w-full h-full overflow-auto">
-                {page === "media" && <MediaPage chat={chat}/>}
-                {page === "files" && <FilePage chat={chat}/>}
-                {page === "links" && <LinkPage chat={chat}/>}
+            <div className="mt-4 h-full w-full overflow-auto">
+                {page === "media" && <MediaPage />}
+                {page === "files" && <FilePage />}
+                {page === "links" && <LinkPage />}
             </div>
         </>
     );
