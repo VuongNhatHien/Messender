@@ -1,10 +1,12 @@
 "use client";
+import Loading from "@/app/loading";
 import fetcher from "@/lib/fetcher";
 import { formatFileSize } from "@/lib/utils";
 import { ChatType, MessageResponseType } from "@/types/response.type";
-import { AttachmentType, MetadataType } from "@/types/schema.type";
+import { AttachmentType, MetadataType, UserType } from "@/types/schema.type";
 import { File } from "lucide-react";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import useSWR from "swr";
 
 const isImage = (type: string) => type.includes("image");
@@ -141,13 +143,22 @@ const MessageBubble = ({
     </>
 );
 
+export default function SecondColumnBody() {
+    const { chatId } = useParams<{ chatId: string }>();
 
-
-export default function SecondColumnBody({ chat }: { chat: ChatType }) {
     const { data: messages } = useSWR<MessageResponseType[]>(
-        `http://localhost:8080/chats/${chat.id}/messages`,
+        `http://localhost:8080/chats/${chatId}/messages`,
         fetcher,
     );
+
+    const { data: user } = useSWR<UserType>(
+        `http://localhost:8080/chats/${chatId}/users`,
+        fetcher,
+    );
+    if (!user) {
+        return <Loading />;
+    }
+
     return (
         messages && (
             <div className="relative flex h-full flex-col-reverse justify-start gap-4 overflow-auto p-4">
@@ -155,7 +166,7 @@ export default function SecondColumnBody({ chat }: { chat: ChatType }) {
                     <MessageBubble
                         key={content.id}
                         content={content}
-                        isOwnMessage={content.senderId !== chat.user.id}
+                        isOwnMessage={content.senderId !== user.id}
                     />
                 ))}
             </div>

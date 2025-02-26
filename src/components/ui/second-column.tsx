@@ -7,7 +7,10 @@ import SecondColumnHeader from "./second-column-header";
 import { Separator } from "./separator";
 import { FolderUp } from "lucide-react";
 import { uploadFiles } from "./choose-file";
-export default function SecondColumn({ chat }: { chat: ChatType }) {
+import { useParams } from "next/navigation";
+export default function SecondColumn() {
+    const { chatId } = useParams<{ chatId: string }>();
+
     const [isOver, setIsOver] = useState(false);
 
     // Define the event handlers
@@ -26,7 +29,7 @@ export default function SecondColumn({ chat }: { chat: ChatType }) {
         setIsOver(false);
 
         if (event.dataTransfer.files) {
-            await uploadFiles(chat.id.toString(), event.dataTransfer.files);
+            await uploadFiles(chatId, event.dataTransfer.files);
         }
     };
     return (
@@ -37,11 +40,11 @@ export default function SecondColumn({ chat }: { chat: ChatType }) {
             className="card w-1/2"
         >
             <>
-                <SecondColumnHeader chat={chat} />
+                <SecondColumnHeader />
                 <Separator />
                 <div className="relative flex h-full flex-col overflow-hidden">
-                    <SecondColumnBody chat={chat} />
-                    <SecondColumnFooter chat={chat} />
+                    <SecondColumnBody />
+                    <SecondColumnFooter />
                     {isOver && (
                         <div className="absolute inset-0 flex h-full flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-foreground bg-background opacity-85">
                             <p className="text-2xl font-bold text-secondary-foreground">
