@@ -1,9 +1,9 @@
 "use client";
 import Loading from "@/app/loading";
+import { useGetMedia } from "@/hooks/hooks";
 import { AttachmentType } from "@/types/schema.type";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import useSWR from "swr";
 const MediaItem = ({ media }: { media: AttachmentType }) => {
     const isImage = media.type.includes("image");
 
@@ -53,17 +53,11 @@ const MediaItem = ({ media }: { media: AttachmentType }) => {
 export default function MediaPage() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { data: media } = useSWR<AttachmentType[]>(
-        `/chats/${chatId}/attachments/media`,
-    );
-    if (!media) {
-        return <Loading />;
-    }
+    const { media, isLoading } = useGetMedia(chatId);
+    if (isLoading) return <Loading />;
     return (
         <div className="flex flex-wrap gap-[2px]">
-            {media.map((media) => (
-                <MediaItem key={media.id} media={media} />
-            ))}
+            {media?.map((media) => <MediaItem key={media.id} media={media} />)}
         </div>
     );
 }

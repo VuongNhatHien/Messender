@@ -1,4 +1,4 @@
-import { requests } from "@/request/requests";
+import { requests } from "@/lib/requests";
 import { Button } from "./button";
 
 export default function LogoutButton() {

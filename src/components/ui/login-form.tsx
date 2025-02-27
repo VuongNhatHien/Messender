@@ -10,7 +10,7 @@ import { Checkbox } from "./checkbox";
 import FormErrorMessage from "./form-error-message";
 import { Input } from "./input";
 import { Label } from "./label";
-import { requests } from "@/request/requests";
+import { requests } from "@/lib/requests";
 
 export default function LoginForm() {
     const [state, action, pending] = useActionState(login, undefined);

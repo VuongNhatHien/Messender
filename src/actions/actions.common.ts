@@ -1,6 +1,6 @@
 "use server";
 
-import { requests } from "@/request/requests";
+import { requests } from "@/lib/requests";
 import {
     LoginResponseValidationErrorType,
     RegisterResponseValidationErrorType,

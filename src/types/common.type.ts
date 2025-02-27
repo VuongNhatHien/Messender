@@ -9,3 +9,9 @@ export type ResponseType<T> = {
     status: number;
     code: string;
 };
+
+export interface Error {
+    name?: string;
+    message?: string;
+    stack?: string;
+}

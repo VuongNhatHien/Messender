@@ -1,10 +1,10 @@
 "use client";
+import Loading from "@/app/loading";
+import { useGetFiles } from "@/hooks/hooks";
+import { formatFileSize } from "@/lib/utils";
 import { AttachmentType } from "@/types/schema.type";
 import { File } from "lucide-react";
-import { formatFileSize } from "@/lib/utils";
 import { useParams } from "next/navigation";
-import useSWR from "swr";
-import Loading from "@/app/loading";
 
 const FileItem = ({ file }: { file: AttachmentType }) => {
     return (
@@ -29,17 +29,11 @@ const FileItem = ({ file }: { file: AttachmentType }) => {
 export default function FilePage() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { data: files } = useSWR<AttachmentType[]>(
-        `/chats/${chatId}/attachments/files`,
-    );
-    if (!files) {
-        return <Loading />;
-    }
+    const { files, isLoading } = useGetFiles(chatId);
+    if (isLoading) return <Loading />;
     return (
         <div className="space-y-1">
-            {files.map((file) => (
-                <FileItem key={file.id} file={file} />
-            ))}
+            {files?.map((file) => <FileItem key={file.id} file={file} />)}
         </div>
     );
 }

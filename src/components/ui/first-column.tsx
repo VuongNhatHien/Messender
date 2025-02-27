@@ -2,19 +2,19 @@
 import Loading from "@/app/loading";
 import Searchbar from "@/components/ui/search";
 import { Separator } from "@/components/ui/separator";
+import { useGetPreviews } from "@/hooks/hooks";
 import socket from "@/lib/socket";
-import { requests } from "@/request/requests";
-import { PreviewMessageType } from "@/types/response.type";
+import { requests } from "@/lib/requests";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
-import useSWR, { mutate } from "swr";
+import { mutate } from "swr";
 import AddUserDialog from "./add-user-dialog";
 import PreviewCard from "./preview-card";
 
 export default function FirstColumn() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { data: previews } = useSWR<PreviewMessageType[]>(`/users/chats`);
+    const { previews, isLoading } = useGetPreviews();
 
     useEffect(() => {
         const handleListenChatRequest = async () => {
@@ -54,7 +54,7 @@ export default function FirstColumn() {
         };
     }, [chatId]);
 
-    if (!previews) {
+    if (isLoading) {
         return <Loading />;
     }
     return (
@@ -72,7 +72,7 @@ export default function FirstColumn() {
 
             <Separator className={"mt-4"} />
             <div className="h-full space-y-1 overflow-auto px-1 py-1">
-                {previews.map((preview) => (
+                {previews?.map((preview) => (
                     <PreviewCard key={preview.chatId} preview={preview} />
                 ))}
             </div>

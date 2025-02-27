@@ -7,12 +7,25 @@ export const fetcher = async (url: string) => {
     const fullUrl = url.startsWith("/")
         ? `${baseUrl}${url}`
         : `${baseUrl}/${url}`;
-    return fetch(fullUrl, {
+    // return fetch(fullUrl, {
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //     },
+    // })
+    //     .then((res) => res.json())
+    //     .then((result) => {
+    //         console.log("result", result);
+    //         if (result.code !== "SUCCESS") {
+    //             throw new Error(result.code);
+    //         }
+    //         return result.data;
+    //     });
+    const res = await fetch(fullUrl, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-    })
-        .then((res) => res.json())
-        .then((result) => result.data);
+    });
+    return await res.json();
 };

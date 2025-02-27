@@ -1,11 +1,10 @@
 "use client";
 
 import Loading from "@/app/loading";
-import { UserType } from "@/types/schema.type";
+import { useGetUserInChat } from "@/hooks/hooks";
 import { File, Image as ImageLucide, Link as LinkLucide } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import useSWR from "swr";
 import Attachments from "./attachments";
 import { Avatar, AvatarImage } from "./avatar";
 
@@ -29,10 +28,9 @@ export default function ThirdColumn() {
 
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { data: user } = useSWR<UserType>(`/chats/${chatId}/users`);
-    if (!user) {
-        return <Loading />;
-    }
+    const { user, isLoading } = useGetUserInChat(chatId);
+
+    if (isLoading) return <Loading />;
 
     return (
         <div className="card w-1/4 items-center overflow-auto px-3 py-4">
@@ -40,12 +38,12 @@ export default function ThirdColumn() {
                 <>
                     <Avatar className="size-20">
                         <AvatarImage
-                            src={user.avatar ? user.avatar : `/avatar.png`}
+                            src={user?.avatar ? user.avatar : `/avatar.png`}
                         />
                     </Avatar>
                     <div className="mt-2 text-center">
                         <p className="text-xl font-semibold">
-                            {user.displayName}
+                            {user?.displayName}
                         </p>
                     </div>
                     <div className="mt-4 w-full">

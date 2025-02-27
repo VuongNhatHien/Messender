@@ -1,12 +1,12 @@
 "use client";
 import Loading from "@/app/loading";
+import { useGetMessages, useGetUserInChat } from "@/hooks/hooks";
 import { formatFileSize } from "@/lib/utils";
 import { MessageResponseType } from "@/types/response.type";
-import { AttachmentType, MetadataType, UserType } from "@/types/schema.type";
+import { AttachmentType, MetadataType } from "@/types/schema.type";
 import { File } from "lucide-react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import useSWR from "swr";
+import { useParams, useRouter } from "next/navigation";
 
 const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
@@ -145,28 +145,25 @@ const MessageBubble = ({
 );
 
 export default function SecondColumnBody() {
+    const router = useRouter();
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { data: messages } = useSWR<MessageResponseType[]>(
-        `/chats/${chatId}/messages`,
-    );
+    const { messages, isLoading: load1 } = useGetMessages(chatId);
+    const { user, isLoading: load2 } = useGetUserInChat(chatId);
 
-    const { data: user } = useSWR<UserType>(`/chats/${chatId}/users`);
-    if (!user) {
-        return <Loading />;
-    }
+    if (load1 || load2) return <Loading />;
 
     return (
-        messages && (
-            <div className="relative flex h-full flex-col-reverse justify-start gap-4 overflow-auto p-4">
-                {messages.slice().map((content) => (
+        <div className="relative flex h-full flex-col-reverse justify-start gap-4 overflow-auto p-4">
+            {messages
+                ?.slice()
+                .map((content) => (
                     <MessageBubble
                         key={content.id}
                         content={content}
-                        isOwnMessage={content.senderId !== user.id}
+                        isOwnMessage={content.senderId !== user?.id}
                     />
                 ))}
-            </div>
-        )
+        </div>
     );
 }

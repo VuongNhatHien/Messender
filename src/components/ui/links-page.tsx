@@ -1,10 +1,10 @@
 "use client";
 import Loading from "@/app/loading";
+import { useGetLinks } from "@/hooks/hooks";
 import { MetadataType } from "@/types/schema.type";
 import { Globe } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import useSWR from "swr";
 
 const LinkItem = ({ link }: { link: MetadataType | null }) => {
     return (
@@ -36,15 +36,11 @@ const LinkItem = ({ link }: { link: MetadataType | null }) => {
 export default function LinkPage() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { data: links } = useSWR<MetadataType[]>(`/chats/${chatId}/links`);
-    if (!links) {
-        return <Loading />;
-    }
+    const { links, isLoading } = useGetLinks(chatId);
+    if (isLoading) return <Loading />;
     return (
         <div className="space-y-1">
-            {links.map((link) => (
-                <LinkItem key={link.id} link={link} />
-            ))}
+            {links?.map((link) => <LinkItem key={link.id} link={link} />)}
         </div>
     );
 }

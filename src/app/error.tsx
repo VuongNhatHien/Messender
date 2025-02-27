@@ -18,9 +18,9 @@ export default function Error({
     return (
         <div className="flex h-full flex-col items-center justify-center gap-4">
             <Image src="/logo.png" width={120} height={120} alt="Logo" />
-            <div className="text-4xl">{`There was an error loading this page`}</div>
+            <div className="text-4xl">{`Sorry, something went wrong`}</div>
             <div className="text-lg text-muted-foreground">
-                An unexpected error occurred. Please try again later
+                We're working on getting this fixed as soon as we can
             </div>
             <Button
                 variant="default"

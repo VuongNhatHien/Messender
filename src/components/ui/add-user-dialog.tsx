@@ -1,6 +1,5 @@
 import Loading from "@/app/loading";
-import { UserType } from "@/types/schema.type";
-import useSWR from "swr";
+import { useGetNotConnected } from "@/hooks/hooks";
 import { Button } from "./button";
 import {
     Dialog,
@@ -15,9 +14,9 @@ import Searchbar from "./search";
 import { Separator } from "./separator";
 
 export default function AddUserDialog() {
-    const { data: notConnected } = useSWR<UserType[]>(`/users/not-connected`);
+    const { notConnected, isLoading } = useGetNotConnected();
 
-    if (!notConnected) {
+    if (isLoading) {
         return <Loading />;
     }
 
@@ -49,7 +48,7 @@ export default function AddUserDialog() {
 
                 <Separator className={"mt-4"} />
                 <div className="h-full space-y-1 overflow-auto pe-1 pt-1">
-                    {notConnected.map((user) => (
+                    {notConnected?.map((user) => (
                         <NotConnectCard key={user.id} user={user} />
                     ))}
                 </div>

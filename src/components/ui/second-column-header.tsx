@@ -1,28 +1,26 @@
-import Loading from "@/app/loading";
-import { UserType } from "@/types/schema.type";
+import { useGetUserInChat } from "@/hooks/hooks";
 import { useParams } from "next/navigation";
-import useSWR from "swr";
 import { Avatar, AvatarImage } from "./avatar";
+import Loading from "@/app/loading";
 
 export default function SecondColumnHeader() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { data: user } = useSWR<UserType>(`/chats/${chatId}/users`);
-    if (!user) {
-        return <Loading />;
-    }
+    const { user, isLoading } = useGetUserInChat(chatId);
+
+    if (isLoading) return <Loading />;
     return (
         <div className={"flex items-center justify-between px-4 py-3"}>
             <div className="flex items-center">
                 <Avatar>
                     <AvatarImage
-                        src={user.avatar ? user.avatar : `/avatar.png`}
+                        src={user?.avatar ? user.avatar : `/avatar.png`}
                     />
                 </Avatar>
 
                 <div className="ml-4 text-lg">
                     <p className="line-clamp-1 font-semibold">
-                        {user.displayName}
+                        {user?.displayName}
                     </p>
                 </div>
             </div>
