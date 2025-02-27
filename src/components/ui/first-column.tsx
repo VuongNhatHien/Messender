@@ -2,16 +2,27 @@
 import Loading from "@/app/loading";
 import Searchbar from "@/components/ui/search";
 import { Separator } from "@/components/ui/separator";
-import { useGetPreviews } from "@/hooks/hooks";
+import { useGetNotConnected, useGetPreviews } from "@/hooks/hooks";
 import socket from "@/lib/socket";
 import { requests } from "@/lib/requests";
 import { useEffect } from "react";
 import { mutate } from "swr";
 import AddUserDialog from "./add-user-dialog";
 import PreviewCard from "./preview-card";
+import { Button } from "./button";
+import { ArrowDown } from "lucide-react";
 
 export default function FirstColumn() {
-    const { previews, isLoading } = useGetPreviews();
+    const {
+        previews,
+        isLoading,
+        isReachingEnd,
+        isLoadingMore,
+        size,
+        setSize,
+        mutate: mutatePreviews,
+    } = useGetPreviews();
+    const { mutate: mutateNotConnected } = useGetNotConnected();
 
     useEffect(() => {
         const handleListenChatRequest = async () => {
@@ -25,8 +36,8 @@ export default function FirstColumn() {
         };
 
         const handleReceiveChatRequest = () => {
-            mutate(`/users/chats`);
-            mutate(`/users/not-connected`);
+            mutatePreviews();
+            mutateNotConnected();
         };
 
         socket.on("receiveMessage", handleReceiveMessage);
@@ -40,7 +51,7 @@ export default function FirstColumn() {
 
     useEffect(() => {
         previews?.forEach((preview) => {
-            socket.emit("joinChat", `chatId-${preview.chatId}`);
+            preview && socket.emit("joinChat", `chatId-${preview.chatId}`);
         });
     }, [previews]);
 
@@ -61,10 +72,29 @@ export default function FirstColumn() {
             </div>
 
             <Separator className={"mt-4"} />
-            <div className="h-full space-y-1 overflow-auto px-1 py-1">
-                {previews?.map((preview) => (
-                    <PreviewCard key={preview.chatId} preview={preview} />
-                ))}
+            <div className="flex h-full flex-col gap-1 overflow-auto px-1 py-1">
+                {previews?.map(
+                    (preview) =>
+                        preview && (
+                            <PreviewCard
+                                key={preview.chatId}
+                                preview={preview}
+                            />
+                        ),
+                )}
+                {!isReachingEnd && (
+                    <Button
+                        variant={"default"}
+                        className={
+                            "mt-2 shrink-0 animate-bounce self-center rounded-full"
+                        }
+                        disabled={isLoadingMore}
+                        onClick={() => setSize(size + 1)}
+                        size={"icon"}
+                    >
+                        <ArrowDown />
+                    </Button>
+                )}
             </div>
         </div>
     );

@@ -1,7 +1,11 @@
 "use client";
 
 import { sendMessage } from "@/actions/actions.common";
-import { useGetMessages } from "@/hooks/hooks";
+import {
+    useGetMessages,
+    useGetNotConnected,
+    useGetPreviews,
+} from "@/hooks/hooks";
 import socket from "@/lib/socket";
 import Image from "next/image";
 import { useActionState, useEffect } from "react";
@@ -13,6 +17,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
         sendMessage.bind(null, chatId),
         undefined,
     );
+    const { mutate: mutatePreviews } = useGetPreviews();
 
     const { mutate: mutateMessage } = useGetMessages(chatId);
     useEffect(() => {
@@ -22,7 +27,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
                 mutate(`/chats/${chatId}/links`);
             }
             mutateMessage();
-            mutate(`/users/chats`);
+            mutatePreviews();
         }
     }, [state, chatId]);
 

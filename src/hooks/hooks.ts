@@ -38,29 +38,6 @@ export const useGetUserInChat = (chatId: string) => {
     return { user: data, isLoading };
 };
 
-export const useGetPreviews = () => {
-    const { data, isLoading, code } =
-        useSwrGeneric<PreviewMessageType[]>("/users/chats");
-    useEffect(() => {
-        if (code && code !== "SUCCESS") {
-            throw new Error(code);
-        }
-    }, [code]);
-    return { previews: data, isLoading };
-};
-
-// export const useGetNotConnected = () => {
-//     const { data, isLoading, code } = useSwrGeneric<UserType[]>(
-//         "/users/not-connected",
-//     );
-//     useEffect(() => {
-//         if (code && code !== "SUCCESS") {
-//             throw new Error(code);
-//         }
-//     }, [code]);
-//     return { notConnected: data, isLoading };
-// };
-
 export const useGetFiles = (chatId: string) => {
     const { data, isLoading, code } = useSwrGeneric<AttachmentType[]>(
         `/chats/${chatId}/attachments/files`,
@@ -188,7 +165,6 @@ export const useGetMessages = (chatId: string) => {
 };
 
 export const useGetNotConnected = () => {
-    const router = useRouter();
     const {
         data,
         isLoading,
@@ -203,10 +179,40 @@ export const useGetNotConnected = () => {
         if (code && code !== SUCCESS) {
             throw new Error(code);
         }
-    }, [code, router]);
+    }, [code]);
 
     return {
         users: data,
+        isLoading,
+        isLoadingMore,
+        size,
+        setSize,
+        isReachingEnd,
+        code,
+        mutate,
+    };
+};
+
+export const useGetPreviews = () => {
+    const router = useRouter();
+    const {
+        data,
+        isLoading,
+        isLoadingMore,
+        size,
+        setSize,
+        isReachingEnd,
+        code,
+        mutate,
+    } = useSwrInfiniteGeneric<PreviewMessageType>(`/users/chats`, 10);
+    useEffect(() => {
+        if (code && code !== SUCCESS) {
+            throw new Error(code);
+        }
+    }, [code, router]);
+
+    return {
+        previews: data,
         isLoading,
         isLoadingMore,
         size,
