@@ -1,15 +1,10 @@
 "use client";
 
 import { sendMessage } from "@/actions/actions.common";
-import {
-    useGetMessages,
-    useGetNotConnected,
-    useGetPreviews,
-} from "@/hooks/hooks";
+import { useGetLinks, useGetMessages, useGetPreviews } from "@/hooks/hooks";
 import socket from "@/lib/socket";
 import Image from "next/image";
 import { useActionState, useEffect } from "react";
-import { mutate } from "swr";
 import { Textarea } from "./textarea";
 
 export default function SendMessageBox({ chatId }: { chatId: string }) {
@@ -18,13 +13,13 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
         undefined,
     );
     const { mutate: mutatePreviews } = useGetPreviews();
-
     const { mutate: mutateMessage } = useGetMessages(chatId);
+    const { mutate: mutateLinks } = useGetLinks(chatId);
     useEffect(() => {
         if (state) {
             socket.emit("sendMessage", `chatId-${chatId}`);
             if (state.metadataId) {
-                mutate(`/chats/${chatId}/links`);
+                mutateLinks();
             }
             mutateMessage();
             mutatePreviews();

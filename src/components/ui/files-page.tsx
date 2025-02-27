@@ -3,8 +3,9 @@ import Loading from "@/app/loading";
 import { useGetFiles } from "@/hooks/hooks";
 import { formatFileSize } from "@/lib/utils";
 import { AttachmentType } from "@/types/schema.type";
-import { File } from "lucide-react";
+import { ArrowDown, File } from "lucide-react";
 import { useParams } from "next/navigation";
+import { Button } from "./button";
 
 const FileItem = ({ file }: { file: AttachmentType }) => {
     return (
@@ -29,11 +30,27 @@ const FileItem = ({ file }: { file: AttachmentType }) => {
 export default function FilePage() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { files, isLoading } = useGetFiles(chatId);
+    const { files, isLoading, isReachingEnd, isLoadingMore, size, setSize } =
+        useGetFiles(chatId);
     if (isLoading) return <Loading />;
     return (
-        <div className="space-y-1">
-            {files?.map((file) => <FileItem key={file.id} file={file} />)}
+        <div className="flex flex-col gap-1">
+            {files?.map(
+                (file) => file && <FileItem key={file.id} file={file} />,
+            )}
+            {!isReachingEnd && (
+                <Button
+                    variant={"default"}
+                    className={
+                        "mt-2 shrink-0 animate-bounce self-center rounded-full"
+                    }
+                    disabled={isLoadingMore}
+                    onClick={() => setSize(size + 1)}
+                    size={"icon"}
+                >
+                    <ArrowDown />
+                </Button>
+            )}
         </div>
     );
 }

@@ -3,14 +3,13 @@ import Loading from "@/app/loading";
 import Searchbar from "@/components/ui/search";
 import { Separator } from "@/components/ui/separator";
 import { useGetNotConnected, useGetPreviews } from "@/hooks/hooks";
-import socket from "@/lib/socket";
 import { requests } from "@/lib/requests";
-import { useEffect } from "react";
-import { mutate } from "swr";
-import AddUserDialog from "./add-user-dialog";
-import PreviewCard from "./preview-card";
-import { Button } from "./button";
+import socket from "@/lib/socket";
 import { ArrowDown } from "lucide-react";
+import { useEffect } from "react";
+import AddUserDialog from "./add-user-dialog";
+import { Button } from "./button";
+import PreviewCard from "./preview-card";
 
 export default function FirstColumn() {
     const {
@@ -32,7 +31,7 @@ export default function FirstColumn() {
         handleListenChatRequest();
 
         const handleReceiveMessage = () => {
-            mutate(`/users/chats`);
+            mutatePreviews();
         };
 
         const handleReceiveChatRequest = () => {

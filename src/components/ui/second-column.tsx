@@ -7,8 +7,18 @@ import SecondColumnBody from "./second-column-body";
 import SecondColumnFooter from "./second-column-footer";
 import SecondColumnHeader from "./second-column-header";
 import { Separator } from "./separator";
+import {
+    useGetFiles,
+    useGetMedia,
+    useGetMessages,
+    useGetPreviews,
+} from "@/hooks/hooks";
 export default function SecondColumn() {
     const { chatId } = useParams<{ chatId: string }>();
+    const { mutate: mutateMessages } = useGetMessages(chatId);
+    const { mutate: mutatePreviews } = useGetPreviews();
+    const { mutate: mutateMedia } = useGetMedia(chatId);
+    const { mutate: mutateFiles } = useGetFiles(chatId);
 
     const [isOver, setIsOver] = useState(false);
 
@@ -29,6 +39,10 @@ export default function SecondColumn() {
 
         if (event.dataTransfer.files) {
             await uploadFiles(chatId, event.dataTransfer.files);
+            mutateMessages();
+            mutatePreviews();
+            mutateMedia();
+            mutateFiles();
         }
     };
     return (

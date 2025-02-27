@@ -2,9 +2,10 @@
 import Loading from "@/app/loading";
 import { useGetLinks } from "@/hooks/hooks";
 import { MetadataType } from "@/types/schema.type";
-import { Globe } from "lucide-react";
+import { ArrowDown, Globe } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { Button } from "./button";
 
 const LinkItem = ({ link }: { link: MetadataType | null }) => {
     return (
@@ -36,11 +37,27 @@ const LinkItem = ({ link }: { link: MetadataType | null }) => {
 export default function LinkPage() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { links, isLoading } = useGetLinks(chatId);
+    const { links, isLoading, isReachingEnd, isLoadingMore, size, setSize } =
+        useGetLinks(chatId);
     if (isLoading) return <Loading />;
     return (
-        <div className="space-y-1">
-            {links?.map((link) => <LinkItem key={link.id} link={link} />)}
+        <div className="flex flex-col gap-1">
+            {links?.map(
+                (link) => link && <LinkItem key={link.id} link={link} />,
+            )}
+            {!isReachingEnd && (
+                <Button
+                    variant={"default"}
+                    className={
+                        "mt-3 shrink-0 animate-bounce self-center rounded-full"
+                    }
+                    disabled={isLoadingMore}
+                    onClick={() => setSize(size + 1)}
+                    size={"icon"}
+                >
+                    <ArrowDown />
+                </Button>
+            )}
         </div>
     );
 }

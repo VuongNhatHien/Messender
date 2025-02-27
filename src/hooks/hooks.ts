@@ -38,66 +38,6 @@ export const useGetUserInChat = (chatId: string) => {
     return { user: data, isLoading };
 };
 
-export const useGetFiles = (chatId: string) => {
-    const { data, isLoading, code } = useSwrGeneric<AttachmentType[]>(
-        `/chats/${chatId}/attachments/files`,
-    );
-    const router = useRouter();
-    useEffect(() => {
-        if (code && code !== "SUCCESS") {
-            if (
-                code === ErrorCode.CHAT_NOT_FOUND ||
-                code === ErrorCode.NOT_IN_CHAT
-            ) {
-                router.push("/chats");
-            } else {
-                throw new Error(code);
-            }
-        }
-    }, [code, router]);
-    return { files: data, isLoading };
-};
-
-export const useGetMedia = (chatId: string) => {
-    const { data, isLoading, code } = useSwrGeneric<AttachmentType[]>(
-        `/chats/${chatId}/attachments/media`,
-    );
-    const router = useRouter();
-    useEffect(() => {
-        if (code && code !== "SUCCESS") {
-            if (
-                code === ErrorCode.CHAT_NOT_FOUND ||
-                code === ErrorCode.NOT_IN_CHAT
-            ) {
-                router.push("/chats");
-            } else {
-                throw new Error(code);
-            }
-        }
-    }, [code, router]);
-    return { media: data, isLoading };
-};
-
-export const useGetLinks = (chatId: string) => {
-    const { data, isLoading, code } = useSwrGeneric<MetadataType[]>(
-        `/chats/${chatId}/links`,
-    );
-    const router = useRouter();
-    useEffect(() => {
-        if (code && code !== "SUCCESS") {
-            if (
-                code === ErrorCode.CHAT_NOT_FOUND ||
-                code === ErrorCode.NOT_IN_CHAT
-            ) {
-                router.push("/chats");
-            } else {
-                throw new Error(code);
-            }
-        }
-    }, [code, router]);
-    return { links: data, isLoading };
-};
-
 export const useSwrInfiniteGeneric = <T>(endpoint: string, limit: number) => {
     const { data, isLoading, size, setSize, error, mutate } = useSWRInfinite<
         ResponseType<(T | null)[]>
@@ -194,7 +134,6 @@ export const useGetNotConnected = () => {
 };
 
 export const useGetPreviews = () => {
-    const router = useRouter();
     const {
         data,
         isLoading,
@@ -209,10 +148,123 @@ export const useGetPreviews = () => {
         if (code && code !== SUCCESS) {
             throw new Error(code);
         }
-    }, [code, router]);
+    }, [code]);
 
     return {
         previews: data,
+        isLoading,
+        isLoadingMore,
+        size,
+        setSize,
+        isReachingEnd,
+        code,
+        mutate,
+    };
+};
+
+export const useGetMedia = (chatId: string) => {
+    const router = useRouter();
+    const {
+        data,
+        isLoading,
+        isLoadingMore,
+        size,
+        setSize,
+        isReachingEnd,
+        code,
+        mutate,
+    } = useSwrInfiniteGeneric<AttachmentType>(`/chats/${chatId}/attachments/media`, 3);
+    useEffect(() => {
+        if (code && code !== SUCCESS) {
+            if (
+                code === ErrorCode.CHAT_NOT_FOUND ||
+                code === ErrorCode.NOT_IN_CHAT
+            ) {
+                router.push("/chats");
+            } else {
+                throw new Error(code);
+            }
+        }
+    }, [code, router]);
+
+    return {
+        media: data,
+        isLoading,
+        isLoadingMore,
+        size,
+        setSize,
+        isReachingEnd,
+        code,
+        mutate,
+    };
+};
+
+export const useGetFiles = (chatId: string) => {
+    const router = useRouter();
+    const {
+        data,
+        isLoading,
+        isLoadingMore,
+        size,
+        setSize,
+        isReachingEnd,
+        code,
+        mutate,
+    } = useSwrInfiniteGeneric<AttachmentType>(`/chats/${chatId}/attachments/files`, 3);
+    useEffect(() => {
+        if (code && code !== SUCCESS) {
+            if (
+                code === ErrorCode.CHAT_NOT_FOUND ||
+                code === ErrorCode.NOT_IN_CHAT
+            ) {
+                router.push("/chats");
+            } else {
+                throw new Error(code);
+            }
+        }
+    }, [code, router]);
+
+    return {
+        files: data,
+        isLoading,
+        isLoadingMore,
+        size,
+        setSize,
+        isReachingEnd,
+        code,
+        mutate,
+    };
+};
+
+
+
+export const useGetLinks = (chatId: string) => {
+    const router = useRouter();
+    const {
+        data,
+        isLoading,
+        isLoadingMore,
+        size,
+        setSize,
+        isReachingEnd,
+        code,
+        mutate,
+    } = useSwrInfiniteGeneric<MetadataType>(`/chats/${chatId}/links`, 3);
+    useEffect(() => {
+        if (code && code !== SUCCESS) {
+            if (
+                code === ErrorCode.CHAT_NOT_FOUND ||
+                code === ErrorCode.NOT_IN_CHAT
+            ) {
+                router.push("/chats");
+            } else {
+                throw new Error(code);
+            }
+        }
+    }, [code, router]);
+
+    return {
+        links: data,
         isLoading,
         isLoadingMore,
         size,
