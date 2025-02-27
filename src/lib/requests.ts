@@ -26,9 +26,7 @@ export const requests = {
             baseUrl: "http://localhost:3000",
         });
     },
-    getPreviews: () => {
-        return http.get<ResponseType<PreviewMessageType[]>>("/users/chats");
-    },
+
     logout: () => {
         return http.post(
             "/api/auth/logout",
@@ -38,33 +36,7 @@ export const requests = {
             },
         );
     },
-    getMessages: (chatId: string) => {
-        return http.get<ResponseType<GetMessageResponseType | null>>(
-            `/chats/${chatId}/messages`,
-        );
-    },
-    getUserFromChat: (chatId: string) => {
-        return http.get<ResponseType<UserType | null>>(
-            `/chats/${chatId}/users`,
-            {},
-        );
-    },
-    getMedia: (chatId: string) => {
-        return http.get<ResponseType<AttachmentType[]>>(
-            `/chats/${chatId}/attachments/media`,
-        );
-    },
-    getFiles: (chatId: string) => {
-        return http.get<ResponseType<AttachmentType[]>>(
-            `/chats/${chatId}/attachments/files`,
-        );
-    },
-    getLinks: (chatId: string) => {
-        return http.get<ResponseType<MetadataType[]>>(`/chats/${chatId}/links`);
-    },
-    getNotConnected: () => {
-        return http.get<ResponseType<UserType[]>>("/users/not-connected");
-    },
+
     addUser: (userId: number, token: string) => {
         return http.post<ResponseType<AddChatResponseType | null>>(
             `/users/${userId}/chat-requests`,

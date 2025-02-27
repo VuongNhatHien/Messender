@@ -14,7 +14,6 @@ import { MessageResponseType } from "@/types/response.type";
 
 export default function FirstColumn() {
     const { chatId } = useParams<{ chatId: string }>();
-
     const { previews, isLoading } = useGetPreviews();
 
     useEffect(() => {
