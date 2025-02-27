@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { mutate } from "swr";
 import AddUserDialog from "./add-user-dialog";
 import PreviewCard from "./preview-card";
+import { MessageResponseType } from "@/types/response.type";
 
 export default function FirstColumn() {
     const { chatId } = useParams<{ chatId: string }>();
@@ -31,12 +32,12 @@ export default function FirstColumn() {
     }, [previews]);
 
     useEffect(() => {
-        const handleReceiveMessage = () => {
-            mutate(`/chats/${chatId}/messages`);
+        const handleReceiveMessage = (message: MessageResponseType) => {
+            mutate(`/chats/${message.chatId}/messages`);
             mutate(`/users/chats`);
-            mutate(`/chats/${chatId}/attachments/media`);
-            mutate(`/chats/${chatId}/attachments/files`);
-            mutate(`/chats/${chatId}/links`);
+            mutate(`/chats/${message.chatId}/attachments/media`);
+            mutate(`/chats/${message.chatId}/attachments/files`);
+            mutate(`/chats/${message.chatId}/links`);
         };
 
         socket.on("receiveMessage", handleReceiveMessage);
