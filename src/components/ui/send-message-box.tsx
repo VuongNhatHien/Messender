@@ -4,11 +4,12 @@ import Image from "next/image";
 import { useActionState, useEffect } from "react";
 import { Textarea } from "./textarea";
 import socket from "@/lib/socket";
-import { mutate as mutateGlobal } from "swr";
+import { mutate } from "swr";
 import { sendMessage } from "@/actions/actions.common";
 import useSWRInfinite from "swr/infinite";
 import { fetcher } from "@/lib/fetcher";
 import { LIMIT } from "@/constant/constant";
+import { useGetMessages } from "@/hooks/hooks";
 
 export default function SendMessageBox({ chatId }: { chatId: string }) {
     const [state, action, pending] = useActionState(
@@ -16,11 +17,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
         undefined,
     );
 
-    const { mutate } = useSWRInfinite(
-        (index) => `chats/${chatId}/messages?limit=${LIMIT}&page=${index + 1}`,
-        fetcher,
-    );
-
+    const { mutate: mutateMessage } = useGetMessages(chatId);
     useEffect(() => {
         if (state) {
             socket.emit("sendMessage", {
@@ -28,10 +25,10 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
                 message: state,
             });
             if (state.metadataId) {
-                mutateGlobal(`/chats/${chatId}/links`);
+                mutate(`/chats/${chatId}/links`);
             }
-            mutate();
-            mutateGlobal(`/users/chats`);
+            mutateMessage();
+            mutate(`/users/chats`);
         }
     }, [state, chatId]);
 

@@ -4,4 +4,6 @@ export const ErrorCode = {
     NOT_IN_CHAT: "NOT_IN_CHAT",
 };
 
+export const SUCCESS = "SUCCESS"
+
 export const LIMIT = 10;

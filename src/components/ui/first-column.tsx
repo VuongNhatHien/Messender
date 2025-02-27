@@ -2,7 +2,7 @@
 import Loading from "@/app/loading";
 import Searchbar from "@/components/ui/search";
 import { Separator } from "@/components/ui/separator";
-import { useGetPreviews } from "@/hooks/hooks";
+import { useGetMessages, useGetPreviews } from "@/hooks/hooks";
 import socket from "@/lib/socket";
 import { requests } from "@/lib/requests";
 import { useParams } from "next/navigation";
