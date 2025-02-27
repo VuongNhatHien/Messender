@@ -20,7 +20,7 @@ export default function Error({
             <Image src="/logo.png" width={120} height={120} alt="Logo" />
             <div className="text-4xl">{`Sorry, something went wrong`}</div>
             <div className="text-lg text-muted-foreground">
-                We're working on getting this fixed as soon as we can
+                {`We're working on getting this fixed as soon as we can`}
             </div>
             <Button
                 variant="default"

@@ -6,7 +6,7 @@ import { MessageResponseType } from "@/types/response.type";
 import { AttachmentType, MetadataType } from "@/types/schema.type";
 import { File } from "lucide-react";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
@@ -145,7 +145,6 @@ const MessageBubble = ({
 );
 
 export default function SecondColumnBody() {
-    const router = useRouter();
     const { chatId } = useParams<{ chatId: string }>();
 
     const { messages, isLoading: load1 } = useGetMessages(chatId);

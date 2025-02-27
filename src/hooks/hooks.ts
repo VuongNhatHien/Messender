@@ -32,7 +32,7 @@ export const useGetMessages = (chatId: string) => {
                 throw new Error(code);
             }
         }
-    }, [code]);
+    }, [code, router]);
 
     return { messages: data, isLoading };
 };
@@ -53,7 +53,7 @@ export const useGetUserInChat = (chatId: string) => {
                 throw new Error(code);
             }
         }
-    }, [code]);
+    }, [code, router]);
 
     return { user: data, isLoading };
 };
@@ -97,7 +97,7 @@ export const useGetFiles = (chatId: string) => {
                 throw new Error(code);
             }
         }
-    }, [code]);
+    }, [code, router]);
     return { files: data, isLoading };
 };
 
@@ -117,7 +117,7 @@ export const useGetMedia = (chatId: string) => {
                 throw new Error(code);
             }
         }
-    }, [code]);
+    }, [code, router]);
     return { media: data, isLoading };
 };
 
@@ -137,6 +137,6 @@ export const useGetLinks = (chatId: string) => {
                 throw new Error(code);
             }
         }
-    }, [code]);
+    }, [code, router]);
     return { links: data, isLoading };
 };

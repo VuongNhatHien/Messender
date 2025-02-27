@@ -3,13 +3,11 @@ import { ResponseType } from "@/types/common.type";
 import { LoginBodyType, RegisterBodyType } from "@/types/request.type";
 import {
     AddChatResponseType,
-    GetMessageResponseType,
     LoginResponseType,
     MessageResponseType,
-    RegisterResponseType,
+    RegisterResponseType
 } from "@/types/response.type";
-import { AttachmentType, MetadataType, UserType } from "@/types/schema.type";
-import { PreviewMessageType } from "@/types/response.type";
+import { UserType } from "@/types/schema.type";
 
 export const requests = {
     register: (body: RegisterBodyType) => {
