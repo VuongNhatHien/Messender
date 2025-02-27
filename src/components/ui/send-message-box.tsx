@@ -1,15 +1,12 @@
 "use client";
 
+import { sendMessage } from "@/actions/actions.common";
+import { useGetMessages } from "@/hooks/hooks";
+import socket from "@/lib/socket";
 import Image from "next/image";
 import { useActionState, useEffect } from "react";
-import { Textarea } from "./textarea";
-import socket from "@/lib/socket";
 import { mutate } from "swr";
-import { sendMessage } from "@/actions/actions.common";
-import useSWRInfinite from "swr/infinite";
-import { fetcher } from "@/lib/fetcher";
-import { LIMIT } from "@/constant/constant";
-import { useGetMessages } from "@/hooks/hooks";
+import { Textarea } from "./textarea";
 
 export default function SendMessageBox({ chatId }: { chatId: string }) {
     const [state, action, pending] = useActionState(
@@ -20,10 +17,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
     const { mutate: mutateMessage } = useGetMessages(chatId);
     useEffect(() => {
         if (state) {
-            socket.emit("sendMessage", {
-                chatId: `chatId-${chatId}`,
-                message: state,
-            });
+            socket.emit("sendMessage", `chatId-${chatId}`);
             if (state.metadataId) {
                 mutate(`/chats/${chatId}/links`);
             }
