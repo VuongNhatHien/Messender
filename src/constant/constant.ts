@@ -3,3 +3,5 @@ export const ErrorCode = {
     CHAT_NOT_FOUND: "CHAT_NOT_FOUND",
     NOT_IN_CHAT: "NOT_IN_CHAT",
 };
+
+export const LIMIT = 10;

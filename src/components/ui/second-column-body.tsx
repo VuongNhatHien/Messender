@@ -1,12 +1,19 @@
 "use client";
 import Loading from "@/app/loading";
 import { useGetMessages, useGetUserInChat } from "@/hooks/hooks";
+import { fetcher } from "@/lib/fetcher";
 import { formatFileSize } from "@/lib/utils";
+import { chat } from "@/mocks/mock";
 import { MessageResponseType } from "@/types/response.type";
 import { AttachmentType, MetadataType } from "@/types/schema.type";
 import { File } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import useSWRInfinite from "swr/infinite";
+import { ResponseType } from "@/types/common.type";
+import { Button } from "./button";
+import { LIMIT } from "@/constant/constant";
+import { ArrowUp } from "lucide-react";
 
 const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
@@ -147,10 +154,24 @@ const MessageBubble = ({
 export default function SecondColumnBody() {
     const { chatId } = useParams<{ chatId: string }>();
 
-    const { messages, isLoading: load1 } = useGetMessages(chatId);
+    const {
+        data,
+        isLoading: load1,
+        size,
+        setSize,
+    } = useSWRInfinite<ResponseType<MessageResponseType[]>>(
+        (index) => `chats/${chatId}/messages?limit=${LIMIT}&page=${index + 1}`,
+        fetcher,
+    );
+    const isLoadingMore =
+        load1 || (size > 0 && data && typeof data[size - 1] === "undefined");
+    const isReachingEnd = data && data[data.length - 1]?.data.length < LIMIT;
+
     const { user, isLoading: load2 } = useGetUserInChat(chatId);
 
     if (load1 || load2) return <Loading />;
+
+    const messages = data?.map((page) => page.data).flat();
 
     return (
         <div className="relative flex h-full flex-col-reverse justify-start gap-4 overflow-auto p-4">
@@ -163,6 +184,19 @@ export default function SecondColumnBody() {
                         isOwnMessage={content.senderId !== user?.id}
                     />
                 ))}
+            {!isReachingEnd && (
+                <Button
+                    variant={"default"}
+                    className={
+                        "shrink-0 animate-bounce self-center rounded-full"
+                    }
+                    disabled={isLoadingMore}
+                    onClick={() => setSize(size + 1)}
+                    size={"icon"}
+                >
+                    <ArrowUp />
+                </Button>
+            )}
         </div>
     );
 }
