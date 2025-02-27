@@ -24,13 +24,12 @@ export default function FirstColumn() {
             mutate(`/users/chats`);
         };
 
-        socket.on("receiveMessage", handleReceiveMessage);
-
         const handleReceiveChatRequest = () => {
             mutate(`/users/chats`);
             mutate(`/users/not-connected`);
         };
 
+        socket.on("receiveMessage", handleReceiveMessage);
         socket.on("receiveChatRequest", handleReceiveChatRequest);
 
         return () => {

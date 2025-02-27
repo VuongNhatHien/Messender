@@ -49,17 +49,17 @@ export const useGetPreviews = () => {
     return { previews: data, isLoading };
 };
 
-export const useGetNotConnected = () => {
-    const { data, isLoading, code } = useSwrGeneric<UserType[]>(
-        "/users/not-connected",
-    );
-    useEffect(() => {
-        if (code && code !== "SUCCESS") {
-            throw new Error(code);
-        }
-    }, [code]);
-    return { notConnected: data, isLoading };
-};
+// export const useGetNotConnected = () => {
+//     const { data, isLoading, code } = useSwrGeneric<UserType[]>(
+//         "/users/not-connected",
+//     );
+//     useEffect(() => {
+//         if (code && code !== "SUCCESS") {
+//             throw new Error(code);
+//         }
+//     }, [code]);
+//     return { notConnected: data, isLoading };
+// };
 
 export const useGetFiles = (chatId: string) => {
     const { data, isLoading, code } = useSwrGeneric<AttachmentType[]>(
@@ -177,6 +177,36 @@ export const useGetMessages = (chatId: string) => {
 
     return {
         messages: data,
+        isLoading,
+        isLoadingMore,
+        size,
+        setSize,
+        isReachingEnd,
+        code,
+        mutate,
+    };
+};
+
+export const useGetNotConnected = () => {
+    const router = useRouter();
+    const {
+        data,
+        isLoading,
+        isLoadingMore,
+        size,
+        setSize,
+        isReachingEnd,
+        code,
+        mutate,
+    } = useSwrInfiniteGeneric<UserType>(`/users/not-connected`, 10);
+    useEffect(() => {
+        if (code && code !== SUCCESS) {
+            throw new Error(code);
+        }
+    }, [code, router]);
+
+    return {
+        users: data,
         isLoading,
         isLoadingMore,
         size,
