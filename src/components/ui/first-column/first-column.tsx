@@ -1,26 +1,15 @@
 "use client";
-import Loading from "@/app/loading";
 import Searchbar from "@/components/ui/search";
 import { Separator } from "@/components/ui/separator";
 import { useGetNotConnected, useGetPreviews } from "@/hooks/hooks";
 import { requests } from "@/lib/requests";
 import socket from "@/lib/socket";
-import { ArrowDown } from "lucide-react";
 import { useEffect } from "react";
-import AddUserDialog from "./add-user-dialog";
-import { Button } from "./button";
-import PreviewCard from "./preview-card";
+import AddUserDialog from "../add-user-dialog";
+import FirstColumnBody from "./first-column-body";
 
 export default function FirstColumn() {
-    const {
-        previews,
-        isLoading,
-        isReachingEnd,
-        isLoadingMore,
-        size,
-        setSize,
-        mutate: mutatePreviews,
-    } = useGetPreviews();
+    const { previews, mutate: mutatePreviews } = useGetPreviews();
     const { mutate: mutateNotConnected } = useGetNotConnected();
 
     useEffect(() => {
@@ -54,9 +43,6 @@ export default function FirstColumn() {
         });
     }, [previews]);
 
-    if (isLoading) {
-        return <Loading />;
-    }
     return (
         <div className="card w-1/4">
             <div
@@ -72,28 +58,7 @@ export default function FirstColumn() {
 
             <Separator className={"mt-4"} />
             <div className="flex h-full flex-col gap-1 overflow-auto px-1 py-1">
-                {previews?.map(
-                    (preview) =>
-                        preview && (
-                            <PreviewCard
-                                key={preview.chatId}
-                                preview={preview}
-                            />
-                        ),
-                )}
-                {!isReachingEnd && (
-                    <Button
-                        variant={"default"}
-                        className={
-                            "mt-2 shrink-0 animate-bounce self-center rounded-full"
-                        }
-                        disabled={isLoadingMore}
-                        onClick={() => setSize(size + 1)}
-                        size={"icon"}
-                    >
-                        <ArrowDown />
-                    </Button>
-                )}
+                <FirstColumnBody />
             </div>
         </div>
     );

@@ -75,15 +75,7 @@ const Message = ({
                 : "bg-secondary text-secondary-foreground"
         }`}
     >
-        {content.metadata ? (
-            <p className="underline">
-                <a href={content.metadata.url} target="_blank">
-                    {content.message}
-                </a>
-            </p>
-        ) : (
-            <p>{content.message}</p>
-        )}
+        {content.metadata ? <p>{content.message}</p> : <p>{content.message}</p>}
     </div>
 );
 
