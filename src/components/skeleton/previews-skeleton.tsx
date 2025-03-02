@@ -9,7 +9,7 @@ export default function PreviewSkeleton() {
                         <Skeleton className="size-12 shrink-0 rounded-full" />
                         <div className="ml-4 w-full space-y-2">
                             <Skeleton className="h-5 w-1/2" />
-                            <Skeleton className="h-5" />
+                            <Skeleton className="h-5 w-full" />
                         </div>
                     </div>
                 </div>
