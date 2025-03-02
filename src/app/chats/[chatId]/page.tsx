@@ -1,6 +1,6 @@
 "use client";
 
-import SecondColumn from "@/components/ui/second-column";
+import SecondColumn from "@/components/ui/second-column/second-column";
 import ThirdColumn from "@/components/ui/third-column/third-column";
 import {
     useGetFiles,
@@ -40,7 +40,7 @@ export default function Page() {
 
     return (
         <>
-            <SecondColumn/>
+            <SecondColumn />
             <ThirdColumn />
         </>
     );

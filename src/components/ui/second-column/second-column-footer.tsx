@@ -1,6 +1,6 @@
 import { useParams } from "next/navigation";
-import ChooseFile from "./choose-file";
-import SendMessageBox from "./send-message-box";
+import ChooseFile from "../choose-file";
+import SendMessageBox from "../send-message-box";
 
 export default function SecondColumnFooter() {
     const { chatId } = useParams<{ chatId: string }>();

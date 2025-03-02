@@ -7,7 +7,7 @@ import { AttachmentType, MetadataType } from "@/types/schema.type";
 import { ArrowUp, File } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { Button } from "./button";
+import { Button } from "../button";
 
 const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
