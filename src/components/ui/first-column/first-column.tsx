@@ -5,8 +5,9 @@ import { useGetNotConnected, useGetPreviews } from "@/hooks/hooks";
 import { requests } from "@/lib/requests";
 import socket from "@/lib/socket";
 import { useEffect } from "react";
-import AddUserDialog from "../add-user-dialog";
+import AddUserDialog from "./add-user-dialog";
 import FirstColumnBody from "./first-column-body";
+import FirstColumnHeader from "./first-column-header";
 
 export default function FirstColumn() {
     const { previews, mutate: mutatePreviews } = useGetPreviews();
@@ -45,21 +46,9 @@ export default function FirstColumn() {
 
     return (
         <div className="card w-1/4">
-            <div
-                className={"header flex items-center justify-between px-4 py-3"}
-            >
-                <p className={"text-2xl font-bold"}>Chats</p>
-
-                <AddUserDialog />
-            </div>
-            <div className={"px-3"}>
-                <Searchbar />
-            </div>
-
+            <FirstColumnHeader />
             <Separator className={"mt-4"} />
-            <div className="flex h-full flex-col gap-1 overflow-auto px-1 py-1">
-                <FirstColumnBody />
-            </div>
+            <FirstColumnBody />
         </div>
     );
 }

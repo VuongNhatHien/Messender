@@ -14,7 +14,7 @@ export default function FirstColumnBody() {
         return <Loading />;
     }
     return (
-        <>
+        <div className="flex h-full flex-col gap-1 overflow-auto px-1 py-1">
             {previews?.map(
                 (preview) =>
                     preview && (
@@ -34,6 +34,6 @@ export default function FirstColumnBody() {
                     <ArrowDown />
                 </Button>
             )}
-        </>
+        </div>
     );
 }

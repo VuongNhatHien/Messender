@@ -1,6 +1,6 @@
 import Loading from "@/app/loading";
 import { useGetNotConnected } from "@/hooks/hooks";
-import { Button } from "./button";
+import { Button } from "../button";
 import {
     Dialog,
     DialogContent,
@@ -8,10 +8,10 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "./dialog";
-import NotConnectCard from "./not-connect-card";
-import Searchbar from "./search";
-import { Separator } from "./separator";
+} from "../dialog";
+import NotConnectCard from "../not-connect-card";
+import Searchbar from "../search";
+import { Separator } from "../separator";
 import { ArrowDown } from "lucide-react";
 
 export default function AddUserDialog() {

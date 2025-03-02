@@ -40,7 +40,7 @@ export default function Page() {
 
     return (
         <>
-            <SecondColumn />
+            <SecondColumn/>
             <ThirdColumn />
         </>
     );
