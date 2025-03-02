@@ -1,5 +1,5 @@
 import { requests } from "@/lib/requests";
-import { Button } from "./button";
+import { Button } from "../../ui/button";
 
 export default function LogoutButton() {
     const handleLogout = async () => {

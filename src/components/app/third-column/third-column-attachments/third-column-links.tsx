@@ -5,7 +5,7 @@ import { MetadataType } from "@/types/schema.type";
 import { ArrowDown, Globe } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { Button } from "../../button";
+import { Button } from "../../../ui/button";
 
 const LinkItem = ({ link }: { link: MetadataType | null }) => {
     return (

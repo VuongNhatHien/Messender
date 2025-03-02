@@ -1,7 +1,7 @@
 "use client";
 
-import SecondColumn from "@/components/ui/second-column/second-column";
-import ThirdColumn from "@/components/ui/third-column/third-column";
+import SecondColumn from "@/components/app/second-column/second-column";
+import ThirdColumn from "@/components/app/third-column/third-column";
 import {
     useGetFiles,
     useGetLinks,

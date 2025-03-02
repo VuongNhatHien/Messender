@@ -7,8 +7,8 @@ import {
 } from "@/hooks/hooks";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { uploadFiles } from "../choose-file";
-import { Separator } from "../separator";
+import { uploadFiles } from "./choose-file";
+import { Separator } from "../../ui/separator";
 import SecondColumnBodyAndFooter from "./second-column-body-and-footer";
 import SecondColumnHeader from "./second-column-header";
 export default function SecondColumn() {

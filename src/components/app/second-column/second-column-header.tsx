@@ -1,6 +1,6 @@
 import { useGetUserInChat } from "@/hooks/hooks";
 import { useParams } from "next/navigation";
-import { Avatar, AvatarImage } from "../avatar";
+import { Avatar, AvatarImage } from "../../ui/avatar";
 import Loading from "@/app/loading";
 
 export default function SecondColumnHeader() {

@@ -3,10 +3,10 @@
 import { register } from "@/actions/actions.common";
 import Link from "next/link";
 import { useActionState } from "react";
-import { Button } from "./button";
-import FormErrorMessage from "./form-error-message";
-import { Input } from "./input";
-import { Label } from "./label";
+import { Button } from "../../ui/button";
+import FormErrorMessage from "../../ui/form-error-message";
+import { Input } from "../../ui/input";
+import { Label } from "../../ui/label";
 
 export default function RegisterForm() {
     const [state, action, pending] = useActionState(register, undefined);

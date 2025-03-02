@@ -5,11 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
-import { Button } from "./button";
-import { Checkbox } from "./checkbox";
-import FormErrorMessage from "./form-error-message";
-import { Input } from "./input";
-import { Label } from "./label";
+import { Button } from "../../ui/button";
+import { Checkbox } from "../../ui/checkbox";
+import FormErrorMessage from "../../ui/form-error-message";
+import { Input } from "../../ui/input";
+import { Label } from "../../ui/label";
 import { requests } from "@/lib/requests";
 
 export default function LoginForm() {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetUserInChat } from "@/hooks/hooks";
-import { Avatar, AvatarImage } from "../../avatar";
+import { Avatar, AvatarImage } from "../../../ui/avatar";
 import { useParams } from "next/navigation";
 import Loading from "@/app/loading";
 

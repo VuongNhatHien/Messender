@@ -5,7 +5,7 @@ import { useGetLinks, useGetMessages, useGetPreviews } from "@/hooks/hooks";
 import socket from "@/lib/socket";
 import Image from "next/image";
 import { useActionState, useEffect } from "react";
-import { Textarea } from "./textarea";
+import { Textarea } from "../../ui/textarea";
 
 export default function SendMessageBox({ chatId }: { chatId: string }) {
     const [state, action, pending] = useActionState(

@@ -3,8 +3,8 @@
 import Loading from "@/app/loading";
 import { useGetPreviews } from "@/hooks/hooks";
 import { ArrowDown } from "lucide-react";
-import { Button } from "../button";
-import PreviewCard from "../preview-card";
+import { Button } from "../../ui/button";
+import PreviewCard from "./preview-card";
 
 export default function FirstColumnBody() {
     const { previews, isLoading, isReachingEnd, isLoadingMore, size, setSize } =

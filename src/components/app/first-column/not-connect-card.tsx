@@ -1,7 +1,7 @@
 "use client";
 import socket from "@/lib/socket";
 import { UserType } from "@/types/schema.type";
-import { Avatar, AvatarImage } from "./avatar";
+import { Avatar, AvatarImage } from "../../ui/avatar";
 import { requests } from "@/lib/requests";
 import { addUser } from "@/actions/actions.common";
 

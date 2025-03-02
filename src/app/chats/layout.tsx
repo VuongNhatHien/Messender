@@ -1,4 +1,4 @@
-import FirstColumn from "@/components/ui/first-column/first-column";
+import FirstColumn from "@/components/app/first-column/first-column";
 
 export default function ChatLayout({
     children,

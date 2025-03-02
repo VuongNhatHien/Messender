@@ -2,7 +2,7 @@
 import { PreviewMessageType } from "@/types/response.type";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { Avatar, AvatarImage } from "./avatar";
+import { Avatar, AvatarImage } from "../../ui/avatar";
 
 export default function PreviewCard({
     preview,
@@ -41,7 +41,13 @@ export default function PreviewCard({
             href={`/chats/${preview.chatId}`}
         >
             <Avatar className="size-12">
-                <AvatarImage src={preview.user.avatar ? preview.user.avatar : `/avatar.png`} />
+                <AvatarImage
+                    src={
+                        preview.user.avatar
+                            ? preview.user.avatar
+                            : `/avatar.png`
+                    }
+                />
                 {/* <AvatarFallback>Null</AvatarFallback> */}
             </Avatar>
 

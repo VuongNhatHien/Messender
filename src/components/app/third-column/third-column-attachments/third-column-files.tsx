@@ -5,7 +5,7 @@ import { formatFileSize } from "@/lib/utils";
 import { AttachmentType } from "@/types/schema.type";
 import { ArrowDown, File } from "lucide-react";
 import { useParams } from "next/navigation";
-import { Button } from "../../button";
+import { Button } from "../../../ui/button";
 
 const FileItem = ({ file }: { file: AttachmentType }) => {
     return (
