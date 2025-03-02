@@ -7,8 +7,9 @@ export const fetcher = async (url: string) => {
     const fullUrl = url.startsWith("/")
         ? `${baseUrl}${url}`
         : `${baseUrl}/${url}`;
-    //wait 2 seconds
-    await new Promise((resolve) => setTimeout(resolve, 2000000));
+
+    // await new Promise((resolve) => setTimeout(resolve, 2000000));
+
     const res = await fetch(fullUrl, {
         headers: {
             "Content-Type": "application/json",

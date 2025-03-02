@@ -1,11 +1,10 @@
 "use client";
 
-import { useGetNotConnected, useGetPreviews } from "@/hooks/hooks";
-import PreviewCard from "../preview-card";
-import { Button } from "../button";
-import { ArrowDown } from "lucide-react";
 import Loading from "@/app/loading";
-import { Skeleton } from "../skeleton";
+import { useGetPreviews } from "@/hooks/hooks";
+import { ArrowDown } from "lucide-react";
+import { Button } from "../button";
+import PreviewCard from "../preview-card";
 
 export default function FirstColumnBody() {
     const { previews, isLoading, isReachingEnd, isLoadingMore, size, setSize } =

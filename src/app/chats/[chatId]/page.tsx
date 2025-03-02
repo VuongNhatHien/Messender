@@ -1,8 +1,14 @@
 "use client";
 
 import SecondColumn from "@/components/ui/second-column";
-import ThirdColumn from "@/components/ui/third-column";
-import { useGetFiles, useGetLinks, useGetMedia, useGetMessages, useGetPreviews } from "@/hooks/hooks";
+import ThirdColumn from "@/components/ui/third-column/third-column";
+import {
+    useGetFiles,
+    useGetLinks,
+    useGetMedia,
+    useGetMessages,
+    useGetPreviews,
+} from "@/hooks/hooks";
 import socket from "@/lib/socket";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
@@ -14,7 +20,6 @@ export default function Page() {
     const { mutate: mutateMedia } = useGetMedia(chatId);
     const { mutate: mutateFiles } = useGetFiles(chatId);
     const { mutate: mutateLinks } = useGetLinks(chatId);
-
 
     useEffect(() => {
         mutateMessage();

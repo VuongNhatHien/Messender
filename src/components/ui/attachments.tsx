@@ -2,9 +2,9 @@
 import { ArrowLeft } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import AttachmentsNavBar from "./attachments-nav-bar";
-import FilePage from "./files-page";
-import LinkPage from "./links-page";
-import MediaPage from "./media-page";
+import FilePage from "./third-column/files-page";
+import LinkPage from "./third-column/links-page";
+import MediaPage from "./third-column/media-page";
 
 export default function Attachments({
     page,
