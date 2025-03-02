@@ -23,7 +23,7 @@ export default function AttachmentsNavBar({
     setPage: Dispatch<SetStateAction<string>>;
 }) {
     return (
-        <div className="flex w-full items-center justify-between rounded-full border shadow-sm">
+        <div className="mt-3 flex w-full items-center justify-between rounded-full border shadow-sm">
             {navItems.map((navItem, index) => (
                 <button
                     key={index}

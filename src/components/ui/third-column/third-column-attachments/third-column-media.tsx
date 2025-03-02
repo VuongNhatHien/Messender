@@ -4,7 +4,7 @@ import { useGetMedia } from "@/hooks/hooks";
 import { AttachmentType } from "@/types/schema.type";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { Button } from "../button";
+import { Button } from "../../button";
 import { ArrowDown } from "lucide-react";
 const MediaItem = ({ media }: { media: AttachmentType }) => {
     const isImage = media.type.includes("image");
