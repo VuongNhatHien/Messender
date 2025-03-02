@@ -1,10 +1,9 @@
 "use client";
 
-import { useGetUserInChat } from "@/hooks/hooks";
-import { Avatar, AvatarImage } from "../../../ui/avatar";
-import { useParams } from "next/navigation";
-import Loading from "@/app/loading";
 import ThirdColumnInfoHeaderSkeleton from "@/components/skeleton/third-column-info-header-skeleton";
+import { useGetUserInChat } from "@/hooks/hooks";
+import { useParams } from "next/navigation";
+import { Avatar, AvatarImage } from "../../../ui/avatar";
 
 export default function ThirdColumnInfoHeader() {
     const { chatId } = useParams<{ chatId: string }>();

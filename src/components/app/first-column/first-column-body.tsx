@@ -1,11 +1,10 @@
 "use client";
 
-import Loading from "@/app/loading";
+import PreviewSkeleton from "@/components/skeleton/previews-skeleton";
 import { useGetPreviews } from "@/hooks/hooks";
 import { ArrowDown } from "lucide-react";
 import { Button } from "../../ui/button";
 import PreviewCard from "./preview-card";
-import PreviewSkeleton from "@/components/skeleton/previews-skeleton";
 
 export default function FirstColumnBody() {
     const { previews, isLoading, isReachingEnd, isLoadingMore, size, setSize } =

@@ -88,14 +88,3 @@ body {
         @apply px-5 2xl:container 2xl:mx-auto;
     }
 }
-
-
-
-/* @layer base {
-  * {
-    @apply border-border outline-ring/50;
-    }
-  body {
-    @apply bg-background text-foreground;
-    }
-} */

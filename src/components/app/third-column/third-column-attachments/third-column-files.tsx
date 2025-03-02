@@ -1,12 +1,11 @@
 "use client";
-import Loading from "@/app/loading";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useGetFiles } from "@/hooks/hooks";
 import { formatFileSize } from "@/lib/utils";
 import { AttachmentType } from "@/types/schema.type";
 import { ArrowDown, File } from "lucide-react";
 import { useParams } from "next/navigation";
 import { Button } from "../../../ui/button";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 const FileItem = ({ file }: { file: AttachmentType }) => {
     return (

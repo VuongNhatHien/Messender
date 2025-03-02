@@ -1,5 +1,5 @@
 "use client";
-import Loading from "@/app/loading";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useGetMessages, useGetUserInChat } from "@/hooks/hooks";
 import { formatFileSize } from "@/lib/utils";
 import { MessageResponseType } from "@/types/response.type";
@@ -8,9 +8,6 @@ import { ArrowUp, File } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Button } from "../../ui/button";
-import ClipLoader from "react-spinners/ClipLoader";
-import { CSSProperties } from "react";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");

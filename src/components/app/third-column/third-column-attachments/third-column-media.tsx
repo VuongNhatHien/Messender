@@ -1,12 +1,11 @@
 "use client";
-import Loading from "@/app/loading";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useGetMedia } from "@/hooks/hooks";
 import { AttachmentType } from "@/types/schema.type";
+import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Button } from "../../../ui/button";
-import { ArrowDown } from "lucide-react";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 const MediaItem = ({ media }: { media: AttachmentType }) => {
     const isImage = media.type.includes("image");
 

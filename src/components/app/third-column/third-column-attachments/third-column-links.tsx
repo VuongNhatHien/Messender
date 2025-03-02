@@ -1,13 +1,11 @@
 "use client";
-import Loading from "@/app/loading";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useGetLinks } from "@/hooks/hooks";
 import { MetadataType } from "@/types/schema.type";
 import { ArrowDown, Globe } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Button } from "../../../ui/button";
-import CardSkeleton from "@/components/skeleton/card-skeleton";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 const LinkItem = ({ link }: { link: MetadataType | null }) => {
     return (

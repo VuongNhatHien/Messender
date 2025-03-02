@@ -1,8 +1,7 @@
+import SecondColumnHeaderSkeleton from "@/components/skeleton/second-column-header-skeleton";
 import { useGetUserInChat } from "@/hooks/hooks";
 import { useParams } from "next/navigation";
 import { Avatar, AvatarImage } from "../../ui/avatar";
-import Loading from "@/app/loading";
-import SecondColumnHeaderSkeleton from "@/components/skeleton/second-column-header-skeleton";
 
 export default function SecondColumnHeader() {
     const { chatId } = useParams<{ chatId: string }>();
