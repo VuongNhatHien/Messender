@@ -1,6 +1,6 @@
 "use client";
 
-import AddUserDialog from "./add-user-dialog";
+import AddUserDialog from "./first-column-add-user";
 import Searchbar from "../../ui/search";
 
 export default function FirstColumnHeader() {
