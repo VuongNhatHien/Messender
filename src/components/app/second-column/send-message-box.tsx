@@ -24,7 +24,7 @@ export default function SendMessageBox({ chatId }: { chatId: string }) {
             mutateMessage();
             mutatePreviews();
         }
-    }, [state, chatId]);
+    }, [state, chatId, mutateLinks, mutateMessage, mutatePreviews]);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === "Enter" && !event.shiftKey) {

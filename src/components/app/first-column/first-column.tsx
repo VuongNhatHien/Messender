@@ -1,11 +1,9 @@
 "use client";
-import Searchbar from "@/components/ui/search";
 import { Separator } from "@/components/ui/separator";
 import { useGetNotConnected, useGetPreviews } from "@/hooks/hooks";
 import { requests } from "@/lib/requests";
 import socket from "@/lib/socket";
 import { useEffect } from "react";
-import AddUserDialog from "./add-user-dialog";
 import FirstColumnBody from "./first-column-body";
 import FirstColumnHeader from "./first-column-header";
 
@@ -36,11 +34,11 @@ export default function FirstColumn() {
             socket.off("receiveMessage", handleReceiveMessage);
             socket.off("receiveChatRequest", handleReceiveChatRequest);
         };
-    }, []);
+    }, [mutateNotConnected, mutatePreviews]);
 
     useEffect(() => {
         previews?.forEach((preview) => {
-            preview && socket.emit("joinChat", `chatId-${preview.chatId}`);
+            if (preview) socket.emit("joinChat", `chatId-${preview.chatId}`);
         });
     }, [previews]);
 

@@ -36,7 +36,14 @@ export default function Page() {
         return () => {
             socket.off("receiveMessage", handleReceiveMessage);
         };
-    }, [chatId]);
+    }, [
+        chatId,
+        mutateFiles,
+        mutateLinks,
+        mutateMedia,
+        mutateMessage,
+        mutatePreviews,
+    ]);
 
     return (
         <>
