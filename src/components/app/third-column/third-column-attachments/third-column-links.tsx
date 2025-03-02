@@ -6,6 +6,8 @@ import { ArrowDown, Globe } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Button } from "../../../ui/button";
+import CardSkeleton from "@/components/skeleton/card-skeleton";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 const LinkItem = ({ link }: { link: MetadataType | null }) => {
     return (
@@ -39,7 +41,12 @@ export default function LinkPage() {
 
     const { links, isLoading, isReachingEnd, isLoadingMore, size, setSize } =
         useGetLinks(chatId);
-    if (isLoading) return <Loading />;
+    if (isLoading)
+        return (
+            <div className="flex h-full items-center justify-center">
+                <LoadingSpinner className="size-10" />
+            </div>
+        );
     return (
         <div className="flex flex-col gap-1">
             {links?.map(

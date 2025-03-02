@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Button } from "../../../ui/button";
 import { ArrowDown } from "lucide-react";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 const MediaItem = ({ media }: { media: AttachmentType }) => {
     const isImage = media.type.includes("image");
 
@@ -57,7 +58,12 @@ export default function MediaPage() {
 
     const { media, isLoading, isReachingEnd, isLoadingMore, size, setSize } =
         useGetMedia(chatId);
-    if (isLoading) return <Loading />;
+    if (isLoading)
+        return (
+            <div className="flex h-full items-center justify-center">
+                <LoadingSpinner className="size-10" />
+            </div>
+        );
     return (
         <>
             <div className="flex flex-wrap gap-[2px]">

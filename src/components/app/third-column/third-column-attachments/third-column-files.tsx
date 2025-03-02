@@ -6,6 +6,7 @@ import { AttachmentType } from "@/types/schema.type";
 import { ArrowDown, File } from "lucide-react";
 import { useParams } from "next/navigation";
 import { Button } from "../../../ui/button";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 const FileItem = ({ file }: { file: AttachmentType }) => {
     return (
@@ -32,7 +33,12 @@ export default function FilePage() {
 
     const { files, isLoading, isReachingEnd, isLoadingMore, size, setSize } =
         useGetFiles(chatId);
-    if (isLoading) return <Loading />;
+    if (isLoading)
+        return (
+            <div className="flex h-full items-center justify-center">
+                <LoadingSpinner className="size-10" />
+            </div>
+        );
     return (
         <div className="flex flex-col gap-1">
             {files?.map(
