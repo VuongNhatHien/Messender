@@ -1,17 +1,17 @@
 "use client";
 
-import Loading from "@/app/loading";
-import { useGetNotConnected } from "@/hooks/hooks";
-import NotConnectCard from "./not-connect-card";
+import PreviewSkeleton from "@/components/skeleton/previews-skeleton";
 import { Button } from "@/components/ui/button";
+import { useGetNotConnected } from "@/hooks/hooks";
 import { ArrowDown } from "lucide-react";
+import NotConnectCard from "./not-connect-card";
 
 export default function FirstColumnAddUserBody() {
     const { users, isLoading, isReachingEnd, isLoadingMore, size, setSize } =
         useGetNotConnected();
 
     if (isLoading) {
-        return <Loading />;
+        return <PreviewSkeleton />;
     }
     return (
         <div className="flex h-full flex-col gap-1 overflow-auto pe-1 pt-1">
