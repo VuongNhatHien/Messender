@@ -8,6 +8,9 @@ import { ArrowUp, File } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Button } from "../../ui/button";
+import ClipLoader from "react-spinners/ClipLoader";
+import { CSSProperties } from "react";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
@@ -150,7 +153,12 @@ export default function SecondColumnBody() {
 
     const { user, isLoading: load2 } = useGetUserInChat(chatId);
 
-    if (load1 || load2) return <Loading />;
+    if (load1 || load2)
+        return (
+            <div className="flex h-full items-center justify-center">
+                <LoadingSpinner className="size-10" />
+            </div>
+        );
 
     return (
         <div className="relative flex h-full flex-col-reverse justify-start gap-4 overflow-auto p-4">

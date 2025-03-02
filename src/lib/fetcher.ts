@@ -8,7 +8,7 @@ export const fetcher = async (url: string) => {
         ? `${baseUrl}${url}`
         : `${baseUrl}/${url}`;
 
-    await new Promise((resolve) => setTimeout(resolve, 2000000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000000));
 
     const res = await fetch(fullUrl, {
         headers: {
