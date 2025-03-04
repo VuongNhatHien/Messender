@@ -13,53 +13,57 @@ const isImage = (type: string) => type.includes("image");
 const isVideo = (type: string) => type.includes("video");
 const isAudio = (type: string) => type.includes("audio");
 
-const ImageAttachment = ({ attachment }: { attachment: AttachmentType }) => (
-    <a href={attachment.url} target="_blank">
-        <Image
-            width={320}
-            height={320}
-            src={attachment.url}
-            alt="attachment"
-            className="rounded-lg hover:opacity-75"
-        />
-    </a>
-);
+const ImageAttachment = ({ attachment }: { attachment: AttachmentType }) =>
+    attachment.url && (
+        <a href={attachment.url} target="_blank">
+            <Image
+                width={320}
+                height={320}
+                src={attachment.url}
+                alt="attachment"
+                className="rounded-lg hover:opacity-75"
+            />
+        </a>
+    );
 
-const VideoAttachment = ({ attachment }: { attachment: AttachmentType }) => (
-    <video
-        width="320"
-        height="240"
-        controls
-        preload="auto"
-        className="cursor-pointer rounded-lg"
-    >
-        <source src={attachment.url} />
-        Your browser does not support the video tag.
-    </video>
-);
+const VideoAttachment = ({ attachment }: { attachment: AttachmentType }) =>
+    attachment.url && (
+        <video
+            width="320"
+            height="240"
+            controls
+            preload="auto"
+            className="cursor-pointer rounded-lg"
+        >
+            <source src={attachment.url} />
+            Your browser does not support the video tag.
+        </video>
+    );
 
-const AudioAttachment = ({ attachment }: { attachment: AttachmentType }) => (
-    <audio controls className="cursor-pointer rounded-lg">
-        <source src={attachment.url} />
-        Your browser does not support the audio tag.
-    </audio>
-);
+const AudioAttachment = ({ attachment }: { attachment: AttachmentType }) =>
+    attachment.url && (
+        <audio controls className="cursor-pointer rounded-lg">
+            <source src={attachment.url} />
+            Your browser does not support the audio tag.
+        </audio>
+    );
 
-const FileAttachment = ({ attachment }: { attachment: AttachmentType }) => (
-    <a
-        href={attachment.url}
-        target="_blank"
-        className="flex items-center gap-2 rounded-3xl bg-secondary px-4 py-2 hover:opacity-75"
-    >
-        <File size={36} />
-        <div>
-            <p className="font-extrabold">{attachment.name}</p>
-            <p className="font-medium text-muted-foreground">
-                {formatFileSize(attachment.size)}
-            </p>
-        </div>
-    </a>
-);
+const FileAttachment = ({ attachment }: { attachment: AttachmentType }) =>
+    attachment.url && (
+        <a
+            href={attachment.url}
+            target="_blank"
+            className="flex items-center gap-2 rounded-3xl bg-secondary px-4 py-2 hover:opacity-75"
+        >
+            <File size={36} />
+            <div>
+                <p className="font-extrabold">{attachment.name}</p>
+                <p className="font-medium text-muted-foreground">
+                    {formatFileSize(attachment.size)}
+                </p>
+            </div>
+        </a>
+    );
 
 const Message = ({
     content,
