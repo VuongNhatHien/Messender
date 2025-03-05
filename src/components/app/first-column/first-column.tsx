@@ -15,7 +15,7 @@ export default function FirstColumn() {
     useEffect(() => {
         const handleListenChatRequest = async () => {
             const meId = (await requests.getMe()).data?.id;
-            socket.emit("listenChatRequest", `userId-${meId}`);
+            socket.emit("listenChatRequest", `users/${meId}`);
         };
         handleListenChatRequest();
 
@@ -41,7 +41,7 @@ export default function FirstColumn() {
         previews?.forEach((preview) => {
             if (preview) {
                 const chatId = preview?.chatId;
-                socket.emit("joinChat", `chatId-${chatId}`);
+                socket.emit("joinChat", `chats/${chatId}`);
 
                 const client = new Client({
                     brokerURL: "ws://localhost:8080/socket",
@@ -56,7 +56,7 @@ export default function FirstColumn() {
                     console.log("Connected!", frame);
                     client.subscribe(`/chat/${chatId}`, (message) => {
                         console.log("Message from server:", message.body);
-                        socket.emit("sendMessage", `chatId-${chatId}`);
+                        socket.emit("sendMessage", `chats/${chatId}`);
                     });
                 };
                 client.activate();

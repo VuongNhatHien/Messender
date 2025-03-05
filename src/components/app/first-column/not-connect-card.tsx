@@ -13,7 +13,7 @@ export default function NotConnectCard({ user }: { user: UserType }) {
             const meId = (await requests.getMe()).data?.id;
             const userId =
                 meId === chat.user1.id ? chat.user2.id : chat.user1.id;
-            socket.emit("addChat", `userId-${userId}`);
+            socket.emit("addChat", `chats/${userId}`);
             window.location.href = `/chats/${chat.id}`;
         }
     };

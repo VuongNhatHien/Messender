@@ -6,7 +6,7 @@ import { Paperclip } from "lucide-react";
 export const uploadFiles = async (chatId: string, files: FileList) => {
     for (let i = 0; i < files.length; i++) {
         await uploadFile(chatId, files[i]);
-        socket.emit("sendMessage", `chatId-${chatId}`);
+        socket.emit("sendMessage", `chats/${chatId}`);
     }
 };
 
