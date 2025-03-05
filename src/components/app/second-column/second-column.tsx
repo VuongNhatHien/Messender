@@ -1,26 +1,15 @@
 "use client";
-import {
-    useGetFiles,
-    useGetMedia,
-    useGetMessages,
-    useGetPreviews,
-} from "@/hooks/hooks";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { uploadFiles } from "./choose-file";
 import { Separator } from "../../ui/separator";
+import { uploadFiles } from "./choose-file";
 import SecondColumnBodyAndFooter from "./second-column-body-and-footer";
 import SecondColumnHeader from "./second-column-header";
 export default function SecondColumn() {
     const { chatId } = useParams<{ chatId: string }>();
-    const { mutate: mutateMessages } = useGetMessages(chatId);
-    const { mutate: mutatePreviews } = useGetPreviews();
-    const { mutate: mutateMedia } = useGetMedia(chatId);
-    const { mutate: mutateFiles } = useGetFiles(chatId);
 
     const [isOver, setIsOver] = useState(false);
 
-    // Define the event handlers
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         setIsOver(true);
@@ -37,10 +26,6 @@ export default function SecondColumn() {
 
         if (event.dataTransfer.files) {
             await uploadFiles(chatId, event.dataTransfer.files);
-            mutateMessages();
-            mutatePreviews();
-            mutateMedia();
-            mutateFiles();
         }
     };
     return (

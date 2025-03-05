@@ -6,6 +6,7 @@ import socket from "@/lib/socket";
 import { useEffect } from "react";
 import FirstColumnBody from "./first-column-body";
 import FirstColumnHeader from "./first-column-header";
+import { Client } from "@stomp/stompjs";
 
 export default function FirstColumn() {
     const { previews, mutate: mutatePreviews } = useGetPreviews();
@@ -38,7 +39,28 @@ export default function FirstColumn() {
 
     useEffect(() => {
         previews?.forEach((preview) => {
-            if (preview) socket.emit("joinChat", `chatId-${preview.chatId}`);
+            if (preview) {
+                const chatId = preview?.chatId;
+                socket.emit("joinChat", `chatId-${chatId}`);
+
+                const client = new Client({
+                    brokerURL: "ws://localhost:8080/socket",
+                    onStompError: (frame) => {
+                        console.error("STOMP error:", frame.headers.message);
+                    },
+                    debug: (str) => {
+                        console.log(str);
+                    },
+                });
+                client.onConnect = (frame) => {
+                    console.log("Connected!", frame);
+                    client.subscribe(`/chat/${chatId}`, (message) => {
+                        console.log("Message from server:", message.body);
+                        socket.emit("sendMessage", `chatId-${chatId}`);
+                    });
+                };
+                client.activate();
+            }
         });
     }, [previews]);
 

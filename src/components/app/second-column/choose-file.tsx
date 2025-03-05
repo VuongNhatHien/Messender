@@ -1,11 +1,5 @@
 "use client";
 import { uploadFile } from "@/actions/actions.common";
-import {
-    useGetFiles,
-    useGetMedia,
-    useGetMessages,
-    useGetPreviews,
-} from "@/hooks/hooks";
 import socket from "@/lib/socket";
 import { Paperclip } from "lucide-react";
 
@@ -17,19 +11,11 @@ export const uploadFiles = async (chatId: string, files: FileList) => {
 };
 
 export default function ChooseFile({ chatId }: { chatId: string }) {
-    const { mutate: mutateMessages } = useGetMessages(chatId);
-    const { mutate: mutatePreviews } = useGetPreviews();
-    const { mutate: mutateMedia } = useGetMedia(chatId);
-    const { mutate: mutateFiles } = useGetFiles(chatId);
     const handleUploadFiles = async (
         event: React.ChangeEvent<HTMLInputElement>,
     ) => {
         if (event.target.files) {
             await uploadFiles(chatId, event.target.files);
-            mutateMessages();
-            mutatePreviews();
-            mutateMedia();
-            mutateFiles();
         }
     };
     return (
