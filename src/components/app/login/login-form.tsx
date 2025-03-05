@@ -61,7 +61,7 @@ export default function LoginForm() {
             </div>
 
             <div className="flex items-center space-x-2 self-start">
-                <Checkbox id="remember" name="remember" />
+                <Checkbox id="remember" name="remember" className="rounded-[0.15rem]" />
                 <label
                     htmlFor="remember"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -82,7 +82,7 @@ export default function LoginForm() {
                 <Label className="text-sm text-accent-foreground">
                     Not registered?
                 </Label>
-                <Link href="/auth/register" className="text-sm text-primary">
+                <Link href="/auth/register" className="text-sm text-blue-500">
                     Create an account
                 </Link>
             </div>

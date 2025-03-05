@@ -80,7 +80,7 @@ export default function RegisterForm() {
                 <Label className="text-sm text-accent-foreground">
                     Already have an account?
                 </Label>
-                <Link href="/auth/login" className="text-sm text-primary">
+                <Link href="/auth/login" className="text-sm text-blue-500">
                     Login
                 </Link>
             </div>
