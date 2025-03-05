@@ -12,16 +12,31 @@ const MediaItem = ({ media }: { media: AttachmentType }) => {
     return (
         <div className="aspect-square w-[32%] overflow-hidden hover:opacity-75">
             {isImage ? (
-                <a href={media?.url} target="_blank">
-                    <Image
-                        src={media.url}
-                        alt={media.name}
-                        width={200}
-                        height={200}
-                        className="h-full w-full object-cover"
-                    />
-                </a>
-            ) : (
+                media.url ? (
+                    <a href={media.url} target="_blank">
+                        <Image
+                            src={media.url}
+                            alt={media.name}
+                            width={200}
+                            height={200}
+                            className="h-full w-full object-cover"
+                        />
+                    </a>
+                ) : (
+                    <div className="relative h-full">
+                        <Image
+                            src={"/meo.png"}
+                            alt={media.name}
+                            width={200}
+                            height={200}
+                            className="h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <LoadingSpinner className="size-8 text-black" />
+                        </div>
+                    </div>
+                )
+            ) : media.url ? (
                 <a
                     href={media.url}
                     target="_blank"
@@ -47,6 +62,26 @@ const MediaItem = ({ media }: { media: AttachmentType }) => {
                         </div>
                     </div>
                 </a>
+            ) : (
+                <>
+                    <div className="relative h-full w-full">
+                        <video className="h-full w-full bg-foreground object-cover" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="absolute rounded-full border-double bg-black bg-opacity-60 p-2">
+                                <Image
+                                    src={"/play-button.png"}
+                                    width={16}
+                                    height={16}
+                                    alt=""
+                                    className="opacity-75"
+                                />
+                            </div>
+                            <div className="relative">
+                                <LoadingSpinner className="size-9 text-white" />
+                            </div>
+                        </div>
+                    </div>
+                </>
             )}
         </div>
     );

@@ -8,7 +8,7 @@ export type UserType = BaseType & {
 };
 
 export type AttachmentType = BaseType & {
-    url: string;
+    url: string | null;
     type: string;
     name: string;
     size: number;

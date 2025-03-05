@@ -14,7 +14,7 @@ const isVideo = (type: string) => type.includes("video");
 const isAudio = (type: string) => type.includes("audio");
 
 const ImageAttachment = ({ attachment }: { attachment: AttachmentType }) =>
-    attachment.url && (
+    attachment.url ? (
         <a href={attachment.url} target="_blank">
             <Image
                 width={320}
@@ -24,20 +24,43 @@ const ImageAttachment = ({ attachment }: { attachment: AttachmentType }) =>
                 className="rounded-lg hover:opacity-75"
             />
         </a>
+    ) : (
+        <div className="relative">
+            <Image
+                src={"/meo.png"}
+                width={320}
+                height={320}
+                alt="attachment"
+                className="rounded-lg"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+                <LoadingSpinner className="size-14 text-black" />
+            </div>
+        </div>
     );
 
 const VideoAttachment = ({ attachment }: { attachment: AttachmentType }) =>
-    attachment.url && (
+    attachment.url ? (
         <video
+            src={attachment.url}
             width="320"
             height="240"
             controls
             preload="auto"
             className="cursor-pointer rounded-lg"
-        >
-            <source src={attachment.url} />
-            Your browser does not support the video tag.
-        </video>
+        />
+    ) : (
+        <div className="relative">
+            <video
+                width="320"
+                height="240"
+                controls
+                className="cursor-pointer rounded-lg bg-foreground"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+                <LoadingSpinner className="size-14 text-white" />
+            </div>
+        </div>
     );
 
 const AudioAttachment = ({ attachment }: { attachment: AttachmentType }) =>
