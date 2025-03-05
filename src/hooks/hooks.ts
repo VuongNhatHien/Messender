@@ -77,7 +77,7 @@ export const useGetMessages = (chatId: string) => {
         mutate,
     } = useSwrInfiniteGeneric<MessageResponseType>(
         `/chats/${chatId}/messages`,
-        10,
+        20,
     );
     useEffect(() => {
         if (code && code !== SUCCESS) {
@@ -114,7 +114,7 @@ export const useGetNotConnected = () => {
         isReachingEnd,
         code,
         mutate,
-    } = useSwrInfiniteGeneric<UserType>(`/users/not-connected`, 10);
+    } = useSwrInfiniteGeneric<UserType>(`/users/not-connected`, 20);
     useEffect(() => {
         if (code && code !== SUCCESS) {
             throw new Error(code);
@@ -143,7 +143,7 @@ export const useGetPreviews = () => {
         isReachingEnd,
         code,
         mutate,
-    } = useSwrInfiniteGeneric<PreviewMessageType>(`/users/chats`, 10);
+    } = useSwrInfiniteGeneric<PreviewMessageType>(`/users/chats`, 15);
     useEffect(() => {
         if (code && code !== SUCCESS) {
             throw new Error(code);
@@ -173,7 +173,7 @@ export const useGetMedia = (chatId: string) => {
         isReachingEnd,
         code,
         mutate,
-    } = useSwrInfiniteGeneric<AttachmentType>(`/chats/${chatId}/attachments/media`, 3);
+    } = useSwrInfiniteGeneric<AttachmentType>(`/chats/${chatId}/attachments/media`, 21);
     useEffect(() => {
         if (code && code !== SUCCESS) {
             if (
@@ -210,7 +210,7 @@ export const useGetFiles = (chatId: string) => {
         isReachingEnd,
         code,
         mutate,
-    } = useSwrInfiniteGeneric<AttachmentType>(`/chats/${chatId}/attachments/files`, 3);
+    } = useSwrInfiniteGeneric<AttachmentType>(`/chats/${chatId}/attachments/files`, 15);
     useEffect(() => {
         if (code && code !== SUCCESS) {
             if (
@@ -249,7 +249,7 @@ export const useGetLinks = (chatId: string) => {
         isReachingEnd,
         code,
         mutate,
-    } = useSwrInfiniteGeneric<MetadataType>(`/chats/${chatId}/links`, 3);
+    } = useSwrInfiniteGeneric<MetadataType>(`/chats/${chatId}/links`, 15);
     useEffect(() => {
         if (code && code !== SUCCESS) {
             if (
