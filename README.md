@@ -1,4 +1,3 @@
-## Backend repository: [Backend](https://github.com/VuongNhatHien/Messender-Spring)
 ## Getting Started
 1. Install packages
 ```bash
