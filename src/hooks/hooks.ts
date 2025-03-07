@@ -38,6 +38,11 @@ export const useGetUserInChat = (chatId: string) => {
     return { user: data, isLoading };
 };
 
+export const useGetMe = () => {
+    const { data, isLoading, code } = useSwrGeneric<UserType>("/users/me");
+    return { me: data, isLoading, code };
+};
+
 export const useSwrInfiniteGeneric = <T>(endpoint: string, limit: number) => {
     const { data, isLoading, size, setSize, error, mutate } = useSWRInfinite<
         ResponseType<(T | null)[]>
@@ -173,7 +178,10 @@ export const useGetMedia = (chatId: string) => {
         isReachingEnd,
         code,
         mutate,
-    } = useSwrInfiniteGeneric<AttachmentType>(`/chats/${chatId}/attachments/media`, 21);
+    } = useSwrInfiniteGeneric<AttachmentType>(
+        `/chats/${chatId}/attachments/media`,
+        21,
+    );
     useEffect(() => {
         if (code && code !== SUCCESS) {
             if (
@@ -210,7 +218,10 @@ export const useGetFiles = (chatId: string) => {
         isReachingEnd,
         code,
         mutate,
-    } = useSwrInfiniteGeneric<AttachmentType>(`/chats/${chatId}/attachments/files`, 15);
+    } = useSwrInfiniteGeneric<AttachmentType>(
+        `/chats/${chatId}/attachments/files`,
+        15,
+    );
     useEffect(() => {
         if (code && code !== SUCCESS) {
             if (
@@ -235,8 +246,6 @@ export const useGetFiles = (chatId: string) => {
         mutate,
     };
 };
-
-
 
 export const useGetLinks = (chatId: string) => {
     const router = useRouter();

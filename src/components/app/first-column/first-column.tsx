@@ -1,20 +1,21 @@
 "use client";
 import { Separator } from "@/components/ui/separator";
-import { useGetNotConnected, useGetPreviews } from "@/hooks/hooks";
-import { requests } from "@/lib/requests";
+import { useGetMe, useGetNotConnected, useGetPreviews } from "@/hooks/hooks";
 import socket from "@/lib/socket";
+import { Client } from "@stomp/stompjs";
 import { useEffect } from "react";
 import FirstColumnBody from "./first-column-body";
 import FirstColumnHeader from "./first-column-header";
-import { Client } from "@stomp/stompjs";
 
 export default function FirstColumn() {
     const { previews, mutate: mutatePreviews } = useGetPreviews();
     const { mutate: mutateNotConnected } = useGetNotConnected();
+    const { me } = useGetMe();
 
     useEffect(() => {
         const handleListenChatRequest = async () => {
-            const meId = (await requests.getMe()).data?.id;
+            if (!me) return;
+            const meId = me.id;
             socket.emit("listenChatRequest", `users/${meId}`);
         };
         handleListenChatRequest();
@@ -35,7 +36,7 @@ export default function FirstColumn() {
             socket.off("receiveMessage", handleReceiveMessage);
             socket.off("receiveChatRequest", handleReceiveChatRequest);
         };
-    }, [mutateNotConnected, mutatePreviews]);
+    }, [mutateNotConnected, mutatePreviews, me]);
 
     useEffect(() => {
         previews?.forEach((preview) => {
@@ -48,9 +49,9 @@ export default function FirstColumn() {
                     onStompError: (frame) => {
                         console.error("STOMP error:", frame.headers.message);
                     },
-                    debug: (str) => {
-                        console.log(str);
-                    },
+                    // debug: (str) => {
+                    //     console.log(str);
+                    // },
                 });
                 client.onConnect = (frame) => {
                     console.log("Connected!", frame);

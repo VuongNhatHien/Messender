@@ -14,7 +14,7 @@
             "splitTerminals": [
                 {
                     "name": "run",
-                    "commands": ["bun dev"]
+                    "commands": ["npm run dev"]
                 }
             ]
         }

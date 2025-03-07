@@ -1,12 +1,13 @@
 "use client";
 
-import envConfig from "@/config";
-
 export const fetcher = async (url: string) => {
-    const baseUrl = envConfig.NEXT_PUBLIC_API_ENDPOINT;
+    const baseUrl = "http://localhost:8080";
     const fullUrl = url.startsWith("/")
         ? `${baseUrl}${url}`
         : `${baseUrl}/${url}`;
+
+    console.log("Base url: ", baseUrl);
+    console.log("Full url: ", fullUrl);
 
     // await new Promise((resolve) => setTimeout(resolve, 2000000));
 

@@ -7,7 +7,6 @@ import {
     MessageResponseType,
     RegisterResponseType
 } from "@/types/response.type";
-import { UserType } from "@/types/schema.type";
 
 export const requests = {
     register: (body: RegisterBodyType) => {
@@ -68,7 +67,7 @@ export const requests = {
             },
         );
     },
-    getMe: () => {
-        return http.get<ResponseType<UserType | null>>("/users/me");
-    },
+    // getMe: () => {
+    //     return http.get<ResponseType<UserType | null>>("/users/me");
+    // },
 };
