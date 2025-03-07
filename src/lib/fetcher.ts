@@ -6,9 +6,6 @@ export const fetcher = async (url: string) => {
         ? `${baseUrl}${url}`
         : `${baseUrl}/${url}`;
 
-    console.log("Base url: ", baseUrl);
-    console.log("Full url: ", fullUrl);
-
     // await new Promise((resolve) => setTimeout(resolve, 2000000));
 
     const res = await fetch(fullUrl, {
