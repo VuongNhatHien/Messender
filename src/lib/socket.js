@@ -2,7 +2,7 @@
 
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:4444", {
+const socket = io(`${process.env.NEXT_PUBLIC_BACKEND_URL}:4444`, {
     withCredentials: true,
 });
 

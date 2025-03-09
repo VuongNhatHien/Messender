@@ -5,7 +5,7 @@ import {
     AddChatResponseType,
     LoginResponseType,
     MessageResponseType,
-    RegisterResponseType
+    RegisterResponseType,
 } from "@/types/response.type";
 
 export const requests = {
@@ -20,7 +20,8 @@ export const requests = {
     },
     auth: (body: { token: string; expiresIn: string }) => {
         return http.post("/api/auth", body, {
-            baseUrl: "http://localhost:3000",
+            // baseUrl: `${envConfig.NEXT_PUBLIC_BACKEND_URL}:3000`,
+            baseUrl: `${process.env.NEXT_PUBLIC_FRONTEND_SERVER_URL}`,
         });
     },
 

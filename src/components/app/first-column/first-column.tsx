@@ -6,6 +6,7 @@ import { Client } from "@stomp/stompjs";
 import { useEffect } from "react";
 import FirstColumnBody from "./first-column-body";
 import FirstColumnHeader from "./first-column-header";
+// import envConfig from "@/config";
 
 export default function FirstColumn() {
     const { previews, mutate: mutatePreviews } = useGetPreviews();
@@ -45,7 +46,9 @@ export default function FirstColumn() {
                 socket.emit("joinChat", `chats/${chatId}`);
 
                 const client = new Client({
-                    brokerURL: "ws://localhost:8080/socket",
+                    // brokerURL: `ws://${process.env.NEXT_PUBLIC_BACKEND_URL}:8080/socket`,
+                    brokerURL: `${process.env.NEXT_PUBLIC_WEB_SOCKET_URL}`,
+
                     onStompError: (frame) => {
                         console.error("STOMP error:", frame.headers.message);
                     },

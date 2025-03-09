@@ -1,7 +1,7 @@
 "use client";
 
 export const fetcher = async (url: string) => {
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}:8080`;
     const fullUrl = url.startsWith("/")
         ? `${baseUrl}${url}`
         : `${baseUrl}/${url}`;

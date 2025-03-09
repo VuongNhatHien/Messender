@@ -1,5 +1,3 @@
-import envConfig from "@/config";
-
 type CustomOptions = Omit<RequestInit, "method"> & {
     baseUrl?: string | undefined;
 };
@@ -29,12 +27,13 @@ const request = async <Response>(
 
     const baseUrl =
         options?.baseUrl === undefined
-            ? envConfig.NEXT_PUBLIC_API_ENDPOINT
+            ? process.env.LOCAL_BACKEND_URL
             : options.baseUrl;
 
     const fullUrl = url.startsWith("/")
         ? `${baseUrl}${url}`
         : `${baseUrl}/${url}`;
+
 
     const res = await fetch(fullUrl, {
         ...options,
