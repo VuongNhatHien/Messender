@@ -43,15 +43,36 @@ export const useGetMe = () => {
     return { me: data, isLoading, code };
 };
 
-export const useSwrInfiniteGeneric = <T>(endpoint: string, limit: number) => {
+type ParamsType = {
+    limit: number;
+    search?: string;
+};
+
+export const useSwrInfiniteGeneric = <T>(
+    endpoint: string,
+    params: ParamsType,
+) => {
     const { data, isLoading, size, setSize, error, mutate } = useSWRInfinite<
         ResponseType<(T | null)[]>
-    >((index) => `${endpoint}?limit=${limit}&page=${index + 1}`);
+    >((index) => {
+        let url = `${endpoint}?`;
+
+        url += `page=${index + 1}`;
+
+        Object.entries(params).forEach(([key, value]) => {
+            if (value !== undefined && value !== "") {
+                url += `&${key}=${value}`;
+            }
+        });
+
+        return url;
+    });
 
     const isLoadingMore =
         isLoading ||
         (size > 0 && data && typeof data[size - 1] === "undefined");
-    const isReachingEnd = data && data[data.length - 1]?.data?.length < limit;
+    const isReachingEnd =
+        data && data[data.length - 1]?.data?.length < params.limit;
     const res = data?.map((page) => page.data).flat();
 
     if (error) {
@@ -82,7 +103,7 @@ export const useGetMessages = (chatId: string) => {
         mutate,
     } = useSwrInfiniteGeneric<MessageResponseType>(
         `/chats/${chatId}/messages`,
-        20,
+        { limit: 20 },
     );
     useEffect(() => {
         if (code && code !== SUCCESS) {
@@ -109,7 +130,7 @@ export const useGetMessages = (chatId: string) => {
     };
 };
 
-export const useGetNotConnected = () => {
+export const useGetNotConnected = (search: string) => {
     const {
         data,
         isLoading,
@@ -119,7 +140,10 @@ export const useGetNotConnected = () => {
         isReachingEnd,
         code,
         mutate,
-    } = useSwrInfiniteGeneric<UserType>(`/users/not-connected`, 20);
+    } = useSwrInfiniteGeneric<UserType>(`/users/not-connected`, {
+        limit: 20,
+        search: search,
+    });
     useEffect(() => {
         if (code && code !== SUCCESS) {
             throw new Error(code);
@@ -138,7 +162,7 @@ export const useGetNotConnected = () => {
     };
 };
 
-export const useGetPreviews = () => {
+export const useGetPreviews = (search: string) => {
     const {
         data,
         isLoading,
@@ -148,7 +172,10 @@ export const useGetPreviews = () => {
         isReachingEnd,
         code,
         mutate,
-    } = useSwrInfiniteGeneric<PreviewMessageType>(`/users/chats`, 15);
+    } = useSwrInfiniteGeneric<PreviewMessageType>(`/users/chats`, {
+        limit: 15,
+        search: search,
+    });
     useEffect(() => {
         if (code && code !== SUCCESS) {
             throw new Error(code);
@@ -180,7 +207,7 @@ export const useGetMedia = (chatId: string) => {
         mutate,
     } = useSwrInfiniteGeneric<AttachmentType>(
         `/chats/${chatId}/attachments/media`,
-        21,
+        { limit: 21 },
     );
     useEffect(() => {
         if (code && code !== SUCCESS) {
@@ -220,7 +247,7 @@ export const useGetFiles = (chatId: string) => {
         mutate,
     } = useSwrInfiniteGeneric<AttachmentType>(
         `/chats/${chatId}/attachments/files`,
-        15,
+        { limit: 15 },
     );
     useEffect(() => {
         if (code && code !== SUCCESS) {
@@ -258,7 +285,9 @@ export const useGetLinks = (chatId: string) => {
         isReachingEnd,
         code,
         mutate,
-    } = useSwrInfiniteGeneric<MetadataType>(`/chats/${chatId}/links`, 15);
+    } = useSwrInfiniteGeneric<MetadataType>(`/chats/${chatId}/links`, {
+        limit: 15,
+    });
     useEffect(() => {
         if (code && code !== SUCCESS) {
             if (

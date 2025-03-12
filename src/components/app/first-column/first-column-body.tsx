@@ -5,10 +5,12 @@ import { useGetPreviews } from "@/hooks/hooks";
 import { ArrowDown } from "lucide-react";
 import { Button } from "../../ui/button";
 import PreviewCard from "./preview-card";
+import { useSearch } from "@/hooks/useSearch";
 
 export default function FirstColumnBody() {
+    const { searchPreviews } = useSearch();
     const { previews, isLoading, isReachingEnd, isLoadingMore, size, setSize } =
-        useGetPreviews();
+        useGetPreviews(searchPreviews);
 
     if (isLoading) {
         return <PreviewSkeleton />;

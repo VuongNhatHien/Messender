@@ -63,7 +63,7 @@ export default function RegisterForm() {
 
             <Link
                 href={"/auth/register"}
-                className="!mt-1 self-end text-sm text-primary"
+                className="!mt-1 self-end text-sm text-blue-500"
             >
                 Forgot password?
             </Link>

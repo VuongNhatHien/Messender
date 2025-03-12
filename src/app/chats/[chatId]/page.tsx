@@ -9,14 +9,16 @@ import {
     useGetMessages,
     useGetPreviews,
 } from "@/hooks/hooks";
+import { useSearch } from "@/hooks/useSearch";
 import socket from "@/lib/socket";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Page() {
+    const { searchPreviews } = useSearch();
     const { chatId } = useParams<{ chatId: string }>();
     const { mutate: mutateMessage } = useGetMessages(chatId);
-    const { mutate: mutatePreviews } = useGetPreviews();
+    const { mutate: mutatePreviews } = useGetPreviews(searchPreviews);
     const { mutate: mutateMedia } = useGetMedia(chatId);
     const { mutate: mutateFiles } = useGetFiles(chatId);
     const { mutate: mutateLinks } = useGetLinks(chatId);

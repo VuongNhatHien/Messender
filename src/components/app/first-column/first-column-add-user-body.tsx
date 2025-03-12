@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { useGetNotConnected } from "@/hooks/hooks";
 import { ArrowDown } from "lucide-react";
 import NotConnectCard from "./not-connect-card";
+import { useSearch } from "@/hooks/useSearch";
 
 export default function FirstColumnAddUserBody() {
+    const { searchNotConnected } = useSearch();
     const { users, isLoading, isReachingEnd, isLoadingMore, size, setSize } =
-        useGetNotConnected();
+        useGetNotConnected(searchNotConnected);
 
     if (isLoading) {
         return <PreviewSkeleton />;

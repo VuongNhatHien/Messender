@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "../../ui/button";
 import {
     Dialog,
@@ -7,11 +8,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "../../ui/dialog";
-import Searchbar from "../../ui/search";
+import SearchBar from "../../ui/search";
 import { Separator } from "../../ui/separator";
 import FirstColumnAddUserBody from "./first-column-add-user-body";
+import { useSearch } from "@/hooks/useSearch";
 
 export default function AddUserDialog() {
+    const { searchNotConnected, setSearchNotConnected } = useSearch();
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -35,7 +38,7 @@ export default function AddUserDialog() {
                 </DialogHeader>
 
                 <div className={"pt-3"}>
-                    <Searchbar />
+                    <SearchBar search={searchNotConnected} setSearch={setSearchNotConnected} />
                 </div>
 
                 <Separator className={"mt-4"} />

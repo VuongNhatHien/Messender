@@ -1,9 +1,11 @@
 "use client";
 
 import AddUserDialog from "./first-column-add-user";
-import Searchbar from "../../ui/search";
+import SearchBar from "../../ui/search";
+import { useSearch } from "@/hooks/useSearch";
 
 export default function FirstColumnHeader() {
+    const { searchPreviews, setSearchPreviews } = useSearch();
     return (
         <>
             <div className={"flex items-center justify-between px-4 py-3"}>
@@ -12,7 +14,10 @@ export default function FirstColumnHeader() {
                 <AddUserDialog />
             </div>
             <div className={"px-3"}>
-                <Searchbar />
+                <SearchBar
+                    search={searchPreviews}
+                    setSearch={setSearchPreviews}
+                />
             </div>
         </>
     );

@@ -6,11 +6,13 @@ import { Client } from "@stomp/stompjs";
 import { useEffect } from "react";
 import FirstColumnBody from "./first-column-body";
 import FirstColumnHeader from "./first-column-header";
-// import envConfig from "@/config";
+import { useSearch } from "@/hooks/useSearch";
 
 export default function FirstColumn() {
-    const { previews, mutate: mutatePreviews } = useGetPreviews();
-    const { mutate: mutateNotConnected } = useGetNotConnected();
+    const { searchNotConnected, searchPreviews } = useSearch();
+    const { previews, mutate: mutatePreviews } = useGetPreviews(searchPreviews);
+    const { mutate: mutateNotConnected } =
+        useGetNotConnected(searchNotConnected);
     const { me } = useGetMe();
 
     useEffect(() => {
@@ -37,7 +39,11 @@ export default function FirstColumn() {
             socket.off("receiveMessage", handleReceiveMessage);
             socket.off("receiveChatRequest", handleReceiveChatRequest);
         };
-    }, [mutateNotConnected, mutatePreviews, me]);
+    }, [
+        mutateNotConnected,
+        mutatePreviews,
+        me,
+    ]);
 
     useEffect(() => {
         previews?.forEach((preview) => {
@@ -46,7 +52,6 @@ export default function FirstColumn() {
                 socket.emit("joinChat", `chats/${chatId}`);
 
                 const client = new Client({
-                    // brokerURL: `ws://${process.env.NEXT_PUBLIC_BACKEND_URL}:8080/socket`,
                     brokerURL: `${process.env.NEXT_PUBLIC_WEB_SOCKET_URL}`,
 
                     onStompError: (frame) => {

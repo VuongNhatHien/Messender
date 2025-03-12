@@ -40,9 +40,6 @@ export default function RootLayout({
                     <SWRConfig
                         value={{
                             fetcher,
-                            revalidateIfStale: false,
-                            revalidateOnFocus: false,
-                            revalidateOnReconnect: false,
                         }}
                     >
                         <main className="flex h-screen flex-col">
