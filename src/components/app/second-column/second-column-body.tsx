@@ -88,23 +88,65 @@ const FileAttachment = ({ attachment }: { attachment: AttachmentType }) =>
         </a>
     );
 
+const urlRegex =
+    /(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/g;
+
 const Message = ({
     content,
     isOwnMessage,
 }: {
     content: MessageResponseType;
     isOwnMessage: boolean;
-}) => (
-    <div
-        className={`${content.metadata ? "rounded-t-3xl" : "rounded-3xl"} px-3 py-2 ${
-            isOwnMessage
-                ? "bg-primary text-primary-foreground"
-                : "bg-secondary text-secondary-foreground"
-        }`}
-    >
-        {content.metadata ? <p>{content.message}</p> : <p>{content.message}</p>}
-    </div>
-);
+}) => {
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = urlRegex.exec(content.message!)) !== null) {
+        if (match.index > lastIndex) {
+            parts.push({
+                text: content.message!.substring(lastIndex, match.index),
+                isUrl: false,
+            });
+        }
+        parts.push({ text: match[0], isUrl: true });
+        lastIndex = urlRegex.lastIndex;
+    }
+    if (lastIndex < content.message!.length) {
+        parts.push({
+            text: content.message!.substring(lastIndex),
+            isUrl: false,
+        });
+    }
+
+    return (
+        <div
+            className={`${content.metadata ? "rounded-t-3xl" : "rounded-3xl"} px-3 py-2 ${
+                isOwnMessage
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-secondary-foreground"
+            }`}
+        >
+            <p>
+                {parts.map((part, index) =>
+                    part.isUrl ? (
+                        <a
+                            key={index}
+                            href={part.text}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline"
+                        >
+                            {part.text}
+                        </a>
+                    ) : (
+                        <span key={index}>{part.text}</span>
+                    ),
+                )}
+            </p>
+        </div>
+    );
+};
 
 const MetaData = ({ metadata }: { metadata: MetadataType }) => (
     <a href={metadata.url} target="_blank" className="hover:opacity-75">

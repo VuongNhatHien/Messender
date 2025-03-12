@@ -61,7 +61,11 @@ export default function LoginForm() {
             </div>
 
             <div className="flex items-center space-x-2 self-start">
-                <Checkbox id="remember" name="remember" className="rounded-[0.15rem]" />
+                <Checkbox
+                    id="remember"
+                    name="remember"
+                    className="rounded-[0.15rem]"
+                />
                 <label
                     htmlFor="remember"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -100,6 +104,13 @@ export default function LoginForm() {
                     className="w-full rounded-full"
                     variant="outline"
                     type="button"
+                    onClick={() =>
+                        window.open(
+                            "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                            "_blank",
+                            "noopener,noreferrer",
+                        )
+                    }
                 >
                     <Image
                         src="/google.svg"
@@ -109,10 +120,18 @@ export default function LoginForm() {
                     />
                     <p className="font-semibold">Google</p>
                 </Button>
+
                 <Button
                     className="w-full rounded-full"
                     variant="outline"
                     type="button"
+                    onClick={() =>
+                        window.open(
+                            "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                            "_blank",
+                            "noopener,noreferrer",
+                        )
+                    }
                 >
                     <Image
                         src="/facebook.svg"
